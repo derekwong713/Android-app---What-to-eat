@@ -161,4 +161,4 @@
     <string name="demo_source">虛構測試來源</string>
     <string name="demo_scope">虛構餐廳層面聲明</string>
     <string name="demo_dish">只適用於虛構單一菜式</string>
-</resources>
+<string name="ad_label">廣告</string><string name="ad_unavailable">廣告暫未提供</string></resources>

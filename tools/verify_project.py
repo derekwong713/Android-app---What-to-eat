@@ -26,6 +26,11 @@ with zipfile.ZipFile(root/'gradle/wrapper/gradle-wrapper.jar') as wrapper:
 manifest=ET.parse(root/'app/src/main/AndroidManifest.xml').getroot()
 ns='{http://schemas.android.com/apk/res/android}'
 assert manifest.find('application').get(ns+'allowBackup')=='false'
+assert manifest.find('application').get(ns+'dataExtractionRules')=='@xml/data_extraction_rules'
+rules=ET.parse(res/'xml/data_extraction_rules.xml').getroot()
+for mode in ['cloud-backup','device-transfer']:
+    excluded={e.get('domain') for e in rules.find(mode).findall('exclude') if e.get('path')=='.'}
+    assert {'root','file','database','sharedpref','external','device_root','device_file','device_database','device_sharedpref'} <= excluded
 permissions={e.get(ns+'name') for e in manifest.findall('uses-permission')}
 assert 'android.permission.ACCESS_BACKGROUND_LOCATION' not in permissions
 assert {'android.permission.ACCESS_COARSE_LOCATION','android.permission.ACCESS_FINE_LOCATION'} <= permissions

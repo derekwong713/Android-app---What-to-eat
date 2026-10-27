@@ -10,3 +10,8 @@ secrets.properties
 .kotlin/
 *.log
 __pycache__/
+deliverables/
+verification-artifacts/
+
+.env
+.env.local

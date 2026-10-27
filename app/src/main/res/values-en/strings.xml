@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">食咩好？What To Eat?</string>
+    <string name="app_name">食咩好？</string>
     <string name="demo_indicator">Demo data / 示範資料</string>
     <string name="live_indicator">Live restaurant data</string>
     <string name="tagline">A little less deciding. A little more eating.</string>
@@ -161,4 +161,4 @@
     <string name="demo_source">Fictional test source</string>
     <string name="demo_scope">Fictional restaurant-wide statement</string>
     <string name="demo_dish">Fictional single-dish scope only</string>
-</resources>
+<string name="ad_label">廣告</string><string name="ad_unavailable">廣告暫未提供</string></resources>

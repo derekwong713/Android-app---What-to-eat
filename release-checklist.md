@@ -1,22 +1,13 @@
-# Release checklist
+# 正式發佈前（本工作沒有發佈）
 
-The project is a development MVP. Do not publish the debug APK as a production release.
+- 提供實際 Supabase 專案 URL / public key；review 並執行兩份 additive migration，部署 delete-account Edge Function。
+- 在 Supabase 設定 Google / Facebook provider、各自 OAuth redirect URI、Android callback allowlist；只啟用這兩種 provider。
+- 真實帳戶端到端測試：成功、取消、失敗、token refresh、登出、刪帳戶、登入後返回原操作。
+- 管理員電腦匯入 HK OSM export，review 未分類／缺座標／缺地址／OSM object 消失等資料缺口；不宣稱完整收錄。
+- 填妥營運者、聯絡及保留政策，review `web/` 範本並上載免費靜態託管，設定 policy/terms/deletion URLs。
+- 填正式 AdMob App ID、Banner ID、App Open ID；設定 UMP messaging，以官方測試模式真機驗證同意／拒絕／失敗／離線／外部返回不補播。
+- 真機檢查定位拒絕／永久拒絕／服務關閉／新鮮定位／約略定位、導航、多種尺寸、字體放大及 TalkBack。
+- review Supabase RLS/grants、管理員 UID、頻率限制、匿名 snapshot 防濫用及容量，監察免費額度；沒有建立付費資源。
+- 自備 release signing key，在 CI 以安全 secret 注入。debug/demo 測試 ID 不能用作正式收益驗證。此版本並未簽署或發布正式 APK。
 
-- [ ] Supply a publisher-owned, publicly accessible privacy-policy URL and terms URL in configuration. Incorporate Google requirements and relevant data disclosures. **Currently missing: release blocker.**
-- [ ] Configure a securely managed release keystore and CI signing; preserve upload-key recovery procedures. **Not supplied: release blocker.**
-- [ ] Provide separate debug and release Places keys; validate both with real provider responses. Restrict application package and signing SHA-1, restrict required APIs, enable Places API (New) and billing. **No real key supplied: live integration verification blocker.**
-- [ ] Review applicable target SDK / Play policy deadlines at submission time; current target is API 36.
-- [ ] Configure per-API quotas, monitoring, budget alerts and operational kill/disable procedures. Billing alerts are notifications, **not a guaranteed spending cap**. Search/details field lists can invoke paid SKUs.
-- [ ] Confirm keys never enter source control, screenshots, crash reports or logs. Embedded APK keys are extractable and must be restricted/rotatable.
-- [ ] Re-check the current provider agreement for the billing entity/region. Only IDs and user interaction data persist. No provider content caching is enabled.
-- [ ] Review Google Maps attribution in real nearby/details responses, including returned third-party HTML and links, contrast, visibility, proximity, and logo/text requirements. Add official logo assets if the final production layout has adequate space; compact cards currently use the policy's text alternative.
-- [ ] Validate live missing-key, invalid-key, disabled API, billing, quota, network, zero results and removed Place ID cases using a controlled Cloud project.
-- [ ] Verify foreground permission denial, permanent denial, approximate permission, service disabled, stale fix and timeout on physical devices / multiple Android versions.
-- [ ] Verify custom system animation scales, TalkBack focus, largest font/display sizes, light/dark themes and landscape on device.
-- [ ] Review all allergy language. Live source is Unknown for every restaurant; Conservative mode cannot select a restaurant with avoidance preferences. Never market a result as safe/allergen-free.
-- [ ] Review dependency updates and rerun unit/Room/UI/lint checks. Pinned stable compatibility baseline intentionally predates newest versions.
-- [ ] Run lifecycle/process-kill and storage failure drills with device tools; do not infer device success from unit tests alone.
-- [ ] Complete Play Data safety disclosures, third-party notices, release signing/minification validation and store listing.
-- [ ] Check [verification.md](verification.md) for the commands actually completed in the implementation environment.
-
-No analytics SDK is included. No precise coordinates, keys, or allergy preferences are logged by app code. Backup is disabled. Local deletion requires explicit confirmation.
+最新本機實測及未驗證項目見 verification.md；較早 log／deliverables 是舊方案歷史資料。

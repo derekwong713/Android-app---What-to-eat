@@ -4,221 +4,213 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import hk.whatoeat.core.model.*
-import hk.whatoeat.data.location.StaleFix
-import hk.whatoeat.domain.draw.*
-import hk.whatoeat.domain.filter.*
+import hk.whatoeat.data.local.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 
 data class HomeState(
-    val ready: Boolean = false, val preferences: AppPreferences = AppPreferences(),
-    val district: District = District.MongKok, val fix: LocationFix? = null, val staleFix: LocationFix? = null,
-    val candidates: List<Restaurant> = emptyList(), val filtered: FilterResult = FilterResult(emptyList(),emptyMap(),emptySet()),
-    val searched: Boolean = false, val searching: Boolean = false, val busy: Boolean = false,
-    val failure: Failure? = null, val session: DrawSession? = null, val wheelCandidates: List<Restaurant> = emptyList(),
-    val restoringSession: Boolean = false,
-    val restoredResult: Boolean = false,
-    val result: Restaurant? = null, val detail: Restaurant? = null, val detailLoading: Boolean = false,
-    val favorites: List<SavedFavorite> = emptyList(), val history: List<DrawRecord> = emptyList(),
-    val needsAcknowledgment: Boolean = false, val exhausted: Boolean = false,
-    val drawn: Set<String> = emptySet()
-) {
-    val center: Point get() = fix?.point ?: district.point
-    val locked: Boolean get() = busy || session != null
-}
+    val ready: Boolean=false,val busy: Boolean=false,val filters: Filters=Filters(),val cuisines: List<Cuisine> = emptyList(),
+    val fix: LocationFix?=null,val snapshot: CandidateSnapshot?=null,val session: DrawSession?=null,
+    val recovery: Boolean=false,val restored: Boolean=false,val failure: Failure?=null,val notice: Boolean=false,
+    val detail: Detail?=null,val detailLoading: Boolean=false,val detailId: String?=null,
+    val user: User?=null,val login: Boolean=false,val authUrl: String?=null,val authPending: Boolean=false,
+    val action: PendingAction?=null,val revisions: List<Revision> = emptyList(),val reports: List<Report> = emptyList(),val admin: Boolean=false,
+    val favorites: List<SavedFavorite> = emptyList(),val history: List<DrawRecord> = emptyList(),val legacyCount: Int=0
+) {val locked get()=!ready || busy || (session!=null && !session.revealed)}
 @HiltViewModel class HomeViewModel @Inject constructor(
-    private val restaurants: RestaurantRepository, private val locations: LocationRepository,
-    private val favorites: FavoritesRepository, private val history: HistoryRepository,
-    private val preferences: PreferencesRepository, private val allergens: AllergenInfoRepository,
-    private val rounds: RoundStore, private val coordinator: DrawCoordinator,
-    private val time: TimeSource, private val ids: IdSource, private val io: CoroutineDispatcher
-) : ViewModel() {
-    private val mutable = MutableStateFlow(HomeState())
-    val state: StateFlow<HomeState> = mutable.asStateFlow()
-    private val filter = CandidateFilter()
-    private var searchJob: Job? = null
-    private var searchRequest = 0L
-    private var candidateVersion = ""
-    private var ackSummary = ""
-    private var revealJob: Job? = null
+    private val restaurants: RestaurantRepository,private val locations: LocationRepository,private val auth: AuthRepository,
+    private val store: LocalStore,private val prefs: UserPreferences,private val time: TimeSource,private val ids: IdSource,
+    private val io: CoroutineDispatcher
+): ViewModel() {
+    private val mutable=MutableStateFlow(HomeState());val state=mutable.asStateFlow()
+    private val mutex=Mutex();private var unsaved: DrawSession?=null;private var lastProfile: String?=null
+    private var detailVersion=0L
+    private val mutableRoute=MutableSharedFlow<String>(extraBufferCapacity=8);val routes=mutableRoute.asSharedFlow()
     init {
         viewModelScope.launch {
-            var recovery: DrawSession? = null
             try {
-                val p = preferences.preferences.first()
-                val round = withContext(io) { rounds.read() }
-                recovery = round.session
-                candidateVersion = round.version
-                mutable.update { it.copy(ready=true,preferences=p,drawn=round.drawn,busy=round.session!=null) }
-                round.session?.let { restored ->
-                    // Process recreation never animates or reselects a prepared winner.
-                    val revealed = withContext(io) { coordinator.reveal(restored.drawId) }
-                    mutable.update { it.copy(session=revealed.session,drawn=revealed.drawn,busy=false,restoredResult=true) }
-                    loadResult(restored.winnerId)
+                val filters=withContext(io) {prefs.read()}
+                val saved=withContext(io) {store.read()}
+                withContext(io) {auth.restore()}
+                mutable.update {it.copy(filters=filters,session=saved?.session,snapshot=saved?.request?.snapshot,recovery=saved!=null && saved.session==null,restored=saved!=null)}
+                saved?.session?.let {pick ->
+                    val revealed=pick.copy(revealed=true)
+                    withContext(io) {store.save(SavedDraw(saved.request,revealed))}
+                    mutable.update {it.copy(session=revealed)};mutableRoute.tryEmit("result");loadDetail(pick.restaurant.id)
                 }
-            } catch(e: Exception) { fail(e,Failure.Persistence); mutable.update { it.copy(ready=true,busy=false,session=recovery,restoringSession=recovery!=null,restoredResult=recovery!=null) } }
+                val cuisines=withContext(io) {restaurants.cuisines()}
+                val legacy=withContext(io) {store.legacyCount()}
+                mutable.update {it.copy(cuisines=cuisines,ready=true,legacyCount=legacy)}
+            } catch(e: Exception) {failure(e);mutable.update {it.copy(ready=true)}}
         }
-        viewModelScope.launch { favorites.favorites.catch { mutable.update { it.copy(failure=Failure.Persistence) } }.collect { list -> mutable.update { it.copy(favorites=list) } } }
-        viewModelScope.launch { history.history.catch { mutable.update { it.copy(failure=Failure.Persistence) } }.collect { list -> mutable.update { it.copy(history=list) } } }
+        viewModelScope.launch {store.favorites.collect {rows -> mutable.update {it.copy(favorites=rows)}}}
+        viewModelScope.launch {store.history.collect {rows -> mutable.update {it.copy(history=rows)}}}
+        viewModelScope.launch {auth.user.collect {user ->
+            mutable.update {it.copy(user=user,admin=if(user==null) false else it.admin)}
+            if(user?.id!=lastProfile) {
+                lastProfile=user?.id
+                if(user!=null) runCatching {
+                    val nickname=withContext(io) {restaurants.profile()}
+                    if(nickname!=null && nickname!=user.nickname) withContext(io) {auth.cacheNickname(nickname)}
+                    val admin=withContext(io) {restaurants.admin()};mutable.update {it.copy(admin=admin)}
+                }
+            }
+        }}
     }
-    private fun refilter(s: HomeState): HomeState = s.copy(filtered=filter.apply(s.candidates,s.center,s.preferences.filters,time.now()))
-    private fun fail(e: Exception, fallback: Failure = Failure.Network) {
+    private fun failure(e: Exception) {
         if(e is CancellationException) throw e
-        mutable.update { it.copy(failure=(e as? AppFailure)?.kind ?: fallback) }
+        mutable.update {it.copy(failure=(e as? AppFailure)?.kind ?: Failure.Persistence)}
     }
-    fun clearFailure() { mutable.update { it.copy(failure=null) } }
-    fun permissionDenied(permanent: Boolean) { mutable.update { it.copy(failure=if(permanent) Failure.PermissionPermanent else Failure.Permission) } }
-    fun selectDistrict(d: District) {
-        if(state.value.locked) return
-        mutable.update { it.copy(district=d,fix=null,staleFix=null) }
-        if(state.value.searched || state.value.searching) search()
-    }
+    fun invalidInput() {mutable.update {it.copy(failure=Failure.InvalidInput)}}
+    fun navigationFailed() {mutable.update {it.copy(failure=Failure.Navigation)}}
+    fun clearFailure() {mutable.update {it.copy(failure=null,notice=false)}}
+    fun permissionDenied(permanent: Boolean) {mutable.update {it.copy(failure=if(permanent) Failure.PermissionPermanent else Failure.Permission)}}
     fun useLocation() {
         if(state.value.locked) return
-        mutable.update { it.copy(busy=true,failure=null) }
-        viewModelScope.launch {
-            try {
-                val fix = withContext(io) { locations.locate() }
-                mutable.update { it.copy(fix=fix,staleFix=null,busy=false) }; search()
-            } catch(e: StaleFix) { mutable.update { it.copy(staleFix=e.fix,busy=false,failure=Failure.StaleLocation) } }
-            catch(e: Exception) { fail(e); mutable.update { it.copy(busy=false) } }
-        }
+        mutable.update {it.copy(busy=true,failure=null,fix=null,snapshot=null,recovery=false)}
+        unsaved=null
+        viewModelScope.launch {try {
+            withContext(io) {store.clear()}
+            val fix=withContext(io) {locations.locate()}
+            if(time.now()-fix.timestamp !in 0..DistanceOptions.MAX_FIX_AGE) throw AppFailure(Failure.StaleLocation)
+            mutable.update {it.copy(fix=fix,snapshot=null)}
+            withContext(io) {store.clear()}
+        } catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
     }
-    fun acceptStaleLocation() {
+    fun applyFilters(filters: Filters) {
+        if(state.value.locked || filters==state.value.filters) return
+        mutable.update {it.copy(busy=true)}
+        viewModelScope.launch {try {
+            withContext(io) {prefs.save(filters);store.clear()};unsaved=null
+            mutable.update {it.copy(filters=filters,snapshot=null,session=null,recovery=false,restored=false)}
+            mutableRoute.tryEmit("home")
+        } catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
+    }
+    fun noDistance()=applyFilters(state.value.filters.copy(radius=null))
+    private fun validFix(s: HomeState): LocationFix? {
+        if(s.filters.radius==null) return null
+        return s.fix?.takeIf {it.point.usable && time.now()-it.timestamp in 0..DistanceOptions.MAX_FIX_AGE} ?: throw AppFailure(Failure.LocationUnavailable)
+    }
+    fun refresh() {
         if(state.value.locked) return
-        val fix = state.value.staleFix ?: return
-        mutable.update { it.copy(fix=fix,staleFix=null,failure=null) }; search()
+        mutable.update {it.copy(busy=true,failure=null)}
+        viewModelScope.launch {try {
+            val s=state.value;val snap=withContext(io) {restaurants.snapshot(s.filters,validFix(s))}
+            withContext(io) {store.clear()};unsaved=null
+            mutable.update {it.copy(snapshot=snap,recovery=false)}
+        } catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
     }
-    fun search() {
-        if(state.value.locked || !state.value.ready) return
-        val version = ++searchRequest
-        searchJob?.cancel()
-        val center = state.value.center
-        val radius = state.value.preferences.filters.radius
-        mutable.update { it.copy(searching=true,failure=null,candidates=emptyList(),searched=false) }
-        searchJob = viewModelScope.launch {
-            try {
-                // No automatic retry: explicit refresh keeps costs and quota behavior visible.
-                val results = withContext(io) { restaurants.nearby(center,radius).map { it.copy(evidence=allergens.evidence(it.key)) } }
-                if(version != searchRequest) return@launch
-                val newVersion = ids.next()
-                withContext(io) { coordinator.restart(newVersion) }
-                if(version != searchRequest) return@launch
-                candidateVersion = newVersion
-                mutable.update { refilter(it.copy(candidates=results,searching=false,searched=true,drawn=emptySet())) }
-            } catch(e: Exception) {
-                if(version == searchRequest) { fail(e); mutable.update { it.copy(searching=false) } }
+    fun draw(mode: DrawMode=DrawMode.NewCuisine) {
+        if(state.value.locked) return
+        mutable.update {it.copy(busy=true,failure=null,notice=false)}
+        viewModelScope.launch {try {mutex.withLock {
+            var s=state.value
+            val pending=withContext(io) {store.read()}?.takeIf {it.session==null}
+            val request=if(pending!=null) pending.request else {
+                val currentFix=validFix(s)
+                val snap=s.snapshot ?: withContext(io) {restaurants.snapshot(s.filters,currentFix)}.also {snapshot -> mutable.update {it.copy(snapshot=snapshot)}}
+                if(snap.cuisines.isEmpty()) return@withLock
+                if(mode==DrawMode.SameCuisine && s.session?.cuisineId !in snap.cuisines.map {it.cuisine.id}) throw AppFailure(Failure.DetailsUnavailable)
+                DrawRequest(ids.next(),snap,mode,s.session?.cuisineId,s.session?.restaurant?.id).also {withContext(io) {store.save(SavedDraw(it,null))}}
             }
-        }
+            val pick=unsaved?.takeIf {it.drawId==request.id} ?: withContext(io) {restaurants.prepare(request)}
+            unsaved=pick
+            withContext(io) {store.save(SavedDraw(request,pick))};unsaved=null
+            mutable.update {it.copy(session=pick,snapshot=request.snapshot,recovery=false,restored=false)}
+            if(request.mode==DrawMode.SameCuisine || pick.snapshot.cuisines.size==1) revealInternal()
+            else mutableRoute.tryEmit("wheel")
+        }} catch(e: Exception) {
+            failure(e)
+            val pending=runCatching {withContext(io) {store.read()}}.getOrNull()
+            mutable.update {it.copy(recovery=pending!=null && pending.session==null)}
+        } finally {mutable.update {it.copy(busy=false)}}}
     }
-    fun applyFilters(f: Filters) {
-        if(state.value.locked || f == state.value.preferences.filters) return
-        val previous = state.value.preferences.filters
-        val shouldSearch = previous.radius != f.radius && (state.value.searched || state.value.searching)
-        if(shouldSearch) { ++searchRequest; searchJob?.cancel() }
-        val p = state.value.preferences.copy(filters=f)
-        mutable.update { it.copy(busy=true) }
-        viewModelScope.launch {
-            try {
-                val newVersion = ids.next()
-                withContext(io) { coordinator.restart(newVersion); preferences.save(p) }
-                candidateVersion = newVersion
-                mutable.update { refilter(it.copy(preferences=p,drawn=emptySet(),busy=false)) }
-                if(shouldSearch) search()
-            } catch(e: Exception) { fail(e,Failure.Persistence); mutable.update { it.copy(busy=false) } }
-        }
+    private suspend fun revealInternal() {
+        val saved=withContext(io) {store.read()} ?: return
+        val pick=saved.session ?: return
+        val revealed=pick.copy(revealed=true)
+        withContext(io) {store.save(saved.copy(session=revealed))}
+        mutable.update {it.copy(session=revealed)};mutableRoute.tryEmit("result");loadDetail(pick.restaurant.id)
     }
-    fun setPresentation(mode: Presentation) = savePreferences(state.value.preferences.copy(mode=mode))
-    fun setReducedMotion(value: Boolean) = savePreferences(state.value.preferences.copy(reducedMotion=value))
-    private fun savePreferences(p: AppPreferences) {
-        if(state.value.locked) return
-        mutable.update { it.copy(busy=true) }
-        viewModelScope.launch { try {
-            withContext(io) { preferences.save(p) }; mutable.update { it.copy(preferences=p) }
-        } catch(e: Exception) { fail(e,Failure.Persistence) } finally { mutable.update { it.copy(busy=false) } } }
-    }
-    fun draw(summary: String) {
-        val s = state.value
-        if(s.busy || s.session != null || s.searching) return
-        if(!s.searched) { search(); return }
-        if(s.filtered.unknownAllergens.isNotEmpty() && s.preferences.acknowledged != s.preferences.filters.acknowledgmentKey()) {
-            ackSummary=summary; mutable.update { it.copy(needsAcknowledgment=true) }; return
-        }
-        mutable.update { it.copy(busy=true,failure=null) }
-        viewModelScope.launch {
-            try {
-                val outcome = withContext(io) { coordinator.prepare(s.filtered.eligible.map { it.key },candidateVersion,s.preferences.mode,summary) }
-                when(outcome) {
-                    DrawOutcome.Empty -> Unit
-                    DrawOutcome.Exhausted -> mutable.update { it.copy(exhausted=true) }
-                    is DrawOutcome.Selected -> {
-                        mutable.update { it.copy(session=outcome.session,restoredResult=false,wheelCandidates=s.filtered.eligible.filter { r -> r.key in outcome.session.orderedCandidateIds }.sortedBy { r -> r.key }) }
-                        if(outcome.session.presentationMode == Presentation.Direct || s.preferences.reducedMotion || outcome.session.orderedCandidateIds.size == 1) reveal()
-                    }
-                }
-            } catch(e: Exception) { fail(e,Failure.Persistence) }
-            finally { mutable.update { it.copy(busy=false) } }
-        }
-    }
-    fun acknowledgment(accept: Boolean) {
-        mutable.update { it.copy(needsAcknowledgment=false) }
-        if(!accept) return
-        val p = state.value.preferences.copy(acknowledged=state.value.preferences.filters.acknowledgmentKey())
-        mutable.update { it.copy(busy=true) }
-        viewModelScope.launch { try {
-            withContext(io) { preferences.save(p) }; mutable.update { it.copy(preferences=p,busy=false) }; draw(ackSummary)
-        } catch(e: Exception) { fail(e,Failure.Persistence); mutable.update { it.copy(busy=false) } } }
-    }
-    fun reveal() {
-        val s = state.value.session ?: return
-        if(revealJob?.isActive == true || (s.status == SessionStatus.Revealed && state.value.result != null)) return
-        revealJob = viewModelScope.launch {
-            try {
-                val r = withContext(io) { coordinator.reveal(s.drawId) }
-                mutable.update { it.copy(session=r.session,drawn=r.drawn,restoringSession=false) }
-                loadResult(s.winnerId)
-            } catch(e: Exception) { fail(e,Failure.Persistence) }
-        }
-    }
-    private suspend fun loadResult(key: String) {
-        state.value.candidates.firstOrNull { it.key == key }?.let { r -> mutable.update { if(it.session?.winnerId==key) it.copy(result=r) else it }; return }
-        try { val r=withContext(io) { restaurants.details(key).let { it.copy(evidence=allergens.evidence(key)) } }; mutable.update { if(it.session?.winnerId==key) it.copy(result=r) else it } }
-        catch(e: Exception) { fail(e,Failure.DetailsUnavailable) }
-    }
-    fun dismissResult(thenDraw: Boolean = false, summary: String = "") {
+    fun reveal() {viewModelScope.launch {try {mutex.withLock {revealInternal()}} catch(e: Exception) {failure(e)}}}
+    fun discardPending() {
         if(state.value.busy) return
-        mutable.update { it.copy(busy=true) }
-        viewModelScope.launch { try {
-            state.value.session?.let { withContext(io) { coordinator.reveal(it.drawId) } }
-            withContext(io) { coordinator.dismiss() }
-            mutable.update { it.copy(session=null,result=null,wheelCandidates=emptyList(),busy=false) }
-            if(thenDraw) draw(summary)
-        } catch(e: Exception) { fail(e,Failure.Persistence); mutable.update { it.copy(busy=false) } } }
+        mutable.update {it.copy(busy=true)}
+        viewModelScope.launch {try {mutex.withLock {withContext(io) {store.clear()};unsaved=null;mutable.update {it.copy(recovery=false,session=null,snapshot=null)}}} catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
     }
-    fun restartRound(confirmed: Boolean) {
-        mutable.update { it.copy(exhausted=false) }
-        if(!confirmed) return
-        viewModelScope.launch { try { withContext(io) { coordinator.restart(candidateVersion) }; mutable.update { it.copy(drawn=emptySet()) } } catch(e: Exception) { fail(e,Failure.Persistence) } }
-    }
-    fun toggleFavorite(key: String) { viewModelScope.launch { try { withContext(io) { favorites.toggle(key,time.now()) } } catch(e: Exception) { fail(e,Failure.Persistence) } } }
-    fun deleteRecord(id: String) { viewModelScope.launch { try { withContext(io) { history.delete(id) } } catch(e: Exception) { fail(e,Failure.Persistence) } } }
-    fun clearHistory() { viewModelScope.launch { try { withContext(io) { history.clearHistory() } } catch(e: Exception) { fail(e,Failure.Persistence) } } }
-    fun clearLocalData() {
-        if(state.value.locked) return
-        mutable.update { it.copy(busy=true) }
-        viewModelScope.launch { try {
-            withContext(io) { rounds.clearAll(); preferences.clear() }
-            candidateVersion=""; mutable.update { HomeState(ready=true) }
-        } catch(e: Exception) { fail(e,Failure.Persistence); mutable.update { it.copy(busy=false) } } }
-    }
-    private var detailRequest=0
     fun openDetail(key: String) {
-        val request=++detailRequest
-        mutable.update { it.copy(detail=null,detailLoading=true,failure=null) }
-        viewModelScope.launch { try {
-            val r=withContext(io) { restaurants.details(key).let { it.copy(evidence=allergens.evidence(key)) } }
-            if(request==detailRequest) mutable.update { it.copy(detail=r,detailLoading=false) }
-        } catch(e: Exception) { if(request==detailRequest) { fail(e,Failure.DetailsUnavailable); mutable.update { it.copy(detailLoading=false) } } } }
+        if(key.startsWith("google:")) {mutable.update {it.copy(failure=Failure.DetailsUnavailable)};return}
+        val id=key.removePrefix("catalog:")
+        mutableRoute.tryEmit("detail");viewModelScope.launch {loadDetail(id)}
     }
+    private suspend fun loadDetail(id: String) {
+        val version=++detailVersion
+        mutable.update {it.copy(detail=null,detailId=id,detailLoading=true)}
+        try {val detail=withContext(io) {restaurants.detail(id)};if(version==detailVersion) mutable.update {it.copy(detail=detail,detailLoading=false)}}
+        catch(e: Exception) {if(version==detailVersion) {failure(e);mutable.update {it.copy(detailLoading=false)}}}
+    }
+    fun retryDetail() {state.value.detailId?.let {id -> viewModelScope.launch {loadDetail(id)}}}
+    fun moreReviews() {
+        val d=state.value.detail ?: return;val before=d.nextReviewTime ?: return
+        operation {val page=restaurants.detail(d.restaurant.id,before,d.nextReviewId);mutable.update {it.copy(detail=page.copy(reviews=(d.reviews+page.reviews).distinctBy {r -> r.id}))}}
+    }
+    fun requestAction(kind: String,id: String=state.value.detailId.orEmpty()) {
+        val action=PendingAction(kind,id)
+        if(auth.user.value==null && kind!="history") mutable.update {it.copy(login=true,action=action)} else openAction(action)
+    }
+    private fun openAction(action: PendingAction) {
+        mutable.update {it.copy(action=action,login=false)}
+        if(action.kind=="history") operation {val rows=restaurants.revisions(action.restaurantId);mutable.update {it.copy(revisions=rows)}}
+        if(action.kind=="admin") operation {val rows=restaurants.reports();mutable.update {it.copy(reports=rows)}}
+    }
+    fun closeAction() {mutable.update {it.copy(action=null,login=false)}}
+    fun signIn(provider: Provider) {
+        if(state.value.busy) return
+        mutable.update {it.copy(busy=true)}
+        viewModelScope.launch {try {
+            val url=withContext(io) {auth.begin(provider,state.value.action)}
+            if(url==null) resumePending() else mutable.update {it.copy(authUrl=url,authPending=true)}
+        } catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
+    }
+    fun authLaunched() {mutable.update {it.copy(authUrl=null)}}
+    fun authReturnedWithoutCallback() {if(state.value.authPending) mutable.update {it.copy(authPending=false,login=true,failure=Failure.Cancelled)}}
+    fun authCallback(uri: String) {
+        mutable.update {it.copy(busy=true,authPending=false,authUrl=null)}
+        viewModelScope.launch {try {withContext(io) {auth.callback(uri)};resumePending()} catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
+    }
+    private suspend fun resumePending() {
+        val pending=withContext(io) {auth.pending()};withContext(io) {auth.clearPending()}
+        mutable.update {it.copy(login=false,user=auth.user.value,authPending=false)}
+        if(pending!=null) {if(pending.restaurantId.isNotBlank()) {loadDetail(pending.restaurantId);mutableRoute.tryEmit("detail")};openAction(pending)}
+    }
+    fun cancelLogin() {viewModelScope.launch {withContext(io) {auth.cancel()};mutable.update {it.copy(login=false,authPending=false,action=null,authUrl=null)}}}
+    private fun operation(block: suspend ()->Unit) {
+        if(state.value.busy) return
+        mutable.update {it.copy(busy=true,failure=null)}
+        viewModelScope.launch {try {withContext(io) {block()}} catch(e: Exception) {failure(e);if((e as? AppFailure)?.kind==Failure.Login) mutable.update {it.copy(login=true)}} finally {mutable.update {it.copy(busy=false)}}}
+    }
+    fun edit(id: String,version: Long,patch: EditPatch) {
+        if(!Validation.restaurant(patch)) {mutable.update {it.copy(failure=Failure.InvalidInput)};return}
+        operation {restaurants.edit(id,version,patch);mutable.update {it.copy(action=null,snapshot=null,notice=true)};loadDetail(id)}
+    }
+    fun rate(id: String,stars: Int)=operation {restaurants.rate(id,stars);mutable.update {it.copy(action=null,notice=true)};loadDetail(id)}
+    fun comment(id: String,body: String,key: String) {
+        if(!Validation.review(body)) {mutable.update {it.copy(failure=Failure.InvalidInput)};return}
+        operation {restaurants.comment(id,body,key);mutable.update {it.copy(action=null,notice=true)};loadDetail(id)}
+    }
+    fun deleteComment(id: String)=operation {restaurants.deleteComment(id);state.value.detailId?.let {loadDetail(it)}}
+    fun report(restaurantId: String?,commentId: String?,reason: String)=operation {restaurants.report(restaurantId,commentId,reason);mutable.update {it.copy(action=null,notice=true)}}
+    fun restoreRevision(id: String,revisionId: Long,version: Long)=operation {restaurants.restore(id,revisionId,version);mutable.update {it.copy(action=null,snapshot=null,notice=true)};loadDetail(id)}
+    fun moreRevisions() {val id=state.value.action?.restaurantId ?: return;val cursor=state.value.revisions.lastOrNull()?.version ?: return;operation {val page=restaurants.revisions(id,cursor);mutable.update {it.copy(revisions=(it.revisions+page).distinctBy {r -> r.id})}}}
+    fun resolve(id: String,action: String)=operation {restaurants.resolve(id,action);val rows=restaurants.reports();mutable.update {it.copy(reports=rows,snapshot=null,notice=true)}}
+    fun nickname(value: String) {if(!Validation.nickname(value)) {mutable.update {it.copy(failure=Failure.InvalidInput)};return};operation {restaurants.nickname(value);auth.cacheNickname(value);mutable.update {it.copy(action=null,notice=true)}}}
+    fun logout()=operation {auth.logout();mutable.update {it.copy(user=null,admin=false,action=null)}}
+    fun deleteAccount()=operation {auth.deleteAccount();store.clearLocalData();prefs.clear();mutable.update {HomeState(ready=true,cuisines=it.cuisines,notice=true)}}
+    fun toggleFavorite(key: String)=operation {store.toggle(if(key.startsWith("catalog:") || key.startsWith("google:")) key else "catalog:$key",time.now())}
+    fun deleteRecord(id: String)=operation {store.delete(id)}
+    fun clearHistory()=operation {store.clearHistory()}
+    fun clearLocalData()=operation {store.clearLocalData();prefs.clear();auth.logout();unsaved=null;mutable.update {HomeState(ready=true,cuisines=it.cuisines,notice=true)}}
 }

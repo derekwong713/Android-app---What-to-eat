@@ -1,0 +1,5 @@
+// Windows IDEs can retain handles to generated JARs. Keep CLI validation independent.
+gradle.beforeProject { project ->
+    def outputName = project.path == ':' ? 'root' : project.path.substring(1).replace(':', '-')
+    project.layout.buildDirectory.set(new File(project.rootDir, ".build-cache/verification-output/${outputName}"))
+}

@@ -1,0 +1,15 @@
+project_id = "what-to-eat"
+[api]
+enabled = true
+max_rows = 1000
+[auth]
+enabled = true
+site_url = "http://localhost:8080"
+additional_redirect_urls = ["hk.whatoeat://auth/callback**", "hk.whatoeat.demo://auth/callback**"]
+[auth.email]
+enable_signup = false
+[auth.sms]
+enable_signup = false
+[functions.delete-account]
+# The function itself always verifies bearer tokens through auth.getUser; required for current key types.
+verify_jwt = false

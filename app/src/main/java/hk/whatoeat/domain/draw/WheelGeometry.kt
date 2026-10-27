@@ -7,7 +7,7 @@ package hk.whatoeat.domain.draw
 object WheelGeometry {
     fun normalize(degrees: Double): Double = ((degrees % 360) + 360) % 360
     fun center(count: Int, index: Int): Double {
-        require(count in 1..20 && index in 0 until count)
+        require(count > 0 && index in 0 until count)
         return (index + 0.5) * 360 / count
     }
     fun target(count: Int, winner: Int, current: Double = 0.0, turns: Int = 5): Double {
@@ -16,7 +16,7 @@ object WheelGeometry {
         return current + turns * 360 + normalize(alignment - normalize(current))
     }
     fun pointedIndex(count: Int, rotation: Double): Int {
-        require(count in 1..20)
+        require(count > 0)
         return (normalize(270 - rotation) / (360.0/count)).toInt().coerceIn(0,count-1)
     }
 }

@@ -22,7 +22,7 @@ import java.util.Date
                 Column(Modifier.padding(16.dp)) {
                     Text(stringResource(R.string.saved_placeholder),style=MaterialTheme.typography.titleMedium)
                     Text(stringResource(R.string.saved_at,DateFormat.getDateTimeInstance().format(Date(f.createdAt))))
-                    Text(stringResource(R.string.saved_id,f.key),style=MaterialTheme.typography.bodySmall)
+                    if(f.key.startsWith("google:")) Text("舊版收藏：資料來源已轉換，無法再讀取此編號。",style=MaterialTheme.typography.bodySmall)
                     TextButton(onClick={vm.toggleFavorite(f.key)}) {Text(stringResource(R.string.favorite_remove))}
                 }
             }

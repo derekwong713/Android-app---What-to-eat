@@ -97,6 +97,7 @@ COPY = {
 'demo_source': ('虛構測試來源', 'Fictional test source'), 'demo_scope': ('虛構餐廳層面聲明', 'Fictional restaurant-wide statement'),
 'demo_dish': ('只適用於虛構單一菜式', 'Fictional single-dish scope only'),
 }
+COPY.update({'ad_label': ('廣告','廣告'), 'ad_unavailable': ('廣告暫未提供','廣告暫未提供'), 'app_name': ('食咩好？','食咩好？')})
 root = Path(__file__).resolve().parents[1] / 'app/src/main/res'
 for folder, index in [('values',0),('values-zh-rHK',0),('values-en',1)]:
     target = root / folder / 'strings.xml'

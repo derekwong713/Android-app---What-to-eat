@@ -1,29 +1,12 @@
 package hk.whatoeat.feature.result
-
-import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import hk.whatoeat.core.model.Restaurant
-
 object ExternalActions {
-    fun navigationUrl(r: Restaurant): String? {
-        val destination = r.point?.let { "${it.latitude},${it.longitude}" } ?: r.address ?: r.name ?: return null
-        val b = Uri.parse("https://www.google.com/maps/dir/").buildUpon().appendQueryParameter("api","1")
-            .appendQueryParameter("destination",destination)
-        if(r.provider=="google") b.appendQueryParameter("destination_place_id",r.placeId)
-        return b.build().toString()
-    }
-    fun navigate(context: Context,r: Restaurant): Boolean {
-        val url=navigationUrl(r) ?: return false
-        if(r.provider=="google") {
-            try { context.startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(url)).setPackage("com.google.android.apps.maps"));return true }
-            catch(_: ActivityNotFoundException) { }
-            catch(_: SecurityException) { }
-        }
-        return open(context,url)
-    }
-    fun open(context: Context,url: String): Boolean = try {
-        context.startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(url)));true
-    } catch(_: ActivityNotFoundException) { false } catch(_: SecurityException) { false }
+ fun navigationUrl(r: Restaurant): String? {
+  val destination=r.point?.takeIf {it.usable}?.let {"${it.latitude},${it.longitude}"} ?: r.address.takeIf {it.isNotBlank()}?.let {r.name+" "+it} ?: return null
+  return Uri.parse("https://www.google.com/maps/dir/").buildUpon().appendQueryParameter("api","1").appendQueryParameter("destination",destination).build().toString()
+ }
+ fun navigate(c: Context,r: Restaurant): Boolean {val url=navigationUrl(r) ?: return false;return try {c.startActivity(Intent(Intent.ACTION_VIEW,Uri.parse(url)).putExtra(Intent.EXTRA_TITLE,r.name));true} catch(_: ActivityNotFoundException) {false} catch(_: SecurityException) {false}}
+ fun open(c: Context,url: String): Boolean=try {val u=Uri.parse(url);if(u.scheme!="https") false else {c.startActivity(Intent(Intent.ACTION_VIEW,u));true}} catch(_: ActivityNotFoundException) {false} catch(_: SecurityException) {false}
 }

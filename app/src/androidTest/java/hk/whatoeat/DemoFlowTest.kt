@@ -1,62 +1,20 @@
 package hk.whatoeat
-
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import org.junit.Assume.assumeTrue
 import org.junit.Rule
 import org.junit.Test
-import org.junit.Before
-
-/** Run against demoDebug on a clean app install / cleared app data. */
 class DemoFlowTest {
-    @get:Rule val rule=createAndroidComposeRule<MainActivity>()
-    private fun text(id: Int)=rule.activity.getString(id)
-    @Before fun clearDemoData() {
-        rule.waitForIdle()
-        // Close any result preserved by a prior test before opening settings.
-        if(rule.onAllNodesWithText(text(R.string.close)).fetchSemanticsNodes().isNotEmpty()) rule.onNodeWithText(text(R.string.close)).performScrollTo().performClick()
-        rule.onNodeWithContentDescription(text(R.string.settings)).performClick()
-        rule.onNodeWithText(text(R.string.clear_local_data)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.confirm)).performClick()
-        rule.onNodeWithText(text(R.string.home)).performClick()
-    }
-    @Test fun manualDistrictDirectDrawFavoritesAndHistory() {
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.find_nearby)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.district_sha_tin)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.find_nearby)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.pick)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.pick)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.result_title)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.favorite_add)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.close)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.history)).performClick()
-        rule.onAllNodesWithText(text(R.string.saved_placeholder)).onFirst().assertExists()
-    }
-    @Test fun zeroResultsCanRecoverThroughAnotherDistrict() {
-        rule.onNodeWithText(text(R.string.district_tsuen_wan)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.find_nearby)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.no_restaurants)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.district_sha_tin)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.pick)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.pick)).assertIsEnabled()
-    }
-    @Test fun conservativeUnknownIsExcludedWithoutRelaxation() {
-        rule.onNodeWithText(text(R.string.district_sha_tin)).performScrollTo().performClick()
-        rule.onAllNodesWithText(text(R.string.filters)).onLast().performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.allergen_milk)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.conservative_mode)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.apply)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.find_nearby)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.no_conservative)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.pick)).performScrollTo().assertIsNotEnabled()
-    }
-    @Test fun wheelSkipRevealsPreparedWinner() {
-        rule.onNodeWithText(text(R.string.wheel)).performScrollTo().performClick()
-        rule.onNodeWithText(text(R.string.find_nearby)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.pick)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.pick)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.skip_animation)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.skip_animation)).performScrollTo().performClick()
-        rule.waitUntil(10000) {rule.onAllNodesWithText(text(R.string.result_title)).fetchSemanticsNodes().isNotEmpty()}
-        rule.onNodeWithText(text(R.string.result_title)).assertExists()
-    }
+ @get:Rule val ui=createAndroidComposeRule<MainActivity>()
+ @Test fun guestDrawCuisineThenRestaurantAndReroll() {
+ assumeTrue(BuildConfig.DEMO)
+ ui.waitUntil(15000) {ui.onAllNodes(hasText("首頁") and isEnabled()).fetchSemanticsNodes().isNotEmpty()};ui.onNodeWithText("首頁").performClick()
+ ui.onNodeWithText("距離及菜式").performScrollTo().performClick();ui.onAllNodes(isSelectable())[0].performClick();ui.onNodeWithText("所有菜式／清除已選").performScrollTo().performClick();ui.onNodeWithText("套用篩選").performScrollTo().performClick()
+ ui.waitUntil(10000) {ui.onAllNodes(hasText("重新載入完整候選") and isEnabled()).fetchSemanticsNodes().isNotEmpty()};ui.onNodeWithText("重新載入完整候選").performScrollTo().performClick()
+ ui.waitUntil(10000) {ui.onAllNodesWithText("符合條件：3 間餐廳、3 種菜式").fetchSemanticsNodes().isNotEmpty() && ui.onAllNodes(hasText("抽菜式，再抽餐廳") and isEnabled()).fetchSemanticsNodes().isNotEmpty()}
+ ui.onNodeWithText("抽菜式，再抽餐廳").performScrollTo().performClick();ui.waitUntil(15000) {ui.onAllNodes(hasText("重抽餐廳") and isEnabled()).fetchSemanticsNodes().isNotEmpty()}
+ ui.onNodeWithText("重抽餐廳").performScrollTo().performClick();ui.waitUntil(10000) {ui.onAllNodes(hasText("重抽菜式") and isEnabled()).fetchSemanticsNodes().isNotEmpty()}
+ }
+
+ @Test fun guestWriteOpRequestsOnlySocialLogin() {assumeTrue(BuildConfig.DEMO);ui.waitUntil(15000) {ui.onAllNodesWithText("帳戶").fetchSemanticsNodes().isNotEmpty()};ui.onNodeWithText("帳戶").performClick();ui.onNodeWithText("登入 Google／Facebook").performClick();ui.onNodeWithText("模擬 Google 登入").assertExists();ui.onNodeWithText("模擬 Facebook 登入").assertExists();ui.onNodeWithText("取消").performClick()}
 }
