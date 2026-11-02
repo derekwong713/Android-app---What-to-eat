@@ -1,0 +1,290 @@
+{
+  "source": "Exact complete_address.city mapping; broad or ambiguous localities stay unknown. District list: https://www.had.gov.hk/en/18_districts/my_map.htm",
+  "groups": {
+    "hk_island": {
+      "label": "香港島",
+      "districts": [
+        "central_western",
+        "wan_chai",
+        "eastern",
+        "southern"
+      ]
+    },
+    "kowloon": {
+      "label": "九龍",
+      "districts": [
+        "yau_tsim_mong",
+        "sham_shui_po",
+        "kowloon_city",
+        "wong_tai_sin",
+        "kwun_tong"
+      ]
+    },
+    "new_territories": {
+      "label": "新界",
+      "districts": [
+        "kwai_tsing",
+        "tsuen_wan",
+        "tuen_mun",
+        "yuen_long",
+        "north",
+        "tai_po",
+        "sha_tin",
+        "sai_kung",
+        "islands"
+      ]
+    }
+  },
+  "districts": {
+    "central_western": {
+      "label": "中西區",
+      "group": "hk_island",
+      "localities": [
+        "Central",
+        "Sheung Wan",
+        "Sai Ying Pun",
+        "Kennedy Town",
+        "Sai Wan",
+        "Shek Tong Tsui",
+        "West Point",
+        "Possession Point",
+        "Admiralty"
+      ]
+    },
+    "wan_chai": {
+      "label": "灣仔區",
+      "group": "hk_island",
+      "localities": [
+        "Wan Chai",
+        "Happy Valley",
+        "Tai Hang",
+        "Bowrington",
+        "Starstreet Precinct"
+      ]
+    },
+    "eastern": {
+      "label": "東區",
+      "group": "hk_island",
+      "localities": [
+        "North Point",
+        "Quarry Bay",
+        "Shau Kei Wan",
+        "Sai Wan Ho",
+        "Chai Wan",
+        "Siu Sai Wan",
+        "Fortress Hill",
+        "Tsat Tsz Mui"
+      ]
+    },
+    "southern": {
+      "label": "南區",
+      "group": "hk_island",
+      "localities": [
+        "Aberdeen",
+        "香港仔",
+        "Ap Lei Chau",
+        "Wong Chuk Hang",
+        "Stanley",
+        "Repulse Bay",
+        "Deep Water Bay",
+        "Tai Tam",
+        "Shek O",
+        "South Horizons",
+        "Tin Wan",
+        "Telegraph Bay"
+      ]
+    },
+    "yau_tsim_mong": {
+      "label": "油尖旺區",
+      "group": "kowloon",
+      "localities": [
+        "Mong Kok",
+        "Yau Ma Tei",
+        "Tsim Sha Tsui",
+        "Tsim Sha Tsui East",
+        "TST",
+        "Jordan",
+        "佐敦",
+        "Tai Kok Tsui",
+        "Ferry Point",
+        "Tong Mi"
+      ]
+    },
+    "sham_shui_po": {
+      "label": "深水埗區",
+      "group": "kowloon",
+      "localities": [
+        "Sham Shui Po",
+        "深水埗",
+        "Cheung Sha Wan",
+        "Lei Cheng Uk",
+        "So Uk",
+        "Un Chau",
+        "Yau Yat Chuen"
+      ]
+    },
+    "kowloon_city": {
+      "label": "九龍城區",
+      "group": "kowloon",
+      "localities": [
+        "Kowloon City",
+        "To Kwa Wan",
+        "Hung Hom",
+        "Ho Man Tin",
+        "Ma Tau Chung",
+        "Hok Yuen",
+        "Kai Tak"
+      ]
+    },
+    "wong_tai_sin": {
+      "label": "黃大仙區",
+      "group": "kowloon",
+      "localities": [
+        "Chuk Un",
+        "Wong Tai Sin",
+        "Diamond Hill",
+        "Tsz Wan Shan",
+        "San Po Kong",
+        "Ngau Chi Wan",
+        "Tai Hom"
+      ]
+    },
+    "kwun_tong": {
+      "label": "觀塘區",
+      "group": "kowloon",
+      "localities": [
+        "Kwun Tong",
+        "觀塘",
+        "Ngau Tau Kok",
+        "Kowloon Bay",
+        "Lam Tin",
+        "Yau Tong"
+      ]
+    },
+    "kwai_tsing": {
+      "label": "葵青區",
+      "group": "new_territories",
+      "localities": [
+        "Kwai Chung",
+        "Kwai Fong",
+        "Tsing Yi",
+        "Shek Lei",
+        "Shek Yam"
+      ]
+    },
+    "tsuen_wan": {
+      "label": "荃灣區",
+      "group": "new_territories",
+      "localities": [
+        "Tsuen Wan",
+        "Chai Wan Kok",
+        "Tsuen King Circuit",
+        "Lo Wai",
+        "Ma Wan",
+        "Sam Dip Tam",
+        "Sham Tseng Tsuen",
+        "Hong Kong Disneyland Resort"
+      ]
+    },
+    "tuen_mun": {
+      "label": "屯門區",
+      "group": "new_territories",
+      "localities": [
+        "Tuen Mun",
+        "Tuen Mun New Town",
+        "San Hui",
+        "Lam Tei",
+        "So Kwun Wat"
+      ]
+    },
+    "yuen_long": {
+      "label": "元朗區",
+      "group": "new_territories",
+      "localities": [
+        "Yuen Long",
+        "元朗",
+        "元朗廈村",
+        "Kam Tin",
+        "Au Tau",
+        "Lau Fau Shan",
+        "Pat Heung",
+        "San Tin",
+        "Shek Kong",
+        "Tai Kiu Tsuen"
+      ]
+    },
+    "north": {
+      "label": "北區",
+      "group": "new_territories",
+      "localities": [
+        "Fanling",
+        "Sheung Shui",
+        "上水石湖墟",
+        "Kwan Tei"
+      ]
+    },
+    "tai_po": {
+      "label": "大埔區",
+      "group": "new_territories",
+      "localities": [
+        "Tai Po",
+        "Tai Po Kau",
+        "Lam Tsuen",
+        "Shuen Wan",
+        "Tai Mei Tuk Tsuen",
+        "Tai Wo Estate",
+        "太和"
+      ]
+    },
+    "sha_tin": {
+      "label": "沙田區",
+      "group": "new_territories",
+      "localities": [
+        "Sha Tin",
+        "沙田",
+        "沙田火炭",
+        "Fo Tan",
+        "Ma On Shan",
+        "Tai Wai",
+        "Sha Tin Wai",
+        "Shek Mun",
+        "City One - Shatin",
+        "Chevalier Garden",
+        "Lek Yuen Estate",
+        "Siu Lek Yuen",
+        "Wo Che Estate"
+      ]
+    },
+    "sai_kung": {
+      "label": "西貢區",
+      "group": "new_territories",
+      "localities": [
+        "Sai Kung",
+        "Tseung Kwan O",
+        "Clear Water Bay",
+        "Hebe Haven",
+        "Pak Sha Wan",
+        "Metro City",
+        "Yau Yue Wan"
+      ]
+    },
+    "islands": {
+      "label": "離島區",
+      "group": "new_territories",
+      "localities": [
+        "Tung Chung",
+        "Cheung Chau",
+        "Lamma Island",
+        "Mui Wo",
+        "Peng Chau",
+        "Ngong Ping",
+        "Tai O",
+        "Discovery Bay",
+        "Chek Lap Kok",
+        "Caribbean Coast",
+        "Coastal Skyline",
+        "Seaview Crescent"
+      ]
+    }
+  }
+}

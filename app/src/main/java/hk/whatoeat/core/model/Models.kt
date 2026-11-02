@@ -22,11 +22,47 @@ enum class Business {Unknown,Operating,TemporarilyClosed,Closed}
 data class Restaurant(
     val id: String,val name: String,val address: String,val point: Point?,val cuisines: List<Cuisine>,
     val openingHours: String?,val status: Business,val enabled: Boolean=true,val source: String,
-    val updatedAt: String,val version: Long,val averageRating: Double?=null,val ratingCount: Int=0
+    val updatedAt: String,val version: Long,val averageRating: Double?=null,val ratingCount: Int=0,val mapsUrl: String?=null,val region: String="unknown",val locality: String=""
 ) {val recommendable get()=enabled && status !in setOf(Business.Closed,Business.TemporarilyClosed)}
 object DistanceOptions {val metres: List<Int?> = listOf(null,500,1000,2000,5000);const val MAX_FIX_AGE=300000L}
-data class Filters(val radius: Int?=null,val cuisines: Set<String> = emptySet()) {
-    init {require(radius in DistanceOptions.metres)}
+object RatingOptions {val values: List<Double?> = listOf(null,3.0,3.5,4.0,4.5,5.0)}
+object RegionOptions {
+    val groups=linkedMapOf(
+        "hk_island" to listOf("central_western","wan_chai","eastern","southern"),
+        "kowloon" to listOf("yau_tsim_mong","sham_shui_po","kowloon_city","wong_tai_sin","kwun_tong"),
+        "new_territories" to listOf("kwai_tsing","tsuen_wan","tuen_mun","yuen_long","north","tai_po","sha_tin","sai_kung","islands")
+    )
+    val groupLabels=mapOf("hk_island" to "香港島","kowloon" to "九龍","new_territories" to "新界")
+    val labels=linkedMapOf(
+        "central_western" to "中西區",
+        "wan_chai" to "灣仔區",
+        "eastern" to "東區",
+        "southern" to "南區",
+        "yau_tsim_mong" to "油尖旺區",
+        "sham_shui_po" to "深水埗區",
+        "kowloon_city" to "九龍城區",
+        "wong_tai_sin" to "黃大仙區",
+        "kwun_tong" to "觀塘區",
+        "kwai_tsing" to "葵青區",
+        "tsuen_wan" to "荃灣區",
+        "tuen_mun" to "屯門區",
+        "yuen_long" to "元朗區",
+        "north" to "北區",
+        "tai_po" to "大埔區",
+        "sha_tin" to "沙田區",
+        "sai_kung" to "西貢區",
+        "islands" to "離島區",
+        "unknown" to "地區未知"
+    )
+    val allLabels get()=labels+LocalityOptions.labels
+    fun matches(selected: Set<String>,r: Restaurant)=selected.isEmpty() || r.region in selected || (r.locality.isNotBlank() && r.locality in selected)
+    fun migrate(values: Set<String>): Set<String> = values.flatMap {groups[it] ?: listOf(it)}.filter {it in allLabels}.toSet()
+}
+
+data class Filters(val radius: Int?=null,val cuisines: Set<String> = emptySet(),val minRating: Double?=null,val regions: Set<String> = emptySet()) {
+    val effectiveRadius get()=radius.takeIf {regions.isEmpty()}
+    fun normalized()=if(regions.isNotEmpty() && radius!=null) copy(radius=null) else this
+    init {require(radius in DistanceOptions.metres);require(minRating in RatingOptions.values);require(regions.all {it in RegionOptions.allLabels})}
 }
 data class CuisineCount(val cuisine: Cuisine,val count: Int)
 data class CandidateSnapshot(val id: String,val token: String,val expiresAt: Long,val cuisines: List<CuisineCount>,val restaurantCount: Int,val unclassifiedCount: Int)

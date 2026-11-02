@@ -80,7 +80,8 @@ data class HomeState(
             withContext(io) {store.clear()}
         } catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
     }
-    fun applyFilters(filters: Filters) {
+    fun applyFilters(value: Filters) {
+        val filters=value.normalized()
         if(state.value.locked || filters==state.value.filters) return
         mutable.update {it.copy(busy=true)}
         viewModelScope.launch {try {
@@ -91,7 +92,7 @@ data class HomeState(
     }
     fun noDistance()=applyFilters(state.value.filters.copy(radius=null))
     private fun validFix(s: HomeState): LocationFix? {
-        if(s.filters.radius==null) return null
+        if(s.filters.effectiveRadius==null) return null
         return s.fix?.takeIf {it.point.usable && time.now()-it.timestamp in 0..DistanceOptions.MAX_FIX_AGE} ?: throw AppFailure(Failure.LocationUnavailable)
     }
     fun refresh() {

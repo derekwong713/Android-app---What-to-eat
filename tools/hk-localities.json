@@ -1,0 +1,861 @@
+{
+  "area_mong_kok": {
+    "label": "旺角",
+    "localities": [
+      "Mong Kok"
+    ],
+    "districts": [
+      "kowloon_city",
+      "yau_tsim_mong"
+    ]
+  },
+  "area_tsim_sha_tsui": {
+    "label": "尖沙咀",
+    "localities": [
+      "Tsim Sha Tsui",
+      "TST"
+    ],
+    "districts": [
+      "yau_tsim_mong"
+    ]
+  },
+  "area_tsim_sha_tsui_east": {
+    "label": "尖東",
+    "localities": [
+      "Tsim Sha Tsui East"
+    ],
+    "districts": [
+      "yau_tsim_mong"
+    ]
+  },
+  "area_yau_ma_tei": {
+    "label": "油麻地",
+    "localities": [
+      "Yau Ma Tei"
+    ],
+    "districts": [
+      "yau_tsim_mong"
+    ]
+  },
+  "area_jordan": {
+    "label": "佐敦",
+    "localities": [
+      "Jordan",
+      "佐敦"
+    ],
+    "districts": [
+      "kwun_tong",
+      "yau_tsim_mong"
+    ]
+  },
+  "area_tai_kok_tsui": {
+    "label": "大角咀",
+    "localities": [
+      "Tai Kok Tsui"
+    ],
+    "districts": [
+      "sham_shui_po",
+      "yau_tsim_mong"
+    ]
+  },
+  "area_prince_edward": {
+    "label": "太子",
+    "localities": [
+      "Prince Edward"
+    ],
+    "districts": [
+      "yau_tsim_mong"
+    ]
+  },
+  "area_central": {
+    "label": "中環",
+    "localities": [
+      "Central"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_admiralty": {
+    "label": "金鐘",
+    "localities": [
+      "Admiralty"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_sheung_wan": {
+    "label": "上環",
+    "localities": [
+      "Sheung Wan"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_sai_ying_pun": {
+    "label": "西營盤",
+    "localities": [
+      "Sai Ying Pun"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_kennedy_town": {
+    "label": "堅尼地城",
+    "localities": [
+      "Kennedy Town"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_sai_wan": {
+    "label": "西環",
+    "localities": [
+      "Sai Wan"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_shek_tong_tsui": {
+    "label": "石塘咀",
+    "localities": [
+      "Shek Tong Tsui"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_wan_chai": {
+    "label": "灣仔",
+    "localities": [
+      "Wan Chai"
+    ],
+    "districts": [
+      "wan_chai"
+    ]
+  },
+  "area_causeway_bay": {
+    "label": "銅鑼灣",
+    "localities": [
+      "Causeway Bay"
+    ],
+    "districts": [
+      "eastern",
+      "wan_chai"
+    ]
+  },
+  "area_happy_valley": {
+    "label": "跑馬地",
+    "localities": [
+      "Happy Valley"
+    ],
+    "districts": [
+      "wan_chai"
+    ]
+  },
+  "area_tai_hang": {
+    "label": "大坑",
+    "localities": [
+      "Tai Hang"
+    ],
+    "districts": [
+      "wan_chai"
+    ]
+  },
+  "area_north_point": {
+    "label": "北角",
+    "localities": [
+      "North Point"
+    ],
+    "districts": [
+      "eastern",
+      "wan_chai"
+    ]
+  },
+  "area_quarry_bay": {
+    "label": "鰂魚涌",
+    "localities": [
+      "Quarry Bay"
+    ],
+    "districts": [
+      "eastern"
+    ]
+  },
+  "area_shau_kei_wan": {
+    "label": "筲箕灣",
+    "localities": [
+      "Shau Kei Wan"
+    ],
+    "districts": [
+      "eastern"
+    ]
+  },
+  "area_sai_wan_ho": {
+    "label": "西灣河",
+    "localities": [
+      "Sai Wan Ho"
+    ],
+    "districts": [
+      "eastern"
+    ]
+  },
+  "area_chai_wan": {
+    "label": "柴灣",
+    "localities": [
+      "Chai Wan"
+    ],
+    "districts": [
+      "eastern"
+    ]
+  },
+  "area_siu_sai_wan": {
+    "label": "小西灣",
+    "localities": [
+      "Siu Sai Wan"
+    ],
+    "districts": [
+      "eastern"
+    ]
+  },
+  "area_fortress_hill": {
+    "label": "炮台山",
+    "localities": [
+      "Fortress Hill"
+    ],
+    "districts": [
+      "eastern"
+    ]
+  },
+  "area_aberdeen": {
+    "label": "香港仔",
+    "localities": [
+      "Aberdeen",
+      "香港仔"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_ap_lei_chau": {
+    "label": "鴨脷洲",
+    "localities": [
+      "Ap Lei Chau"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_wong_chuk_hang": {
+    "label": "黃竹坑",
+    "localities": [
+      "Wong Chuk Hang"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_stanley": {
+    "label": "赤柱",
+    "localities": [
+      "Stanley"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_repulse_bay": {
+    "label": "淺水灣",
+    "localities": [
+      "Repulse Bay"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_shek_o": {
+    "label": "石澳",
+    "localities": [
+      "Shek O"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_pok_fu_lam": {
+    "label": "薄扶林",
+    "localities": [
+      "Pok Fu Lam"
+    ],
+    "districts": [
+      "southern"
+    ]
+  },
+  "area_mid_levels": {
+    "label": "半山",
+    "localities": [
+      "Mid-Levels"
+    ],
+    "districts": [
+      "central_western"
+    ]
+  },
+  "area_sham_shui_po": {
+    "label": "深水埗",
+    "localities": [
+      "Sham Shui Po",
+      "深水埗"
+    ],
+    "districts": [
+      "sham_shui_po",
+      "yau_tsim_mong"
+    ]
+  },
+  "area_cheung_sha_wan": {
+    "label": "長沙灣",
+    "localities": [
+      "Cheung Sha Wan"
+    ],
+    "districts": [
+      "sham_shui_po"
+    ]
+  },
+  "area_lai_chi_kok": {
+    "label": "荔枝角",
+    "localities": [
+      "Lai Chi Kok"
+    ],
+    "districts": [
+      "sham_shui_po"
+    ]
+  },
+  "area_kowloon_city": {
+    "label": "九龍城",
+    "localities": [
+      "Kowloon City"
+    ],
+    "districts": [
+      "kowloon_city",
+      "wong_tai_sin"
+    ]
+  },
+  "area_to_kwa_wan": {
+    "label": "土瓜灣",
+    "localities": [
+      "To Kwa Wan"
+    ],
+    "districts": [
+      "kowloon_city"
+    ]
+  },
+  "area_hung_hom": {
+    "label": "紅磡",
+    "localities": [
+      "Hung Hom"
+    ],
+    "districts": [
+      "kowloon_city",
+      "yau_tsim_mong"
+    ]
+  },
+  "area_ho_man_tin": {
+    "label": "何文田",
+    "localities": [
+      "Ho Man Tin"
+    ],
+    "districts": [
+      "kowloon_city"
+    ]
+  },
+  "area_kowloon_tong": {
+    "label": "九龍塘",
+    "localities": [
+      "Kowloon Tong"
+    ],
+    "districts": [
+      "kowloon_city",
+      "sham_shui_po"
+    ]
+  },
+  "area_kai_tak": {
+    "label": "啟德",
+    "localities": [
+      "Kai Tak"
+    ],
+    "districts": [
+      "kowloon_city"
+    ]
+  },
+  "area_chuk_un": {
+    "label": "竹園",
+    "localities": [
+      "Chuk Un"
+    ],
+    "districts": [
+      "wong_tai_sin"
+    ]
+  },
+  "area_diamond_hill": {
+    "label": "鑽石山",
+    "localities": [
+      "Diamond Hill"
+    ],
+    "districts": [
+      "wong_tai_sin"
+    ]
+  },
+  "area_tsz_wan_shan": {
+    "label": "慈雲山",
+    "localities": [
+      "Tsz Wan Shan"
+    ],
+    "districts": [
+      "wong_tai_sin"
+    ]
+  },
+  "area_san_po_kong": {
+    "label": "新蒲崗",
+    "localities": [
+      "San Po Kong"
+    ],
+    "districts": [
+      "wong_tai_sin"
+    ]
+  },
+  "area_kwun_tong": {
+    "label": "觀塘",
+    "localities": [
+      "Kwun Tong",
+      "觀塘"
+    ],
+    "districts": [
+      "kwun_tong"
+    ]
+  },
+  "area_ngau_tau_kok": {
+    "label": "牛頭角",
+    "localities": [
+      "Ngau Tau Kok"
+    ],
+    "districts": [
+      "kwun_tong"
+    ]
+  },
+  "area_kowloon_bay": {
+    "label": "九龍灣",
+    "localities": [
+      "Kowloon Bay"
+    ],
+    "districts": [
+      "kwun_tong"
+    ]
+  },
+  "area_lam_tin": {
+    "label": "藍田",
+    "localities": [
+      "Lam Tin"
+    ],
+    "districts": [
+      "kwun_tong"
+    ]
+  },
+  "area_yau_tong": {
+    "label": "油塘",
+    "localities": [
+      "Yau Tong"
+    ],
+    "districts": [
+      "kwun_tong"
+    ]
+  },
+  "area_kwai_chung": {
+    "label": "葵涌",
+    "localities": [
+      "Kwai Chung"
+    ],
+    "districts": [
+      "kwai_tsing"
+    ]
+  },
+  "area_kwai_fong": {
+    "label": "葵芳",
+    "localities": [
+      "Kwai Fong"
+    ],
+    "districts": [
+      "kwai_tsing"
+    ]
+  },
+  "area_tsing_yi": {
+    "label": "青衣",
+    "localities": [
+      "Tsing Yi"
+    ],
+    "districts": [
+      "kwai_tsing"
+    ]
+  },
+  "area_tsuen_wan": {
+    "label": "荃灣",
+    "localities": [
+      "Tsuen Wan"
+    ],
+    "districts": [
+      "kwai_tsing",
+      "tsuen_wan"
+    ]
+  },
+  "area_ma_wan": {
+    "label": "馬灣",
+    "localities": [
+      "Ma Wan"
+    ],
+    "districts": [
+      "tsuen_wan"
+    ]
+  },
+  "area_tuen_mun": {
+    "label": "屯門",
+    "localities": [
+      "Tuen Mun"
+    ],
+    "districts": [
+      "tuen_mun"
+    ]
+  },
+  "area_san_hui": {
+    "label": "新墟",
+    "localities": [
+      "San Hui"
+    ],
+    "districts": [
+      "tuen_mun"
+    ]
+  },
+  "area_so_kwun_wat": {
+    "label": "掃管笏",
+    "localities": [
+      "So Kwun Wat"
+    ],
+    "districts": [
+      "tuen_mun"
+    ]
+  },
+  "area_yuen_long": {
+    "label": "元朗",
+    "localities": [
+      "Yuen Long",
+      "元朗"
+    ],
+    "districts": [
+      "yuen_long"
+    ]
+  },
+  "area_kam_tin": {
+    "label": "錦田",
+    "localities": [
+      "Kam Tin"
+    ],
+    "districts": [
+      "yuen_long"
+    ]
+  },
+  "area_lau_fau_shan": {
+    "label": "流浮山",
+    "localities": [
+      "Lau Fau Shan"
+    ],
+    "districts": [
+      "yuen_long"
+    ]
+  },
+  "area_san_tin": {
+    "label": "新田",
+    "localities": [
+      "San Tin"
+    ],
+    "districts": [
+      "yuen_long"
+    ]
+  },
+  "area_shek_kong": {
+    "label": "石崗",
+    "localities": [
+      "Shek Kong"
+    ],
+    "districts": [
+      "yuen_long"
+    ]
+  },
+  "area_fanling": {
+    "label": "粉嶺",
+    "localities": [
+      "Fanling"
+    ],
+    "districts": [
+      "north"
+    ]
+  },
+  "area_sheung_shui": {
+    "label": "上水",
+    "localities": [
+      "Sheung Shui"
+    ],
+    "districts": [
+      "north"
+    ]
+  },
+  "area_tai_po": {
+    "label": "大埔",
+    "localities": [
+      "Tai Po"
+    ],
+    "districts": [
+      "tai_po"
+    ]
+  },
+  "area_tai_po_kau": {
+    "label": "大埔滘",
+    "localities": [
+      "Tai Po Kau"
+    ],
+    "districts": [
+      "tai_po"
+    ]
+  },
+  "area_lam_tsuen": {
+    "label": "林村",
+    "localities": [
+      "Lam Tsuen"
+    ],
+    "districts": [
+      "tai_po"
+    ]
+  },
+  "area_tai_wo_estate": {
+    "label": "太和",
+    "localities": [
+      "Tai Wo Estate",
+      "太和"
+    ],
+    "districts": [
+      "tai_po"
+    ]
+  },
+  "area_sha_tin": {
+    "label": "沙田",
+    "localities": [
+      "Sha Tin",
+      "沙田"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_fo_tan": {
+    "label": "火炭",
+    "localities": [
+      "Fo Tan",
+      "沙田火炭"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_ma_on_shan": {
+    "label": "馬鞍山",
+    "localities": [
+      "Ma On Shan"
+    ],
+    "districts": [
+      "sha_tin",
+      "tai_po"
+    ]
+  },
+  "area_tai_wai": {
+    "label": "大圍",
+    "localities": [
+      "Tai Wai"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_sha_tin_wai": {
+    "label": "沙田圍",
+    "localities": [
+      "Sha Tin Wai"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_shek_mun": {
+    "label": "石門",
+    "localities": [
+      "Shek Mun"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_siu_lek_yuen": {
+    "label": "小瀝源",
+    "localities": [
+      "Siu Lek Yuen"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_science_park": {
+    "label": "科學園",
+    "localities": [
+      "Science Park"
+    ],
+    "districts": [
+      "sha_tin"
+    ]
+  },
+  "area_pak_shek_kok": {
+    "label": "白石角",
+    "localities": [
+      "Pak Shek Kok"
+    ],
+    "districts": [
+      "tai_po"
+    ]
+  },
+  "area_sai_kung": {
+    "label": "西貢",
+    "localities": [
+      "Sai Kung"
+    ],
+    "districts": [
+      "sai_kung",
+      "tai_po"
+    ]
+  },
+  "area_tseung_kwan_o": {
+    "label": "將軍澳",
+    "localities": [
+      "Tseung Kwan O"
+    ],
+    "districts": [
+      "sai_kung"
+    ]
+  },
+  "area_clear_water_bay": {
+    "label": "清水灣",
+    "localities": [
+      "Clear Water Bay"
+    ],
+    "districts": [
+      "sai_kung"
+    ]
+  },
+  "area_hebe_haven": {
+    "label": "白沙灣",
+    "localities": [
+      "Hebe Haven"
+    ],
+    "districts": [
+      "sai_kung"
+    ]
+  },
+  "area_tung_chung": {
+    "label": "東涌",
+    "localities": [
+      "Tung Chung"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_cheung_chau": {
+    "label": "長洲",
+    "localities": [
+      "Cheung Chau"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_lamma_island": {
+    "label": "南丫島",
+    "localities": [
+      "Lamma Island"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_mui_wo": {
+    "label": "梅窩",
+    "localities": [
+      "Mui Wo"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_peng_chau": {
+    "label": "坪洲",
+    "localities": [
+      "Peng Chau"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_ngong_ping": {
+    "label": "昂坪",
+    "localities": [
+      "Ngong Ping"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_tai_o": {
+    "label": "大澳",
+    "localities": [
+      "Tai O"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_discovery_bay": {
+    "label": "愉景灣",
+    "localities": [
+      "Discovery Bay"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_chek_lap_kok": {
+    "label": "赤鱲角",
+    "localities": [
+      "Chek Lap Kok"
+    ],
+    "districts": [
+      "islands"
+    ]
+  },
+  "area_lantau_island": {
+    "label": "大嶼山",
+    "localities": [
+      "Lantau Island",
+      "大嶼山"
+    ],
+    "districts": [
+      "islands"
+    ]
+  }
+}

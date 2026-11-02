@@ -13,6 +13,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import hk.whatoeat.core.designsystem.MorandiPalette
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import hk.whatoeat.core.model.DrawSession
@@ -28,10 +30,10 @@ import hk.whatoeat.domain.draw.WheelGeometry
  Canvas(Modifier.fillMaxWidth().height(260.dp)) {
  val count=s.snapshot.cuisines.size;val d=size.minDimension;val top=Offset((size.width-d)/2,0f)
  repeat(count) {i ->
- drawArc(Color.hsv(i*360f/count,.55f,.9f),rotation.value+i*360f/count,360f/count,true,top,androidx.compose.ui.geometry.Size(d,d))
+ drawArc(MorandiPalette.wheel[i%MorandiPalette.wheel.size],rotation.value+i*360f/count,360f/count,true,top,androidx.compose.ui.geometry.Size(d,d))
  if(count<=24) {
  val angle=Math.toRadians((rotation.value+(i+.5)*360/count).toDouble())
- val paint=android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {color=android.graphics.Color.BLACK;textSize=14.dp.toPx();textAlign=android.graphics.Paint.Align.CENTER}
+ val paint=android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {color=MorandiPalette.wheelInk.toArgb();textSize=14.dp.toPx();textAlign=android.graphics.Paint.Align.CENTER}
  drawContext.canvas.nativeCanvas.drawText((i+1).toString(),(size.width/2+cos(angle)*d*.35).toFloat(),(d/2+sin(angle)*d*.35).toFloat()-(paint.ascent()+paint.descent())/2,paint)
  }
  }

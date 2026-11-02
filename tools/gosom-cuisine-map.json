@@ -1,0 +1,608 @@
+{
+  "Chinese restaurant": [
+    {
+      "id": "chinese",
+      "label": "中菜"
+    }
+  ],
+  "Mandarin restaurant": [
+    {
+      "id": "chinese",
+      "label": "中菜"
+    }
+  ],
+  "Cantonese restaurant": [
+    {
+      "id": "cantonese",
+      "label": "粵菜"
+    }
+  ],
+  "Shanghainese restaurant": [
+    {
+      "id": "shanghai",
+      "label": "上海菜"
+    }
+  ],
+  "Beijing restaurant": [
+    {
+      "id": "beijing",
+      "label": "北京菜"
+    }
+  ],
+  "Sichuan restaurant": [
+    {
+      "id": "sichuan",
+      "label": "川菜"
+    }
+  ],
+  "Hunan restaurant": [
+    {
+      "id": "hunan",
+      "label": "湘菜"
+    }
+  ],
+  "Hakka restaurant": [
+    {
+      "id": "hakka",
+      "label": "客家菜"
+    }
+  ],
+  "Fujian restaurant": [
+    {
+      "id": "fujian",
+      "label": "福建菜"
+    }
+  ],
+  "Zhejiang restaurant": [
+    {
+      "id": "zhejiang",
+      "label": "浙江菜"
+    }
+  ],
+  "Taiwanese restaurant": [
+    {
+      "id": "taiwanese",
+      "label": "台灣菜"
+    }
+  ],
+  "Dim sum restaurant": [
+    {
+      "id": "dim_sum",
+      "label": "點心"
+    }
+  ],
+  "Chinese noodle restaurant": [
+    {
+      "id": "noodles",
+      "label": "粉麵"
+    }
+  ],
+  "Noodle shop": [
+    {
+      "id": "noodles",
+      "label": "粉麵"
+    }
+  ],
+  "Porridge restaurant": [
+    {
+      "id": "congee",
+      "label": "粥品"
+    }
+  ],
+  "Cha chaan teng (Hong Kong-style cafe)": [
+    {
+      "id": "cha_chaan_teng",
+      "label": "茶餐廳"
+    }
+  ],
+  "Hong Kong style fast food restaurant": [
+    {
+      "id": "cha_chaan_teng",
+      "label": "茶餐廳"
+    }
+  ],
+  "Japanese restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Authentic Japanese restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Japanese regional restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Syokudo and Teishoku restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Sukiyaki and Shabu Shabu restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Sukiyaki restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Tempura restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Teppanyaki restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Tonkatsu restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Kaiseki restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Gyudon restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Tempura donburi restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Seafood donburi restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Japanized western restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Japanese curry restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Japanese steakhouse": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Champon noodle restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Udon noodle restaurant": [
+    {
+      "id": "japanese",
+      "label": "日式"
+    }
+  ],
+  "Ramen restaurant": [
+    {
+      "id": "ramen",
+      "label": "拉麵"
+    }
+  ],
+  "Sushi restaurant": [
+    {
+      "id": "sushi",
+      "label": "壽司"
+    }
+  ],
+  "Conveyor belt sushi restaurant": [
+    {
+      "id": "sushi",
+      "label": "壽司"
+    }
+  ],
+  "Sushi takeaway": [
+    {
+      "id": "sushi",
+      "label": "壽司"
+    }
+  ],
+  "Izakaya restaurant": [
+    {
+      "id": "izakaya",
+      "label": "居酒屋"
+    }
+  ],
+  "Modern izakaya restaurant": [
+    {
+      "id": "izakaya",
+      "label": "居酒屋"
+    }
+  ],
+  "Yakiniku restaurant": [
+    {
+      "id": "japanese_grill",
+      "label": "日式燒肉／串燒"
+    }
+  ],
+  "Yakitori restaurant": [
+    {
+      "id": "japanese_grill",
+      "label": "日式燒肉／串燒"
+    }
+  ],
+  "Kushiyaki restaurant": [
+    {
+      "id": "japanese_grill",
+      "label": "日式燒肉／串燒"
+    }
+  ],
+  "Korean restaurant": [
+    {
+      "id": "korean",
+      "label": "韓式"
+    }
+  ],
+  "Korean barbecue restaurant": [
+    {
+      "id": "korean",
+      "label": "韓式"
+    }
+  ],
+  "Thai restaurant": [
+    {
+      "id": "thai",
+      "label": "泰國菜"
+    }
+  ],
+  "Vietnamese restaurant": [
+    {
+      "id": "vietnamese",
+      "label": "越南菜"
+    }
+  ],
+  "Pho restaurant": [
+    {
+      "id": "vietnamese",
+      "label": "越南菜"
+    }
+  ],
+  "Indian restaurant": [
+    {
+      "id": "indian",
+      "label": "印度菜"
+    }
+  ],
+  "North Indian restaurant": [
+    {
+      "id": "indian",
+      "label": "印度菜"
+    }
+  ],
+  "Modern Indian restaurant": [
+    {
+      "id": "indian",
+      "label": "印度菜"
+    }
+  ],
+  "Punjabi restaurant": [
+    {
+      "id": "indian",
+      "label": "印度菜"
+    }
+  ],
+  "Kashmiri restaurant": [
+    {
+      "id": "indian",
+      "label": "印度菜"
+    }
+  ],
+  "Nepalese restaurant": [
+    {
+      "id": "nepalese",
+      "label": "尼泊爾菜"
+    }
+  ],
+  "Pakistani restaurant": [
+    {
+      "id": "pakistani",
+      "label": "巴基斯坦菜"
+    }
+  ],
+  "Bangladeshi restaurant": [
+    {
+      "id": "bangladeshi",
+      "label": "孟加拉菜"
+    }
+  ],
+  "Singaporean restaurant": [
+    {
+      "id": "singaporean",
+      "label": "新加坡菜"
+    }
+  ],
+  "Malaysian restaurant": [
+    {
+      "id": "malaysian",
+      "label": "馬來西亞菜"
+    }
+  ],
+  "Western restaurant": [
+    {
+      "id": "western",
+      "label": "西餐"
+    }
+  ],
+  "Continental restaurant": [
+    {
+      "id": "western",
+      "label": "西餐"
+    }
+  ],
+  "European restaurant": [
+    {
+      "id": "western",
+      "label": "西餐"
+    }
+  ],
+  "Modern European restaurant": [
+    {
+      "id": "western",
+      "label": "西餐"
+    }
+  ],
+  "Bistro": [
+    {
+      "id": "western",
+      "label": "西餐"
+    }
+  ],
+  "Brasserie": [
+    {
+      "id": "western",
+      "label": "西餐"
+    }
+  ],
+  "French restaurant": [
+    {
+      "id": "french",
+      "label": "法國菜"
+    }
+  ],
+  "Modern French restaurant": [
+    {
+      "id": "french",
+      "label": "法國菜"
+    }
+  ],
+  "Haute French restaurant": [
+    {
+      "id": "french",
+      "label": "法國菜"
+    }
+  ],
+  "French steakhouse restaurant": [
+    {
+      "id": "french",
+      "label": "法國菜"
+    }
+  ],
+  "Italian restaurant": [
+    {
+      "id": "italian",
+      "label": "意大利菜"
+    }
+  ],
+  "Pasta shop": [
+    {
+      "id": "italian",
+      "label": "意大利菜"
+    }
+  ],
+  "Pizza restaurant": [
+    {
+      "id": "italian",
+      "label": "意大利菜"
+    }
+  ],
+  "Spanish restaurant": [
+    {
+      "id": "spanish",
+      "label": "西班牙菜"
+    }
+  ],
+  "Tapas restaurant": [
+    {
+      "id": "spanish",
+      "label": "西班牙菜"
+    }
+  ],
+  "Tapas bar": [
+    {
+      "id": "spanish",
+      "label": "西班牙菜"
+    }
+  ],
+  "American restaurant": [
+    {
+      "id": "american",
+      "label": "美式"
+    }
+  ],
+  "New American restaurant": [
+    {
+      "id": "american",
+      "label": "美式"
+    }
+  ],
+  "Hamburger restaurant": [
+    {
+      "id": "american",
+      "label": "美式"
+    }
+  ],
+  "Soul food restaurant": [
+    {
+      "id": "american",
+      "label": "美式"
+    }
+  ],
+  "British restaurant": [
+    {
+      "id": "british",
+      "label": "英國菜"
+    }
+  ],
+  "German restaurant": [
+    {
+      "id": "german",
+      "label": "德國菜"
+    }
+  ],
+  "Polish restaurant": [
+    {
+      "id": "polish",
+      "label": "波蘭菜"
+    }
+  ],
+  "Australian restaurant": [
+    {
+      "id": "australian",
+      "label": "澳洲菜"
+    }
+  ],
+  "Argentinian restaurant": [
+    {
+      "id": "argentinian",
+      "label": "阿根廷菜"
+    }
+  ],
+  "Mexican restaurant": [
+    {
+      "id": "mexican",
+      "label": "墨西哥菜"
+    }
+  ],
+  "Turkish restaurant": [
+    {
+      "id": "turkish",
+      "label": "土耳其菜"
+    }
+  ],
+  "Kebab shop": [
+    {
+      "id": "turkish",
+      "label": "土耳其菜"
+    }
+  ],
+  "Mediterranean restaurant": [
+    {
+      "id": "mediterranean",
+      "label": "地中海菜"
+    }
+  ],
+  "Latin American restaurant": [
+    {
+      "id": "latin_american",
+      "label": "拉丁美洲菜"
+    }
+  ],
+  "Vegetarian restaurant": [
+    {
+      "id": "vegetarian",
+      "label": "素食"
+    }
+  ],
+  "Vegan restaurant": [
+    {
+      "id": "vegetarian",
+      "label": "素食"
+    }
+  ],
+  "Vegetarian cafe and deli": [
+    {
+      "id": "vegetarian",
+      "label": "素食"
+    }
+  ],
+  "Hot pot restaurant": [
+    {
+      "id": "hot_pot",
+      "label": "火鍋"
+    }
+  ],
+  "Seafood restaurant": [
+    {
+      "id": "seafood",
+      "label": "海鮮"
+    }
+  ],
+  "Oyster bar restaurant": [
+    {
+      "id": "seafood",
+      "label": "海鮮"
+    }
+  ],
+  "Steak house": [
+    {
+      "id": "steak",
+      "label": "扒房"
+    }
+  ],
+  "Chophouse restaurant": [
+    {
+      "id": "steak",
+      "label": "扒房"
+    }
+  ],
+  "Barbecue restaurant": [
+    {
+      "id": "barbecue",
+      "label": "燒烤"
+    }
+  ],
+  "Bar & grill": [
+    {
+      "id": "barbecue",
+      "label": "燒烤"
+    }
+  ],
+  "Dessert restaurant": [
+    {
+      "id": "dessert",
+      "label": "甜品"
+    }
+  ],
+  "Dessert shop": [
+    {
+      "id": "dessert",
+      "label": "甜品"
+    }
+  ]
+}

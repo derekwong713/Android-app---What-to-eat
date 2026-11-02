@@ -14,14 +14,14 @@ import hk.whatoeat.core.model.DrawMode
  Text("先等機率抽菜式，再等機率抽餐廳。評分及廣告不影響抽選。")
  Text("目標範圍為香港；使用內置餐廳資料，來源及日期見詳情，尚未完整收錄。")
  Text(filterSummary(s.filters));Text("距離為直線距離，不代表步行距離。")
- OutlinedButton(onClick=filters,enabled=!s.locked) {Text("距離及菜式")}
+ OutlinedButton(onClick=filters,enabled=!s.locked) {Text("距離、菜式、評分及地區")}
  OutlinedButton(onClick=location,enabled=!s.locked) {Text("取得／重試目前位置")}
  s.fix?.let {Text("定位時間：${java.util.Date(it.timestamp)}；準確度約 ${it.accuracy.toInt()} 米")}
  if(s.filters.radius!=null) TextButton(onClick=vm::noDistance,enabled=!s.locked) {Text("改用不限距離")}
  s.snapshot?.let {snap ->
  Text("符合條件：${snap.restaurantCount} 間餐廳、${snap.cuisines.size} 種菜式")
  if(snap.unclassifiedCount>0) Text("另有 ${snap.unclassifiedCount} 間未分類餐廳，不參與菜式抽選；不會根據店名猜測。")
- if(snap.cuisines.isEmpty()) Text("沒有符合條件的餐廳，請調整距離或菜式。")
+ if(snap.cuisines.isEmpty()) Text("沒有符合條件的餐廳，請調整距離、菜式、評分或地區。")
  }
  Button(onClick={vm.draw(DrawMode.NewCuisine)},enabled=!s.locked) {Text(if(s.recovery) "重試原有抽選" else "抽菜式，再抽餐廳")}
  OutlinedButton(onClick=vm::refresh,enabled=!s.locked) {Text("重新載入完整候選")}

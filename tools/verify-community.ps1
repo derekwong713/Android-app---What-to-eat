@@ -12,7 +12,7 @@ $taskTemp = Join-Path $taskRoot '.tools\tmp'
 New-Item -ItemType Directory -Path $taskTemp -Force | Out-Null
 $env:TEMP = $taskTemp
 $env:TMP = $taskTemp
-$env:JAVA_TOOL_OPTIONS = '-Djdk.net.unixdomain.tmpdir="' + $taskTemp + '" -Djava.io.tmpdir="' + $taskTemp + '"'
+$env:JAVA_TOOL_OPTIONS = '-Djava.net.preferIPv4Stack=true -Djdk.net.unixdomain.tmpdir="' + $taskTemp + '" -Djava.io.tmpdir="' + $taskTemp + '"'
 $taskChecks = @(':app:assembleDemoDebug', ':app:assembleLiveDebug', ':app:testDemoDebugUnitTest', ':app:testLiveDebugUnitTest', ':app:lintDemoDebug', ':app:lintLiveDebug')
 if ($Clean) { $taskChecks = @(':app:clean') + $taskChecks }
 if ($Connected) { $taskChecks += ':app:connectedDemoDebugAndroidTest' }

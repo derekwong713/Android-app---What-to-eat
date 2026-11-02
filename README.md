@@ -1,12 +1,16 @@
 # 食咩好？ — 內置資料版本
 
-目前 App 改為讀取 `app/src/main/assets/restaurants.json`，兩種 flavor 均不使用 Supabase；毋須註冊，沒有評論／評分提交入口。內置清單目前為空，須先整理匯出資料及確認菜式，再重新建置。沿用原生 Compose、Room 收藏／歷史、距離與菜式篩選及公平抽選。
+目前 App 改為讀取 `app/src/main/assets/restaurants.json`，兩種 flavor 均不使用 Supabase；毋須註冊，沒有評論／評分提交入口。已匯入 2026-11-03 整理的 2,665 間餐廳；2,376 間可抽選，48 種菜式，277 間未分類及 15 間明確停業不進入抽選（兩者有重疊）。並非全港完整資料；重新建置及安裝後才會更新手機。詳見 [匯入報告](docs/catalog-import-report.md)。沿用原生 Compose、Room 收藏／歷史、距離與菜式篩選及公平抽選。
 
 - [App 說明網站](docs/index.html)（GitHub 網頁可由 Pages 選 main /docs 提供）
 - [gosom 資料整理及匯入](OFFLINE-CATALOG.md)
 - [整理工具](tools/prepare_bundled_catalog.py)
 
-最新 Android 建置尚未完成：Gradle 環境報 `Unable to establish loopback connection`。以下為保留的上一版 Supabase 架構及驗證文件，不能視作目前內置版本已通過驗證。Android Studio 更新的 Gradle wrapper 9.8.2 保留。
+行政區現在按來源座標與民政事務總署官方邊界分類；太子等 9 個地點已放回相關區列表，多區資料會在相應區下顯示。
+
+目前新增最低評分（不限、3.0、3.5、4.0、4.5、5.0 分）及地區多選（香港 18 區及 93 個細地點，可搜尋，另有地區未知），選地區／細地點後自動不限距離；與菜式及評分一併篩選。介面使用莫蘭迪色系，含日夜模式及輪盤；條件會儲存，選了評分門檻時不納入未評分餐廳。「帳戶」改為「設定」，保留廣告私隱及本機資料管理。
+
+2026-11-03 的莫蘭迪／細地點版本 demoDebug 與 liveDebug 已成功建置（29 項 JVM 測試、25 項資料／邊界測試通過；本輪畫面測試受模擬器資料鎖阻擋），兩個 APK 已確認包含最新 2,665 間餐廳及地區資料。舊版文件中的 loopback 建置阻礙已可透過 tools/verify-community.ps1 的 IPv4 及本機暫存目錄設定避開。上一版已完成模擬器日夜篩選測試；本輪新增太子／銅鑼灣測試已編譯但尚未執行，亦未完成本次實體手機操作驗證。以下保留上一版 Supabase 架構，並非目前啟用的後台。Android Studio 更新的 Gradle wrapper 9.8.2 保留。
 
 ---
 
@@ -51,6 +55,6 @@ PostgreSQL 本機測試先執行 `python tools/setup_backend_test_runtime.py` �
 
 範圍香港，尚未匯入真正香港資料，不能聲稱完整收錄。餐廳起始資料 © OpenStreetMap contributors，ODbL；用家修改不寫回 OSM。沒有 Google Maps／Places／Geocoding／Routes SDK 或 API，導航僅開啟 Google Maps HTTPS URL，不依賴 Place ID。沒有 Resend、付費資料／短訊／地圖資源，沒有正式發佈或啟用計費。
 
-`web/` 提供私隱／條款／帳戶刪除靜態範本，可用免費 GitHub Pages 等服務託管；營運者及聯絡資料待填，尚未上載。
+`web/` 提供私隱／條款／帳戶刪除靜態範本，可用免費 GitHub Pages 等服務託管；營運者及聯絡資料待填，尚未作為正式政策頁發布。
 
 舊 `deliverables/` 或較早 verification log 屬舊方案，不能作為這次產品的驗證。新版本為 0.2.0 / code 2。

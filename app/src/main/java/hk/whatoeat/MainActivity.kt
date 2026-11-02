@@ -55,9 +55,9 @@ import java.util.Locale
  LaunchedEffect(vm,ad.startup) {if(!ad.startup) vm.routes.collect {r -> nav.navigate(r) {if(r=="wheel" || r=="result") popUpTo("home");launchSingleTop=true}}}
  LaunchedEffect(s.ready,ad.startup) {if(!ad.startup && s.ready && s.restored && s.session!=null) nav.navigate("result") {launchSingleTop=true}}
  LaunchedEffect(s.authUrl) {s.authUrl?.let(activity::launchOAuth)}
- val navigate: (hk.whatoeat.core.model.Restaurant)->Unit={r -> activity.ads.markExternal();if(!ExternalActions.navigate(activity,r)) vm.navigationFailed()}
+ val openRestaurant: (hk.whatoeat.core.model.Restaurant)->Unit={r -> activity.ads.markExternal();if(!ExternalActions.open(activity,ExternalActions.restaurantUrl(r))) vm.navigationFailed()}
  if(ad.startup) {Surface(Modifier.fillMaxSize()) {Column(Modifier.padding(32.dp)) {Text("食咩好？",style=MaterialTheme.typography.headlineLarge);Text("準備開始…");LinearProgressIndicator()}};return}
- Scaffold(topBar={TopAppBar(title={Text("食咩好？")},actions={TextButton(onClick={nav.navigate("account")},enabled=!s.locked) {Text("帳戶")}})},bottomBar={Column(Modifier.navigationBarsPadding()) {
+ Scaffold(topBar={TopAppBar(title={Text("食咩好？")},actions={TextButton(onClick={nav.navigate("settings")},enabled=!s.locked) {Text("設定")}})},bottomBar={Column(Modifier.navigationBarsPadding()) {
  AdBanner(ad)
  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceEvenly) {listOf("home" to "首頁","favorites" to "收藏","history" to "歷史").forEach {(r,label) -> TextButton(onClick={nav.navigate(r) {popUpTo("home");launchSingleTop=true}},enabled=!s.locked) {Text(label)}}}
  }}) {padding -> Column(Modifier.fillMaxSize().padding(padding)) {
@@ -65,11 +65,11 @@ import java.util.Locale
  NavHost(nav,"home",Modifier.weight(1f)) {
  composable("home") {HomeScreen(s,vm,{filters=true},location)}
  composable("wheel") {s.session?.let {CuisineWheel(it,vm::reveal)}}
- composable("result") {ResultScreen(s,vm,navigate,true)}
- composable("detail") {ResultScreen(s,vm,navigate,false)}
+ composable("result") {ResultScreen(s,vm,openRestaurant,true)}
+ composable("detail") {ResultScreen(s,vm,openRestaurant,false)}
  composable("favorites") {FavoritesScreen(s,vm,vm::openDetail)}
  composable("history") {HistoryScreen(s,vm,vm::openDetail)}
- composable("account") {SettingsScreen(s,vm,{activity.ads.privacy(activity)},{ExternalActions.open(activity,it)})}
+ composable("settings") {SettingsScreen(s,vm,{activity.ads.privacy(activity)},{ExternalActions.open(activity,it)})}
  }
  }}
  if(filters) FilterSheet(s.filters,s.cuisines,{filters=false},vm::applyFilters)

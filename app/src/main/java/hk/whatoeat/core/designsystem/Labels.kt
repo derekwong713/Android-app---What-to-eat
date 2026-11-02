@@ -13,9 +13,9 @@ fun Failure.message(): String=when(this) {
  Failure.Cancelled->"已取消登入。"
  Failure.Forbidden->"沒有執行此操作的權限。"
  Failure.RateLimited->"操作太頻密，請稍後再試。"
- Failure.Navigation->"未能開啟導航連結。"
+ Failure.Navigation->"未能開啟 Google Maps 餐廳連結。"
  Failure.DetailsUnavailable->"餐廳資料暫未能讀取。舊版收藏仍保留，但不能以舊供應商編號查詢新後台。"
  Failure.Persistence->"未能儲存或讀取資料，請重試。"
 }
 fun Business.label(): String=when(this) {Business.Unknown->"營業狀態未知";Business.Operating->"營業中（資料紀錄，並非即時營業判斷）";Business.TemporarilyClosed->"暫停營業";Business.Closed->"已結業"}
-fun filterSummary(f: Filters)=listOf(f.radius?.let {"${it} 米內"} ?: "不限距離",if(f.cuisines.isEmpty()) "所有已分類菜式" else "已選 ${f.cuisines.size} 種菜式").joinToString(" · ")
+fun filterSummary(f: Filters)=listOf(f.effectiveRadius?.let {"${it} 米內"} ?: "不限距離",if(f.cuisines.isEmpty()) "所有已分類菜式" else "已選 ${f.cuisines.size} 種菜式",f.minRating?.let {"${it} 分或以上"} ?: "不限評分",if(f.regions.isEmpty()) "所有地區" else f.regions.mapNotNull {RegionOptions.allLabels[it]}.sorted().joinToString("、")).joinToString(" · ")
