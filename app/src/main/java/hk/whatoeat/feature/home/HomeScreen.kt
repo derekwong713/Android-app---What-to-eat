@@ -12,7 +12,7 @@ import hk.whatoeat.core.model.DrawMode
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  Text("今日食咩好？",style=MaterialTheme.typography.headlineLarge)
  Text("先等機率抽菜式，再等機率抽餐廳。評分及廣告不影響抽選。")
- Text("服務範圍為香港；資料來自 OpenStreetMap 及用家補充，尚未完整收錄全港餐廳。")
+ Text("目標範圍為香港；使用內置餐廳資料，來源及日期見詳情，尚未完整收錄。")
  Text(filterSummary(s.filters));Text("距離為直線距離，不代表步行距離。")
  OutlinedButton(onClick=filters,enabled=!s.locked) {Text("距離及菜式")}
  OutlinedButton(onClick=location,enabled=!s.locked) {Text("取得／重試目前位置")}

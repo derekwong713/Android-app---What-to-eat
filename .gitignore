@@ -15,3 +15,6 @@ verification-artifacts/
 
 .env
 .env.local
+
+# Raw scraper exports stay local; review only curated catalogue for release.
+gosom-data/

@@ -17,15 +17,7 @@ import hk.whatoeat.feature.home.*
  Text("來源：${r.source} · 更新：${r.updatedAt} · 版本 ${r.version}",style=MaterialTheme.typography.bodySmall)
  Button(onClick={navigate(r)}) {Text("導航：${r.name}")}
  OutlinedButton(onClick={vm.toggleFavorite(r.id)},enabled=!s.busy) {Text(if(s.favorites.any {it.key=="catalog:${r.id}"}) "取消收藏" else "收藏餐廳")}
- listOf("edit" to "修改餐廳資料","rate" to "評分／更新自己的評分","comment" to "發表評論","report" to "檢舉餐廳資料","history" to "修改紀錄／還原").forEach {(kind,label) -> TextButton(onClick={vm.requestAction(kind,r.id)},enabled=!s.busy) {Text(label)}}
- Text("文字評論",style=MaterialTheme.typography.titleLarge)
- if(d.reviews.isEmpty()) Text("暫無評論")
- d.reviews.forEach {review ->
- HorizontalDivider();Text("${review.nickname} · ${review.createdAt}");Text(review.text)
- TextButton(onClick={vm.requestAction("report_comment:${review.id}",r.id)},enabled=!s.busy) {Text("檢舉評論")}
- if(review.own) TextButton(onClick={vm.deleteComment(review.id)},enabled=!s.busy) {Text("刪除自己的評論")}
- }
- if(d.nextReviewTime!=null) TextButton(onClick=vm::moreReviews,enabled=!s.busy) {Text("載入更多評論")}
+ Text("內置資料；評分為匯入時的資料，並非即時評分。")
 }
 @Composable fun ResultScreen(s: HomeState,vm: HomeViewModel,navigate: (Restaurant)->Unit,reroll: Boolean) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {

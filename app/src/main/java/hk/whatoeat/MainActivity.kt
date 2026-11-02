@@ -61,7 +61,7 @@ import java.util.Locale
  AdBanner(ad)
  Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceEvenly) {listOf("home" to "首頁","favorites" to "收藏","history" to "歷史").forEach {(r,label) -> TextButton(onClick={nav.navigate(r) {popUpTo("home");launchSingleTop=true}},enabled=!s.locked) {Text(label)}}}
  }}) {padding -> Column(Modifier.fillMaxSize().padding(padding)) {
- Text(if(BuildConfig.DEMO) "示範模式：餐廳及登入身份均為虛構，本機資料重開後可重設。" else "香港餐廳資料 · OSM 及用家補充 · 未完整收錄",Modifier.padding(8.dp),style=MaterialTheme.typography.labelMedium)
+ Text("內置餐廳資料 · 毋須登入 · 未完整收錄",Modifier.padding(8.dp),style=MaterialTheme.typography.labelMedium)
  NavHost(nav,"home",Modifier.weight(1f)) {
  composable("home") {HomeScreen(s,vm,{filters=true},location)}
  composable("wheel") {s.session?.let {CuisineWheel(it,vm::reveal)}}

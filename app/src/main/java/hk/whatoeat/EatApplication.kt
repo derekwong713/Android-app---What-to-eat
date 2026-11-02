@@ -27,7 +27,13 @@ import java.util.UUID
  @Provides @Singleton fun local(db: EatDatabase)=LocalStore(db)
  @Provides @Singleton fun prefs(@ApplicationContext c: Context)=UserPreferences(c)
  @Provides @Singleton fun http(): JsonTransport=SupabaseHttp(BuildConfig.SUPABASE_URL,BuildConfig.SUPABASE_PUBLIC_KEY)
- @Provides @Singleton fun auth(@ApplicationContext c: Context,http: JsonTransport,t: TimeSource): AuthRepository=if(BuildConfig.DEMO) DemoAuthRepository() else SupabaseAuthRepository(http,BuildConfig.SUPABASE_URL,c.packageName,EncryptedAuthVault(c),t)
- @Provides @Singleton fun restaurants(http: JsonTransport,a: AuthRepository,t: TimeSource,r: RandomSource): RestaurantRepository=if(BuildConfig.DEMO) DemoRestaurantRepository(a,t,r) else SupabaseRestaurantRepository(http,a)
+ @Provides @Singleton fun auth(): AuthRepository=DemoAuthRepository()
+ @Provides @Singleton fun restaurants(@ApplicationContext c: Context,a: AuthRepository,t: TimeSource,r: RandomSource): RestaurantRepository {
+ val rows=c.assets.open("restaurants.json").bufferedReader().use { reader ->
+ val array=org.json.JSONArray(reader.readText())
+ (0 until array.length()).map {Codec.restaurant(array.getJSONObject(it))}
+ }
+ return DemoRestaurantRepository(a,t,r,rows)
+ }
  @Provides @Singleton fun location(@ApplicationContext c: Context,t: TimeSource): LocationRepository=FusedLocationRepository(c,t)
 }

@@ -67,7 +67,7 @@ class DemoAuthRepository: AuthRepository {
     override val user=mutable.asStateFlow()
     private var action: PendingAction?=null
     override suspend fun restore() {}
-    override suspend fun begin(provider: Provider,pending: PendingAction?): String? {action=pending;mutable.value=User("00000000-0000-4000-8000-000000000001","示範食客",true);return null}
+    override suspend fun begin(provider: Provider,pending: PendingAction?): String? {throw AppFailure(Failure.Forbidden)}
     override suspend fun callback(uri: String): PendingAction?=throw AppFailure(Failure.Login)
     override suspend fun cancel() {action=null}
     override suspend fun pending()=action

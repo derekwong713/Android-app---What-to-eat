@@ -1,3 +1,15 @@
+# 食咩好？ — 內置資料版本
+
+目前 App 改為讀取 `app/src/main/assets/restaurants.json`，兩種 flavor 均不使用 Supabase；毋須註冊，沒有評論／評分提交入口。內置清單目前為空，須先整理匯出資料及確認菜式，再重新建置。沿用原生 Compose、Room 收藏／歷史、距離與菜式篩選及公平抽選。
+
+- [App 說明網站](docs/index.html)（GitHub 網頁可由 Pages 選 main /docs 提供）
+- [gosom 資料整理及匯入](OFFLINE-CATALOG.md)
+- [整理工具](tools/prepare_bundled_catalog.py)
+
+最新 Android 建置尚未完成：Gradle 環境報 `Unable to establish loopback connection`。以下為保留的上一版 Supabase 架構及驗證文件，不能視作目前內置版本已通過驗證。Android Studio 更新的 Gradle wrapper 9.8.2 保留。
+
+---
+
 # 食咩好？
 
 原生 Android、Compose Material 3、Hilt、Room、DataStore，沿用現有配色及輪盤幾何。已重新檢查 Android Studio 的 AGP 9.4.1 / Gradle 9.8.0 設定，使用內建 Kotlin（2.2.10 / KSP 2.2.10-2.0.2），未回退舊工具鏈。沒有發現適用的 AGENTS.md。

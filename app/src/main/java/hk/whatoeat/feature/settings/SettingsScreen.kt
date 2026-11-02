@@ -12,19 +12,11 @@ import hk.whatoeat.feature.home.*
  var confirm by remember {mutableStateOf("")}
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  Text("帳戶及私隱",style=MaterialTheme.typography.headlineLarge)
- Text(s.user?.let {"${it.nickname}"} ?: "遊客：毋須登入即可抽選、閱讀評分及評論、導航。")
- if(s.user==null) Button(onClick={vm.requestAction("profile","")}) {Text("登入 Google／Facebook")}
- else {
- TextButton(onClick={vm.requestAction("profile","")}) {Text("更改暱稱")}
- TextButton(onClick=vm::logout,enabled=!s.busy) {Text("登出")}
- TextButton(onClick={confirm="account"},enabled=!s.busy) {Text("刪除帳戶")}
- }
- Text("刪除帳戶後會移除登入身份、暱稱、評分及評論；已公開的餐廳修改會保留，修改紀錄及檢舉的作者身份會匿名化。已刪除評論的相關檢舉亦會移除。")
+ Text("內置餐廳資料，毋須登入。不提供評論或資料修改。")
  TextButton(onClick=privacy) {Text("廣告同意及私隱選項")}
  if(BuildConfig.PRIVACY_POLICY_URL.isNotBlank()) TextButton(onClick={open(BuildConfig.PRIVACY_POLICY_URL)}) {Text("私隱政策")}
  if(BuildConfig.TERMS_URL.isNotBlank()) TextButton(onClick={open(BuildConfig.TERMS_URL)}) {Text("使用條款")}
- Text("餐廳起始資料 © OpenStreetMap contributors，採用 ODbL 授權；用家修改只儲存在本服務，不會寫回 OSM。")
- TextButton(onClick={open("https://www.openstreetmap.org/copyright")}) {Text("OpenStreetMap 署名及授權")}
+ Text("資料隨 App 更新，來源及日期見餐廳詳情；未完整收錄香港餐廳。")
  TextButton(onClick={confirm="local"},enabled=!s.busy) {Text("清除本機資料及登出")}
  if(s.admin) TextButton(onClick={vm.requestAction("admin","")}) {Text("管理檢舉")}
  }

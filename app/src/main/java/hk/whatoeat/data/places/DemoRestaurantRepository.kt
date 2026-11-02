@@ -9,17 +9,18 @@ import kotlinx.coroutines.sync.withLock
 import java.util.UUID
 
 /** Explicitly fictional local demo; never substitutes for missing live configuration. */
-class DemoRestaurantRepository(private val auth: AuthRepository,private val time: TimeSource,random: RandomSource): RestaurantRepository {
+class DemoRestaurantRepository(private val auth: AuthRepository,private val time: TimeSource,random: RandomSource, bundled: List<Restaurant>? = null): RestaurantRepository {
+    private val bundledMode=bundled!=null
     private val chinese=Cuisine("chinese","中式");private val japanese=Cuisine("japanese","日式");private val noodles=Cuisine("noodles","粉麵")
     private val lock=Mutex();private val engine=DrawEngine(random)
     private var generation=1L
-    private val rows=mutableListOf(
+    private val rows=(bundled ?: listOf(
         Restaurant("demo-1","示範茶餐廳（虛構）","九龍示範商場 2 樓 A1 舖",Point(22.3193,114.1694),listOf(chinese,noodles),null,Business.Unknown,source="虛構示範資料",updatedAt="2026-10-27T00:00:00Z",version=1),
         Restaurant("demo-2","示範拉麵店（虛構）","港島示範商場地下 B2 舖",Point(22.2800,114.1840),listOf(japanese,noodles),"星期一至日 11:00–21:00",Business.Operating,source="虛構示範資料",updatedAt="2026-10-27T00:00:00Z",version=1),
         Restaurant("demo-3","示範小館（虛構）","新界示範中心 1 樓 C3 舖",Point(22.3814,114.1889),listOf(chinese),null,Business.Unknown,source="虛構示範資料",updatedAt="2026-10-27T00:00:00Z",version=1),
         Restaurant("demo-unclassified","未分類示範店（虛構）","示範地址",null,emptyList(),null,Business.Unknown,source="虛構示範資料",updatedAt="2026-10-27T00:00:00Z",version=1),
         Restaurant("demo-closed","已結業示範店（虛構）","示範地址",Point(22.3193,114.1694),listOf(japanese),null,Business.Closed,source="虛構示範資料",updatedAt="2026-10-27T00:00:00Z",version=1)
-    )
+    )).toMutableList()
     private data class Cached(val snapshot: CandidateSnapshot,val rows: List<Restaurant>,val generation: Long)
     private val snapshots=mutableMapOf<String,Cached>();private val draws=mutableMapOf<String,DrawSession>()
     private val stars=mutableMapOf<Pair<String,String>,Int>()
@@ -34,6 +35,7 @@ class DemoRestaurantRepository(private val auth: AuthRepository,private val time
         }}
     }
     private fun writer(action: String,limit: Int=20): User {
+        if(bundledMode) throw AppFailure(Failure.Forbidden)
         val user=auth.user.value ?: throw AppFailure(Failure.Login)
         val list=events.getOrPut(user.id to action) {mutableListOf()};list.removeAll {time.now()-it>3600000}
         if(list.size>=limit) throw AppFailure(Failure.RateLimited);list+=time.now();return user
@@ -57,7 +59,7 @@ class DemoRestaurantRepository(private val auth: AuthRepository,private val time
         val r=current(id);val votes=stars.filterKeys {it.first==id}.values
         val all=reviews[id].orEmpty().map {(_,v) -> v}.sortedWith(compareByDescending<Review> {it.createdAt}.thenByDescending {it.id})
         val page=all.filter {before==null || it.createdAt<before || (it.createdAt==before && it.id<beforeId.orEmpty())}.take(10)
-        Detail(r.copy(averageRating=votes.takeIf {it.isNotEmpty()}?.average(),ratingCount=votes.size),page.map {it.copy(own=reviews[id].orEmpty().first {pair -> pair.second.id==it.id}.first==auth.user.value?.id)},auth.user.value?.let {stars[id to it.id]},page.lastOrNull()?.createdAt.takeIf {page.size==10},page.lastOrNull()?.id.takeIf {page.size==10})
+        Detail(r.copy(averageRating=if(bundledMode) r.averageRating else votes.takeIf {it.isNotEmpty()}?.average(),ratingCount=if(bundledMode) r.ratingCount else votes.size),page.map {it.copy(own=reviews[id].orEmpty().first {pair -> pair.second.id==it.id}.first==auth.user.value?.id)},auth.user.value?.let {stars[id to it.id]},page.lastOrNull()?.createdAt.takeIf {page.size==10},page.lastOrNull()?.id.takeIf {page.size==10})
     }
     override suspend fun edit(id: String,version: Long,patch: EditPatch)=lock.withLock {
         val user=writer("edit");if(!Validation.restaurant(patch) || patch.cuisineIds.any {it !in rows.flatMap {r -> r.cuisines}.map {c -> c.id}}) throw AppFailure(Failure.InvalidInput)
