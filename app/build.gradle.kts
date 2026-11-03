@@ -17,8 +17,8 @@ android {
         targetSdk = 36
         buildConfigField("String", "SUPABASE_URL", quoted(config("SUPABASE_URL")))
         buildConfigField("String", "SUPABASE_PUBLIC_KEY", quoted(config("SUPABASE_PUBLIC_KEY")))
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 4
+        versionName = "0.3.1"
         testInstrumentationRunner = "hk.whatoeat.EatTestRunner"
         buildConfigField("String", "PRIVACY_POLICY_URL", quoted(config("PRIVACY_POLICY_URL")))
         buildConfigField("String", "TERMS_URL", quoted(config("TERMS_URL")))

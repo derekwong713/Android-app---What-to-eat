@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import hk.whatoeat.R
 import hk.whatoeat.domain.mascot.MascotTheme
+import hk.whatoeat.domain.mascot.MascotClip
 
 @DrawableRes fun mascotDrawable(theme: MascotTheme): Int=when(theme) {
  MascotTheme.Base->R.drawable.mascot_base
@@ -59,9 +60,11 @@ import hk.whatoeat.domain.mascot.MascotTheme
  modifier=modifier.testTag("mascot_${theme.name.lowercase()}"),contentScale=ContentScale.Fit)
 }
 @Composable fun MascotWelcome() {
+ var clip by remember {mutableStateOf(MascotClip.Welcome)}
  Surface(color=MaterialTheme.colorScheme.surfaceContainer,shape=MaterialTheme.shapes.large) {
  Row(Modifier.fillMaxWidth().padding(12.dp),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.spacedBy(12.dp)) {
- PigMascot(MascotTheme.Base,null,Modifier.size(108.dp))
+ AnimatedPigMascot(MascotTheme.Base,"豬仔陪你揀今餐",Modifier.size(108.dp),clip=clip,cycles=1,
+  onFinished={if(clip==MascotClip.Welcome) clip=MascotClip.Drooling})
  Column(Modifier.weight(1f),verticalArrangement=Arrangement.spacedBy(6.dp)) {
  Text("豬仔陪你揀今餐",style=MaterialTheme.typography.titleMedium)
  Text("揀好心水條件，轉一轉就有靈感。",style=MaterialTheme.typography.bodyMedium)
@@ -74,10 +77,10 @@ import hk.whatoeat.domain.mascot.MascotTheme
  val progress=remember(appearanceKey) {Animatable(if(reduced) 1f else 0f)}
  LaunchedEffect(appearanceKey,reduced) {if(reduced) progress.snapTo(1f) else progress.animateTo(1f,tween(320))}
  Column(modifier.fillMaxWidth(),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(8.dp)) {
- PigMascot(theme,"豬仔的${cuisineName}主題造型",Modifier.height(196.dp).fillMaxWidth().graphicsLayer {
+ AnimatedPigMascot(theme,"豬仔的${cuisineName}主題造型",Modifier.height(196.dp).fillMaxWidth().graphicsLayer {
  alpha=progress.value
  scaleX=.9f+.1f*progress.value;scaleY=scaleX
- })
+ },playKey=appearanceKey)
  Text(if(isDraw) "抽中菜式：$cuisineName" else "菜式：$cuisineName",style=MaterialTheme.typography.titleLarge)
  }
 }

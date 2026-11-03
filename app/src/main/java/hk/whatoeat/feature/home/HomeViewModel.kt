@@ -69,22 +69,32 @@ data class HomeState(
     fun invalidInput() {mutable.update {it.copy(failure=Failure.InvalidInput)}}
     fun navigationFailed() {mutable.update {it.copy(failure=Failure.Navigation)}}
     fun clearFailure() {mutable.update {it.copy(failure=null,notice=false)}}
-    fun permissionDenied(permanent: Boolean) {mutable.update {it.copy(failure=if(permanent) Failure.PermissionPermanent else Failure.Permission)}}
+    fun permissionDenied(permanent: Boolean) {mutable.update {it.copy(failure=if(permanent) Failure.PermissionPermanent else Failure.Permission,fix=null,snapshot=null)}}
+    private var locationJob: Job?=null
+    private var locationGeneration=0L
+    fun cancelLocation() {
+        val locating=locationJob?.isActive==true
+        locationGeneration++;locationJob?.cancel();locationJob=null
+        mutable.update {it.copy(fix=null,snapshot=if(it.fix!=null || locating) null else it.snapshot,busy=if(locating) false else it.busy)}
+    }
     fun useLocation() {
         if(state.value.locked) return
+        val generation=++locationGeneration
         mutable.update {it.copy(busy=true,failure=null,fix=null,snapshot=null,recovery=false)}
         unsaved=null
-        viewModelScope.launch {try {
+        locationJob=viewModelScope.launch {try {
             withContext(io) {store.clear()}
             val fix=withContext(io) {locations.locate()}
             if(time.now()-fix.timestamp !in 0..DistanceOptions.MAX_FIX_AGE) throw AppFailure(Failure.StaleLocation)
+            if(generation!=locationGeneration) return@launch
             mutable.update {it.copy(fix=fix,snapshot=null)}
-            withContext(io) {store.clear()}
-        } catch(e: Exception) {failure(e)} finally {mutable.update {it.copy(busy=false)}}}
+        } catch(e: Exception) {if(generation==locationGeneration) failure(e)} finally {if(generation==locationGeneration) mutable.update {it.copy(busy=false)}}}
     }
     fun applyFilters(value: Filters) {
         val filters=value.normalized()
-        if(state.value.locked || filters==state.value.filters) return
+        if(state.value.locked) return
+        if(filters.regions.isNotEmpty()) cancelLocation()
+        if(filters==state.value.filters) return
         mutable.update {it.copy(busy=true)}
         viewModelScope.launch {try {
             withContext(io) {prefs.save(filters);store.clear()};unsaved=null

@@ -11,14 +11,21 @@ import androidx.compose.ui.unit.dp
 import hk.whatoeat.core.model.*
 
 @OptIn(ExperimentalMaterial3Api::class,ExperimentalLayoutApi::class)
-@Composable fun FilterSheet(current: Filters,cuisines: List<Cuisine>,dismiss: ()->Unit,save: (Filters)->Unit) {
+@Composable fun FilterSheet(current: Filters,cuisines: List<Cuisine>,dismiss: ()->Unit,save: (Filters)->Unit,
+ requestLocation: ()->Unit={},locationStatus: String="尚未取得目前位置",busy: Boolean=false,clearDistanceToken: Int=0,
+ cancelLocation: ()->Unit={}) {
  var radius by remember {mutableStateOf(current.effectiveRadius)}
  var minRating by remember {mutableStateOf(current.minRating)}
  var regions by remember {mutableStateOf(current.regions)}
  var selected by remember {mutableStateOf(current.cuisines)}
  var expanded by remember {mutableStateOf(emptySet<String>())}
  var search by remember {mutableStateOf("")}
- val changeRegions: (Set<String>)->Unit={values -> regions=values.filterNot {it in LocalityOptions.labels && LocalityOptions.covered(it,values)}.toSet();if(values.isNotEmpty()) radius=null}
+ val initialClearToken=remember {clearDistanceToken}
+ LaunchedEffect(clearDistanceToken) {if(clearDistanceToken!=initialClearToken) radius=null}
+ val changeRegions: (Set<String>)->Unit={values ->
+  regions=values.filterNot {it in LocalityOptions.labels && LocalityOptions.covered(it,values)}.toSet()
+  if(regions.isNotEmpty()) {radius=null;cancelLocation()}
+ }
  ModalBottomSheet(onDismissRequest=dismiss) {
  Column(Modifier.verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  Text("餐廳篩選",style=MaterialTheme.typography.headlineSmall)
@@ -27,6 +34,9 @@ import hk.whatoeat.core.model.*
  FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
  DistanceOptions.metres.forEach {v -> FilterChip(selected=radius==v,onClick={radius=v},enabled=regions.isEmpty() || v==null,label={Text(v?.let {"${it} 米內"} ?: "不限距離")})}
  }
+ Text(if(regions.isNotEmpty()) "已選地區，未使用目前位置" else locationStatus,style=MaterialTheme.typography.bodySmall)
+ OutlinedButton(onClick={regions=emptySet();requestLocation()},enabled=!busy) {Text("取得／重試目前位置")}
+ Text("目前位置與地區擇一：取得位置會清除地區，選地區會取消目前位置。",style=MaterialTheme.typography.bodySmall)
  HorizontalDivider()
  Text("最低評分",style=MaterialTheme.typography.titleMedium)
  FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {
@@ -69,7 +79,7 @@ import hk.whatoeat.core.model.*
  Text("菜式",style=MaterialTheme.typography.titleMedium)
  TextButton(onClick={selected=emptySet()}) {Text("所有菜式／清除已選")}
  cuisines.forEach {c -> Row {Checkbox(c.id in selected,{checked -> selected=if(checked) selected+c.id else selected-c.id});Text(c.label)}}
- Button(onClick={save(Filters(radius,selected,minRating,regions).normalized());dismiss()},modifier=Modifier.fillMaxWidth()) {Text("套用篩選")}
+ Button(onClick={save(Filters(radius,selected,minRating,regions).normalized());dismiss()},enabled=!busy,modifier=Modifier.fillMaxWidth()) {Text("套用篩選")}
  }
  }
 }

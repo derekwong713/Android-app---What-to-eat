@@ -8,10 +8,9 @@ import kotlin.math.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.ui.graphics.graphicsLayer
-import hk.whatoeat.core.designsystem.PigMascot
+import hk.whatoeat.core.designsystem.AnimatedPigMascot
 import hk.whatoeat.core.designsystem.reducedMascotMotion
-import hk.whatoeat.domain.mascot.MascotMotion
+import hk.whatoeat.domain.mascot.MascotClip
 import hk.whatoeat.domain.mascot.MascotTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -47,9 +46,8 @@ import hk.whatoeat.domain.draw.WheelGeometry
  }
  }
  Box(Modifier.size(120.dp).align(Alignment.Center).background(MaterialTheme.colorScheme.surface,CircleShape)) {
- PigMascot(MascotTheme.Base,"豬仔陪你轉輪盤",Modifier.fillMaxSize().padding(3.dp).graphicsLayer {
- rotationZ=MascotMotion.wheelSway(rotation.value/target,reduced)
- })
+ AnimatedPigMascot(MascotTheme.Base,"豬仔拋鑊陪你轉輪盤",Modifier.fillMaxSize().padding(3.dp),
+  clip=MascotClip.Wok,playKey=s.drawId,cycles=null)
  }
  }
  Text("菜式順序（從右側起順時針）："+s.snapshot.cuisines.mapIndexed {i,c -> "${i+1}. ${c.cuisine.label}"}.joinToString("、"))

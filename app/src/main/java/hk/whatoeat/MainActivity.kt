@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
@@ -50,8 +51,20 @@ import java.util.Locale
  val nav=rememberNavController();val entry by nav.currentBackStackEntryAsState();val route=entry?.destination?.route ?: "home"
  BackHandler(enabled=route=="wheel") {vm.reveal()}
  var filters by remember {mutableStateOf(false)}
- val permission=rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {grants -> if(grants.values.any {it}) vm.useLocation() else vm.permissionDenied(!ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.ACCESS_COARSE_LOCATION) && !ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.ACCESS_FINE_LOCATION))}
- val location: ()->Unit={if(ContextCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) vm.useLocation() else permission.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION))}
+ var clearDistanceToken by remember {mutableIntStateOf(0)}
+ var locationRequestActive by rememberSaveable {mutableStateOf(false)}
+ val cancelLocation: ()->Unit={locationRequestActive=false;vm.cancelLocation()}
+ val permission=rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {grants ->
+  if(locationRequestActive) {
+   locationRequestActive=false
+   if(grants.values.any {it}) vm.useLocation() else vm.permissionDenied(!ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.ACCESS_COARSE_LOCATION) && !ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.ACCESS_FINE_LOCATION))
+  }
+ }
+ val location: ()->Unit={
+  vm.cancelLocation();locationRequestActive=true
+  if(ContextCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED) {locationRequestActive=false;vm.useLocation()}
+  else permission.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION))
+ }
  LaunchedEffect(vm,ad.startup) {if(!ad.startup) vm.routes.collect {r -> nav.navigate(r) {if(r=="wheel" || r=="result") popUpTo("home");launchSingleTop=true}}}
  LaunchedEffect(s.ready,ad.startup) {if(!ad.startup && s.ready && s.restored && s.session!=null) nav.navigate("result") {launchSingleTop=true}}
  LaunchedEffect(s.authUrl) {s.authUrl?.let(activity::launchOAuth)}
@@ -63,7 +76,7 @@ import java.util.Locale
  }}) {padding -> Column(Modifier.fillMaxSize().padding(padding)) {
  Text("內置餐廳資料 · 毋須登入 · 未完整收錄",Modifier.padding(8.dp),style=MaterialTheme.typography.labelMedium)
  NavHost(nav,"home",Modifier.weight(1f)) {
- composable("home") {HomeScreen(s,vm,{filters=true},location)}
+ composable("home") {HomeScreen(s,vm,{filters=true})}
  composable("wheel") {s.session?.let {CuisineWheel(it,vm::reveal)}}
  composable("result") {ResultScreen(s,vm,openRestaurant,true)}
  composable("detail") {ResultScreen(s,vm,openRestaurant,false)}
@@ -72,11 +85,13 @@ import java.util.Locale
  composable("settings") {SettingsScreen(s,vm,{activity.ads.privacy(activity)},{ExternalActions.open(activity,it)})}
  }
  }}
- if(filters) FilterSheet(s.filters,s.cuisines,{filters=false},vm::applyFilters)
+ if(filters) FilterSheet(s.filters,s.cuisines,{filters=false},vm::applyFilters,
+  requestLocation=location,locationStatus=if(s.busy) "正在處理…" else if(s.fix?.let {System.currentTimeMillis()-it.timestamp in 0..hk.whatoeat.core.model.DistanceOptions.MAX_FIX_AGE}==true) "已取得目前位置" else "尚未取得目前位置",
+  busy=s.busy,clearDistanceToken=clearDistanceToken,cancelLocation=cancelLocation)
  CommunityDialogs(s,vm)
  s.failure?.let {f -> AlertDialog(onDismissRequest=vm::clearFailure,title={Text("未能完成操作")},text={Text(f.message())},confirmButton={TextButton(onClick=vm::clearFailure) {Text("關閉")}},dismissButton={Column {
  if(f in setOf(hk.whatoeat.core.model.Failure.Permission,hk.whatoeat.core.model.Failure.PermissionPermanent,hk.whatoeat.core.model.Failure.LocationDisabled,hk.whatoeat.core.model.Failure.LocationUnavailable,hk.whatoeat.core.model.Failure.LocationTimeout,hk.whatoeat.core.model.Failure.StaleLocation)) {
- TextButton(onClick={vm.clearFailure();location()}) {Text("重試定位")};TextButton(onClick={vm.clearFailure();vm.noDistance()}) {Text("不限距離繼續")}
+ TextButton(onClick={vm.clearFailure();location()}) {Text("重試定位")};TextButton(onClick={vm.clearFailure();if(filters) clearDistanceToken++;vm.noDistance()}) {Text("不限距離繼續")}
  TextButton(onClick={vm.clearFailure();activity.startActivity(if(f==hk.whatoeat.core.model.Failure.LocationDisabled) Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) else Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.parse("package:${activity.packageName}")))}) {Text("系統設定")}
  }
  if(f==hk.whatoeat.core.model.Failure.Conflict) TextButton(onClick={vm.closeAction();vm.clearFailure();vm.retryDetail()}) {Text("放棄草稿並重新讀取")}

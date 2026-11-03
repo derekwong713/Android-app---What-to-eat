@@ -1,0 +1,335 @@
+[
+  {
+    "id": "chinese",
+    "title": "中菜及點心 · 開心食包包",
+    "description": "咬一口、鼓起面珠咀嚼，滿足眯眼，再舔舔嘴。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "中菜",
+      "粵菜",
+      "上海菜",
+      "北京菜",
+      "川菜",
+      "湘菜",
+      "客家菜",
+      "福建菜",
+      "浙江菜",
+      "台灣菜",
+      "點心",
+      "粉麵",
+      "粥品",
+      "茶餐廳"
+    ],
+    "src": "assets/motion-chinese.png"
+  },
+  {
+    "id": "ramen",
+    "title": "日式及拉麵 · 吸麵鼓面珠",
+    "description": "筷子夾起拉麵，吹一吹再吸入口，鼓起面珠、滿足眯眼。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "拉麵",
+      "日式",
+      "居酒屋"
+    ],
+    "src": "assets/motion-ramen.png"
+  },
+  {
+    "id": "sushi",
+    "title": "壽司 · 小師傅鞠躬",
+    "description": "展示壽司盤、閉眼鞠躬，再舉起筷子。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "壽司"
+    ],
+    "src": "assets/motion-sushi.png"
+  },
+  {
+    "id": "korean",
+    "title": "韓式 · 拌飯嚐一口",
+    "description": "用木匙拌飯，舀一小口品嚐，再開心眯眼點頭。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "韓式"
+    ],
+    "src": "assets/motion-korean.png"
+  },
+  {
+    "id": "southeast",
+    "title": "東南亞 · 聞香飲湯",
+    "description": "聞到湯麵香味，吹涼湯匙，飲一口後露出滿足笑容。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "泰國菜",
+      "越南菜",
+      "新加坡菜",
+      "馬來西亞菜"
+    ],
+    "src": "assets/motion-southeast.png"
+  },
+  {
+    "id": "curry",
+    "title": "咖喱 · 蘸餅舔舔嘴",
+    "description": "撕起小塊薄餅蘸咖喱，食一口後可愛地舔嘴。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "印度菜",
+      "尼泊爾菜",
+      "巴基斯坦菜",
+      "孟加拉菜"
+    ],
+    "src": "assets/motion-curry.png"
+  },
+  {
+    "id": "western",
+    "title": "西式 · 捲意粉開餐",
+    "description": "用叉捲起意粉、送入口，咀嚼後滿足眨眼。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "西餐",
+      "法國菜",
+      "意大利菜",
+      "西班牙菜",
+      "美式",
+      "英國菜",
+      "德國菜",
+      "波蘭菜",
+      "澳洲菜"
+    ],
+    "src": "assets/motion-western.png"
+  },
+  {
+    "id": "grill",
+    "title": "燒烤 · 夾起香噴噴串燒",
+    "description": "燒烤夾開合，翻一翻蔬菜串燒，聞到香味後笑眯眯。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "扒房",
+      "燒烤",
+      "日式燒肉／串燒",
+      "阿根廷菜"
+    ],
+    "src": "assets/motion-grill.png"
+  },
+  {
+    "id": "vegetarian",
+    "title": "素食 · 咬紅蘿蔔",
+    "description": "拿起紅蘿蔔咬一口，面珠鼓起，再開心眯眼。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "素食"
+    ],
+    "src": "assets/motion-vegetarian.png"
+  },
+  {
+    "id": "seafood",
+    "title": "海鮮 · 嚐蝦肉眨眼",
+    "description": "叉起一小口熟蝦肉，吹一吹、食入口，再滿足地眨眼。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "海鮮"
+    ],
+    "src": "assets/motion-seafood.png"
+  },
+  {
+    "id": "hotpot",
+    "title": "火鍋 · 撈料吹一吹",
+    "description": "漏勺撈起蘑菇，吹涼才品嚐，最後開心笑。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "火鍋"
+    ],
+    "src": "assets/motion-hotpot.png"
+  },
+  {
+    "id": "dessert",
+    "title": "甜品 · 開心小跳",
+    "description": "屈膝、跳起、披肩飄起，再舉起打蛋器。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "甜品"
+    ],
+    "src": "assets/motion-dessert.png"
+  },
+  {
+    "id": "wrap",
+    "title": "薄餅及卷餅 · 大啖咬一口",
+    "description": "拿起卷餅咬一口，鼓起面珠、舔嘴，再開心展示美食。",
+    "times": [
+      450,
+      180,
+      180,
+      240,
+      220,
+      400,
+      250,
+      400
+    ],
+    "cuisines": [
+      "土耳其菜",
+      "地中海菜",
+      "墨西哥菜",
+      "拉丁美洲菜"
+    ],
+    "src": "assets/motion-wrap.png"
+  },
+  {
+    "id": "welcome",
+    "title": "首頁：眨眼揮手",
+    "description": "首頁先播放迎賓動作，再播放流口水動作，最後停留。",
+    "times": [
+      600,
+      120,
+      100,
+      140,
+      140,
+      140,
+      140,
+      500
+    ],
+    "cuisines": [],
+    "src": "assets/motion-welcome.png"
+  },
+  {
+    "id": "wok",
+    "title": "輪盤：拋鑊炒菜",
+    "description": "輪盤中央循環播放拋鑊，直至已保存的抽選結果揭曉。",
+    "times": [
+      180,
+      140,
+      120,
+      120,
+      150,
+      140,
+      140,
+      180
+    ],
+    "cuisines": [],
+    "src": "assets/motion-wok.png"
+  },
+  {
+    "id": "drooling",
+    "title": "肚餓：流口水抹嘴",
+    "description": "聞到香味、嘴角一小滴口水，再可愛地抹嘴。",
+    "times": [
+      500,
+      240,
+      350,
+      250,
+      350,
+      230,
+      450,
+      450
+    ],
+    "cuisines": [],
+    "src": "assets/motion-drooling.png"
+  }
+]

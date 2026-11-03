@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import hk.whatoeat.core.designsystem.filterSummary
 import hk.whatoeat.core.designsystem.MascotWelcome
 import hk.whatoeat.core.model.DrawMode
-@Composable fun HomeScreen(s: HomeState,vm: HomeViewModel,filters: ()->Unit,location: ()->Unit) {
+@Composable fun HomeScreen(s: HomeState,vm: HomeViewModel,filters: ()->Unit) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  Text("今日食咩好？",style=MaterialTheme.typography.headlineLarge)
  MascotWelcome()
@@ -17,8 +17,6 @@ import hk.whatoeat.core.model.DrawMode
  Text("目標範圍為香港；使用內置餐廳資料，來源及日期見詳情，尚未完整收錄。")
  Text(filterSummary(s.filters));Text("距離為直線距離，不代表步行距離。")
  OutlinedButton(onClick=filters,enabled=!s.locked) {Text("距離、菜式、評分及地區")}
- OutlinedButton(onClick=location,enabled=!s.locked) {Text("取得／重試目前位置")}
- s.fix?.let {Text("定位時間：${java.util.Date(it.timestamp)}；準確度約 ${it.accuracy.toInt()} 米")}
  if(s.filters.radius!=null) TextButton(onClick=vm::noDistance,enabled=!s.locked) {Text("改用不限距離")}
  s.snapshot?.let {snap ->
  Text("符合條件：${snap.restaurantCount} 間餐廳、${snap.cuisines.size} 種菜式")

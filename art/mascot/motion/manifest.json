@@ -1,0 +1,712 @@
+{
+  "version": "motion-review-v3",
+  "date": "2026-11-04",
+  "mode": "built-in ImageGen using original costume references",
+  "scope": "Review only. All 13 original cuisine-theme illustrations animated; grouped coverage of 48 cuisine IDs. App unchanged.",
+  "grid": {
+    "columns": 4,
+    "rows": 2,
+    "frames": 8
+  },
+  "themes": [
+    {
+      "id": "chinese",
+      "title": "中菜及點心 · 開心食包包",
+      "description": "咬一口、鼓起面珠咀嚼，滿足眯眼，再舔舔嘴。",
+      "cuisines": [
+        {
+          "id": "chinese",
+          "label": "中菜"
+        },
+        {
+          "id": "cantonese",
+          "label": "粵菜"
+        },
+        {
+          "id": "shanghai",
+          "label": "上海菜"
+        },
+        {
+          "id": "beijing",
+          "label": "北京菜"
+        },
+        {
+          "id": "sichuan",
+          "label": "川菜"
+        },
+        {
+          "id": "hunan",
+          "label": "湘菜"
+        },
+        {
+          "id": "hakka",
+          "label": "客家菜"
+        },
+        {
+          "id": "fujian",
+          "label": "福建菜"
+        },
+        {
+          "id": "zhejiang",
+          "label": "浙江菜"
+        },
+        {
+          "id": "taiwanese",
+          "label": "台灣菜"
+        },
+        {
+          "id": "dim_sum",
+          "label": "點心"
+        },
+        {
+          "id": "noodles",
+          "label": "粉麵"
+        },
+        {
+          "id": "congee",
+          "label": "粥品"
+        },
+        {
+          "id": "cha_chaan_teng",
+          "label": "茶餐廳"
+        }
+      ],
+      "reference": "costumes/chinese.png",
+      "atlas": "assets/chinese.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "ramen",
+      "title": "日式及拉麵 · 吸麵鼓面珠",
+      "description": "筷子夾起拉麵，吹一吹再吸入口，鼓起面珠、滿足眯眼。",
+      "cuisines": [
+        {
+          "id": "ramen",
+          "label": "拉麵"
+        },
+        {
+          "id": "japanese",
+          "label": "日式"
+        },
+        {
+          "id": "izakaya",
+          "label": "居酒屋"
+        }
+      ],
+      "reference": "costumes/ramen.png",
+      "atlas": "assets/ramen.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "sushi",
+      "title": "壽司 · 小師傅鞠躬",
+      "description": "展示壽司盤、閉眼鞠躬，再舉起筷子。",
+      "cuisines": [
+        {
+          "id": "sushi",
+          "label": "壽司"
+        }
+      ],
+      "reference": "costumes/sushi.png",
+      "atlas": "assets/sushi.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "korean",
+      "title": "韓式 · 拌飯嚐一口",
+      "description": "用木匙拌飯，舀一小口品嚐，再開心眯眼點頭。",
+      "cuisines": [
+        {
+          "id": "korean",
+          "label": "韓式"
+        }
+      ],
+      "reference": "costumes/korean.png",
+      "atlas": "assets/korean.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "southeast",
+      "title": "東南亞 · 聞香飲湯",
+      "description": "聞到湯麵香味，吹涼湯匙，飲一口後露出滿足笑容。",
+      "cuisines": [
+        {
+          "id": "thai",
+          "label": "泰國菜"
+        },
+        {
+          "id": "vietnamese",
+          "label": "越南菜"
+        },
+        {
+          "id": "singaporean",
+          "label": "新加坡菜"
+        },
+        {
+          "id": "malaysian",
+          "label": "馬來西亞菜"
+        }
+      ],
+      "reference": "costumes/southeast.png",
+      "atlas": "assets/southeast.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "curry",
+      "title": "咖喱 · 蘸餅舔舔嘴",
+      "description": "撕起小塊薄餅蘸咖喱，食一口後可愛地舔嘴。",
+      "cuisines": [
+        {
+          "id": "indian",
+          "label": "印度菜"
+        },
+        {
+          "id": "nepalese",
+          "label": "尼泊爾菜"
+        },
+        {
+          "id": "pakistani",
+          "label": "巴基斯坦菜"
+        },
+        {
+          "id": "bangladeshi",
+          "label": "孟加拉菜"
+        }
+      ],
+      "reference": "costumes/curry.png",
+      "atlas": "assets/curry.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "western",
+      "title": "西式 · 捲意粉開餐",
+      "description": "用叉捲起意粉、送入口，咀嚼後滿足眨眼。",
+      "cuisines": [
+        {
+          "id": "western",
+          "label": "西餐"
+        },
+        {
+          "id": "french",
+          "label": "法國菜"
+        },
+        {
+          "id": "italian",
+          "label": "意大利菜"
+        },
+        {
+          "id": "spanish",
+          "label": "西班牙菜"
+        },
+        {
+          "id": "american",
+          "label": "美式"
+        },
+        {
+          "id": "british",
+          "label": "英國菜"
+        },
+        {
+          "id": "german",
+          "label": "德國菜"
+        },
+        {
+          "id": "polish",
+          "label": "波蘭菜"
+        },
+        {
+          "id": "australian",
+          "label": "澳洲菜"
+        }
+      ],
+      "reference": "costumes/western.png",
+      "atlas": "assets/western.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "grill",
+      "title": "燒烤 · 夾起香噴噴串燒",
+      "description": "燒烤夾開合，翻一翻蔬菜串燒，聞到香味後笑眯眯。",
+      "cuisines": [
+        {
+          "id": "steak",
+          "label": "扒房"
+        },
+        {
+          "id": "barbecue",
+          "label": "燒烤"
+        },
+        {
+          "id": "japanese_grill",
+          "label": "日式燒肉／串燒"
+        },
+        {
+          "id": "argentinian",
+          "label": "阿根廷菜"
+        }
+      ],
+      "reference": "costumes/grill.png",
+      "atlas": "assets/grill.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "vegetarian",
+      "title": "素食 · 咬紅蘿蔔",
+      "description": "拿起紅蘿蔔咬一口，面珠鼓起，再開心眯眼。",
+      "cuisines": [
+        {
+          "id": "vegetarian",
+          "label": "素食"
+        }
+      ],
+      "reference": "costumes/vegetarian.png",
+      "atlas": "assets/vegetarian.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "seafood",
+      "title": "海鮮 · 嚐蝦肉眨眼",
+      "description": "叉起一小口熟蝦肉，吹一吹、食入口，再滿足地眨眼。",
+      "cuisines": [
+        {
+          "id": "seafood",
+          "label": "海鮮"
+        }
+      ],
+      "reference": "costumes/seafood.png",
+      "atlas": "assets/seafood.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "hotpot",
+      "title": "火鍋 · 撈料吹一吹",
+      "description": "漏勺撈起蘑菇，吹涼才品嚐，最後開心笑。",
+      "cuisines": [
+        {
+          "id": "hot_pot",
+          "label": "火鍋"
+        }
+      ],
+      "reference": "costumes/hotpot.png",
+      "atlas": "assets/hotpot.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "dessert",
+      "title": "甜品 · 開心小跳",
+      "description": "屈膝、跳起、披肩飄起，再舉起打蛋器。",
+      "cuisines": [
+        {
+          "id": "dessert",
+          "label": "甜品"
+        }
+      ],
+      "reference": "costumes/dessert.png",
+      "atlas": "assets/dessert.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "wrap",
+      "title": "薄餅及卷餅 · 大啖咬一口",
+      "description": "拿起卷餅咬一口，鼓起面珠、舔嘴，再開心展示美食。",
+      "cuisines": [
+        {
+          "id": "turkish",
+          "label": "土耳其菜"
+        },
+        {
+          "id": "mediterranean",
+          "label": "地中海菜"
+        },
+        {
+          "id": "mexican",
+          "label": "墨西哥菜"
+        },
+        {
+          "id": "latin_american",
+          "label": "拉丁美洲菜"
+        }
+      ],
+      "reference": "costumes/wrap.png",
+      "atlas": "assets/wrap.png",
+      "times": [
+        450,
+        180,
+        180,
+        240,
+        220,
+        400,
+        250,
+        400
+      ],
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    }
+  ],
+  "reusedPromptRecords": [
+    {
+      "id": "welcome",
+      "prompt": "Use case: identity-preserve. Asset type: production 2D animation sprite sheet, NOT a contact sheet of unrelated poses. Reference image defines the exact same big-eyed chubby pink pig character, brown cloven hooves, round snout, curled tail, cape with gold clasp, cream apron with small Morandi roulette emblem, soft paper-watercolour illustration. Preserve identity, proportions, costume and viewpoint across every frame. Create ONE transparent PNG, exactly 2048x1024 pixels, an invisible regular grid of 4 columns x 2 rows, eight 512x512 equal square cells. Read frames left-to-right across top row then bottom row. Each cell contains exactly one whole pig at the SAME scale and registration, feet baseline y=460 within every cell except explicitly jumping; body centred x=256; leave 32px safety margin for all extended limbs and props. No cell borders, no text, no labels, no numbers, no ground, no shadows, no scenery. True transparent alpha everywhere outside the pig. All eight frames must show visibly DIFFERENT articulated poses and facial expressions of a single coherent motion, not a rigid rotated or translated copy. Exactly two arms and two legs, natural grips. Keep silhouette clear at phone size. Subtle hand-drawn squash/stretch, moving ears and cape, no stylistic drift. Morandi sage/dusty rose/cream/muted grey-blue palette, warm friendly expression. Output only the aligned eight-frame sprite atlas.\nAction: greeting loop, no cooking props for this animation so empty hands can wave. Sage cape and cream apron. Frames: 1 both arms relaxed, eyes open; 2 right elbow bends raising hoof to shoulder and eyes half blink; 3 right hoof high waving outward, eyes closed smiling; 4 right wrist waving inward, eyes reopen; 5 right hoof waving outward again, mouth open happy; 6 hoof swings inward, ears lift and cape tip lags; 7 arm lowers halfway, mouth small smile; 8 arms return to frame1 rest, eyes open. Body stays registered, movement is arms/eyes/ears/cape, never whole-image rotation.",
+      "reference": "app/src/main/res/drawable-nodpi/mascot_base.png",
+      "output": "assets/welcome.png",
+      "generatedFilename": "exec-91f10516-fcad-4a2c-8ebb-a67b1096d119.png",
+      "cleanupPrompt": "Use case: background-extraction. Edit target: the provided eight-frame pig animation sheet. Remove ONLY the pale white background from this entire sprite atlas, replacing it with genuinely transparent alpha 0, not semi-transparent white. Preserve EVERY pig, colour, facial expression, all eight poses, internal opaque pig pixels, paper texture, cell registration, 4 columns x 2 rows layout and exact image dimensions unchanged. Do not redraw, rescale, reposition or add anything. No checkerboard illustration, no tint, no shadows, no visible background. Output transparent PNG. Pig interiors remain fully opaque; only background goes alpha zero.",
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "wok",
+      "prompt": "Use case: identity-preserve. Asset type: production 2D animation sprite sheet, NOT a contact sheet of unrelated poses. Reference image defines the exact same big-eyed chubby pink pig character, brown cloven hooves, round snout, curled tail, cape with gold clasp, cream apron with small Morandi roulette emblem, soft paper-watercolour illustration. Preserve identity, proportions, costume and viewpoint across every frame. Create ONE transparent PNG, exactly 2048x1024 pixels, an invisible regular grid of 4 columns x 2 rows, eight 512x512 equal square cells. Read frames left-to-right across top row then bottom row. Each cell contains exactly one whole pig at the SAME scale and registration, feet baseline y=460 within every cell except explicitly jumping; body centred x=256; leave 32px safety margin for all extended limbs and props. No cell borders, no text, no labels, no numbers, no ground, no shadows, no scenery. True transparent alpha everywhere outside the pig. All eight frames must show visibly DIFFERENT articulated poses and facial expressions of a single coherent motion, not a rigid rotated or translated copy. Exactly two arms and two legs, natural grips. Keep silhouette clear at phone size. Subtle hand-drawn squash/stretch, moving ears and cape, no stylistic drift. Morandi sage/dusty rose/cream/muted grey-blue palette, warm friendly expression. Output only the aligned eight-frame sprite atlas.\nAction: cyclic wok toss for a spinning restaurant wheel. Left hoof holds wok handle, right hoof holds spatula, sage cape. Small carrots/green vegetables in wok, never floating independent extra limbs. Frames: 1 wok low at waist, spatula near wok; 2 knees and elbows bend, crouch slightly preparing; 3 left arm drives wok up and tilts rim, right spatula lifts; 4 vegetables arc just above wok, eyes follow food, cape lifts; 5 food reaches apex, wok extended catching below; 6 vegetables fall into wok, elbows bend catching, eyes blink; 7 straighten legs, spatula stirs, cape settles; 8 back to initial low wok posture. Clear sequential cooking action and moving arms, not whole-character spin. Keep ingredients within cell.",
+      "reference": "app/src/main/res/drawable-nodpi/mascot_base.png",
+      "output": "assets/wok.png",
+      "generatedFilename": "exec-7bf1f7db-34a8-46e9-a5c4-acb5965b2b4b.png",
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "sushi",
+      "prompt": "Use case: identity-preserve. Asset type: production 2D animation sprite sheet, NOT a contact sheet of unrelated poses. Reference image defines the exact same big-eyed chubby pink pig character, brown cloven hooves, round snout, curled tail, cape with gold clasp, cream apron with small Morandi roulette emblem, soft paper-watercolour illustration. Preserve identity, proportions, costume and viewpoint across every frame. Create ONE transparent PNG, exactly 2048x1024 pixels, an invisible regular grid of 4 columns x 2 rows, eight 512x512 equal square cells. Read frames left-to-right across top row then bottom row. Each cell contains exactly one whole pig at the SAME scale and registration, feet baseline y=460 within every cell except explicitly jumping; body centred x=256; leave 32px safety margin for all extended limbs and props. No cell borders, no text, no labels, no numbers, no ground, no shadows, no scenery. True transparent alpha everywhere outside the pig. All eight frames must show visibly DIFFERENT articulated poses and facial expressions of a single coherent motion, not a rigid rotated or translated copy. Exactly two arms and two legs, natural grips. Keep silhouette clear at phone size. Subtle hand-drawn squash/stretch, moving ears and cape, no stylistic drift. Morandi sage/dusty rose/cream/muted grey-blue palette, warm friendly expression. Output only the aligned eight-frame sprite atlas.\nAction: sushi chef proudly presents platter then bows in thanks. Keep sage cape, cream apron, same simple sushi chef hat as reference, left hoof holds a wooden sushi platter with 3 sushi pieces, right hoof holds chopsticks. Frames: 1 platter close to waist eyes open; 2 both elbows open bringing platter forward; 3 platter presented proudly, smile widens; 4 slight knee bend and head bows down, eyes half close; 5 deepest polite bow with closed smiling eyes, hat follows head, tray stays level; 6 rise partway eyes half open; 7 standing again with right chopsticks raised in small victory gesture; 8 lower chopsticks, platter returns near waist matching frame1. Limbs and head must change poses; entire sheet is not a row of still images with only different rotation.",
+      "reference": "app/src/main/res/drawable-nodpi/mascot_sushi.png",
+      "output": "assets/sushi.png",
+      "generatedFilename": "exec-e0a3db19-cc2d-4cfe-b7e1-2ee7f20d938c.png",
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "id": "dessert",
+      "prompt": "Use case: identity-preserve. Asset type: production 2D animation sprite sheet, NOT a contact sheet of unrelated poses. Reference image defines the exact same big-eyed chubby pink pig character, brown cloven hooves, round snout, curled tail, cape with gold clasp, cream apron with small Morandi roulette emblem, soft paper-watercolour illustration. Preserve identity, proportions, costume and viewpoint across every frame. Create ONE transparent PNG, exactly 2048x1024 pixels, an invisible regular grid of 4 columns x 2 rows, eight 512x512 equal square cells. Read frames left-to-right across top row then bottom row. Each cell contains exactly one whole pig at the SAME scale and registration, feet baseline y=460 within every cell except explicitly jumping; body centred x=256; leave 32px safety margin for all extended limbs and props. No cell borders, no text, no labels, no numbers, no ground, no shadows, no scenery. True transparent alpha everywhere outside the pig. All eight frames must show visibly DIFFERENT articulated poses and facial expressions of a single coherent motion, not a rigid rotated or translated copy. Exactly two arms and two legs, natural grips. Keep silhouette clear at phone size. Subtle hand-drawn squash/stretch, moving ears and cape, no stylistic drift. Morandi sage/dusty rose/cream/muted grey-blue palette, warm friendly expression. Output only the aligned eight-frame sprite atlas.\nAction: dessert result celebration, one small happy hop. Dusty-rose cape instead of sage, white chef toque, cream apron. Left hoof holds a plate with strawberry cake, right hoof holds whisk. Frames: 1 standing eyes open, arms low; 2 knees bend anticipation and eyes half blink; 3 spring up 20 pixels, right whisk arm lifts, cake kept level; 4 apex 40 pixels above baseline, legs tuck slightly, eyes closed delighted, mouth wide smile, cape flutters upward; 5 descending 20 pixels, legs extend, whisk still up; 6 soft landing with knees bent, cape lags, eyes reopen; 7 straighten and give a small whisk salute; 8 return to initial standing pose. Cake stays on plate; all accessories within cell. No confetti or text.",
+      "reference": "app/src/main/res/drawable-nodpi/mascot_dessert.png",
+      "output": "assets/dessert.png",
+      "generatedFilename": "exec-6db7405b-44e8-4f8c-9ad2-93f2d8ed62d0.png",
+      "cleanupPrompt": "Use case: background-extraction. Edit target: the provided eight-frame pig animation sheet. Remove ONLY the pale white background from this entire sprite atlas, replacing it with genuinely transparent alpha 0, not semi-transparent white. Preserve EVERY pig, colour, facial expression, all eight poses, internal opaque pig pixels, paper texture, cell registration, 4 columns x 2 rows layout and exact image dimensions unchanged. Do not redraw, rescale, reposition or add anything. No checkerboard illustration, no tint, no shadows, no visible background. Output transparent PNG. Pig interiors remain fully opaque; only background goes alpha zero.",
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "key": "eating",
+      "title": "開心食包包",
+      "prompt": "Use case: identity-preserve. Create a 2D cartoon animation sprite atlas based on the supplied approved pig mascot reference. Keep identical big eyes, pink round snout, brown hooves, chubby proportions, sage green cape with gold clasp, ivory chef toque, cream apron with Morandi roulette emblem, delicate paper-watercolour texture. Exactly ONE atlas: 4 columns x 2 rows of 8 equal square cells in reading order, 2048x1024 landscape aspect 2:1. No lines, no text, no frame labels, no scenery, no shadows. Background must be genuinely transparent alpha=0, not translucent white; all pig interiors opaque. Each cell one full-body pig same size and centre; feet at same cell baseline, all ears, food and hands within cell with 30px margin. Animate face, pupils, mouth, cheeks and arms as described, not whole-image rotation. Precisely two arms and two legs. Maintain coherent connected movement, safe food handling, cute and appetising rather than messy. Morandi palette. Output transparent PNG. Action is eating one small steamed VEGETABLE bun: replace reference bamboo lid in right hoof with a bun; left hoof carries a steamer with two other buns. Frame1 open eyes looking at bun at chest level, closed anticipatory smile. Frame2 lift bun halfway toward mouth, pupils follow, mouth starts open. Frame3 bun touches open mouth, take a small bite, visible crescent bite mark in bun. Frame4 bun lowered to chest, lips closed, cheeks puff on one side, eyes wide delighted. Frame5 chewing gently, puff switches slightly, eyes half closed, no flying crumbs. Frame6 satisfied closed crescent eyes, both cheeks round, tiny rosy blush, mouth content. Frame7 swallow, cheeks relax, a small visible tongue-tip licks one corner of lips, bun still with bite mark. Frame8 mouth returns to small smile, eyes reopen and look at bitten bun ready for another bite. Focus on distinct chewing mouth/cheek expressions, not just arm movement. No actual meat depiction.",
+      "output": "assets/eating.png",
+      "generatedFilename": "exec-35f763d3-55ce-497d-9919-52bed7a235b9.png",
+      "reference": "app/src/main/res/drawable-nodpi/mascot_chinese.png",
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    },
+    {
+      "key": "drooling",
+      "title": "望住美食流口水",
+      "prompt": "Use case: identity-preserve. Create a 2D cartoon animation sprite atlas based on the supplied approved pig mascot reference. Keep identical big eyes, pink round snout, brown hooves, chubby proportions, sage green cape with gold clasp, ivory chef toque, cream apron with Morandi roulette emblem, delicate paper-watercolour texture. Exactly ONE atlas: 4 columns x 2 rows of 8 equal square cells in reading order, 2048x1024 landscape aspect 2:1. No lines, no text, no frame labels, no scenery, no shadows. Background must be genuinely transparent alpha=0, not translucent white; all pig interiors opaque. Each cell one full-body pig same size and centre; feet at same cell baseline, all ears, food and hands within cell with 30px margin. Animate face, pupils, mouth, cheeks and arms as described, not whole-image rotation. Precisely two arms and two legs. Maintain coherent connected movement, safe food handling, cute and appetising rather than messy. Morandi palette. Output transparent PNG. Action is an adorable hungry anticipation then wiping mouth loop. Left hoof carries a small steaming bowl of vegetable noodles at chest level, right hoof is initially relaxed. No bamboo steamer or lid. Frame1 pupils look down at noodle bowl, warm smile. Frame2 lean head slightly toward bowl to smell steam, eyes half closed, nostrils subtly lift. Frame3 eyes widen bright and sparkling looking at food, lips part a little. Frame4 a single small pale mist-blue droplet appears at one corner of smiling mouth. Frame5 that tiny droplet hangs slightly longer, eager eyes on food; subtle hungry cheek blush. Frame6 right hoof lifts and gently wipes the droplet from the mouth corner, eyes shyly half closed. Frame7 right hoof lowers, droplet gone, eyes closed in a pleased sheepish smile. Frame8 head upright, eyes open looking at bowl again, right hoof relaxed like frame1. Drool must be a tiny clean cartoon droplet, never a puddle, string, fountain or slime; not gross or sexual. Actual mouth/eyes/droplet/wiping changes across frames.",
+      "cleanupPrompt": "Use case: background-extraction. Edit only the background of the provided eight-frame cartoon pig sprite atlas. Remove the white/ivory background completely to true transparent alpha=0. Preserve the exact canvas dimensions, 4 columns by 2 rows, every cell's position, all eight pig poses, subtle grey steam, tiny pale-blue drool droplets, noodle bowls, every facial expression, artwork and original opaque interior colours. Do not redraw, scale, shift or crop the characters. No ground or shadows. No white haze, checkerboard or translucent backdrop. Pig pixels must remain fully opaque, outside background fully transparent. Transparent PNG.",
+      "output": "assets/drooling.png",
+      "generatedFilename": "exec-22985ad2-aa02-477d-beb3-3040d4916a06.png",
+      "reference": "app/src/main/res/drawable-nodpi/mascot_chinese.png",
+      "actualDimensions": [
+        1774,
+        887
+      ]
+    }
+  ],
+  "newPromptRecords": [
+    {
+      "key": "ramen",
+      "title": "日式及拉麵 · 吸麵鼓面珠",
+      "description": "筷子夾起拉麵，吹一吹再吸入口，鼓起面珠、滿足眯眼。",
+      "action": "Keep the original mist-blue tied headband and ramen bowl/chopsticks. 1 eyes on bowl, chopsticks low; 2 pick up a small noodle bundle; 3 lift to mouth, purse lips blowing gently to cool; 4 slurp a short strand visibly connecting mouth to chopsticks; 5 noodle disappears, lips closed and cheeks puff, eyes wide; 6 chew with pleased crescent eyes and rosy cheeks; 7 swallow with tiny lip lick; 8 lower chopsticks to bowl, open eyes smile. Bowl stays level in left hoof, right uses chopsticks. No spoon or extra hand.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep the original mist-blue tied headband and ramen bowl/chopsticks. 1 eyes on bowl, chopsticks low; 2 pick up a small noodle bundle; 3 lift to mouth, purse lips blowing gently to cool; 4 slurp a short strand visibly connecting mouth to chopsticks; 5 noodle disappears, lips closed and cheeks puff, eyes wide; 6 chew with pleased crescent eyes and rosy cheeks; 7 swallow with tiny lip lick; 8 lower chopsticks to bowl, open eyes smile. Bowl stays level in left hoof, right uses chopsticks. No spoon or extra hand."
+    },
+    {
+      "key": "korean",
+      "title": "韓式 · 拌飯嚐一口",
+      "description": "用木匙拌飯，舀一小口品嚐，再開心眯眼點頭。",
+      "action": "Keep original mist-blue chef cap, bibimbap stone bowl, wooden spoon and apron bow. 1 look at bibimbap; 2 spoon goes into bowl; 3 mix rice with a circular arm gesture; 4 raise spoon with small rice bite; 5 mouth closes around spoon taking bite; 6 lower empty spoon, cheeks puff and eyes half close; 7 happy closed-eye grin and tiny nod; 8 open eyes spoon returns above bowl. Bowl in left hoof, spoon in right throughout.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original mist-blue chef cap, bibimbap stone bowl, wooden spoon and apron bow. 1 look at bibimbap; 2 spoon goes into bowl; 3 mix rice with a circular arm gesture; 4 raise spoon with small rice bite; 5 mouth closes around spoon taking bite; 6 lower empty spoon, cheeks puff and eyes half close; 7 happy closed-eye grin and tiny nod; 8 open eyes spoon returns above bowl. Bowl in left hoof, spoon in right throughout."
+    },
+    {
+      "key": "southeast",
+      "title": "東南亞 · 聞香飲湯",
+      "description": "聞到湯麵香味，吹涼湯匙，飲一口後露出滿足笑容。",
+      "action": "Keep original sage chef cap, herb noodle soup and spring-roll platter, ceramic soup spoon. 1 hold platter steady, eyes on soup; 2 lean snout slightly toward steam, half-close eyes enjoying smell; 3 dip spoon into broth; 4 lift full spoon near mouth and purse lips to blow gently; 5 sip spoon with small mouth; 6 spoon lowers, tiny satisfied cheek puff; 7 eyes closed big content smile, cape softly settles; 8 reopen eyes and return spoon to original rest. Exactly two hooves: platter left, spoon right. No added meat.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original sage chef cap, herb noodle soup and spring-roll platter, ceramic soup spoon. 1 hold platter steady, eyes on soup; 2 lean snout slightly toward steam, half-close eyes enjoying smell; 3 dip spoon into broth; 4 lift full spoon near mouth and purse lips to blow gently; 5 sip spoon with small mouth; 6 spoon lowers, tiny satisfied cheek puff; 7 eyes closed big content smile, cape softly settles; 8 reopen eyes and return spoon to original rest. Exactly two hooves: platter left, spoon right. No added meat."
+    },
+    {
+      "key": "curry",
+      "title": "咖喱 · 蘸餅舔舔嘴",
+      "description": "撕起小塊薄餅蘸咖喱，食一口後可愛地舔嘴。",
+      "action": "Keep original muted sage chef toque, curry bowl and naan platter, sage cape. Replace raised wooden ladle with a small torn naan piece for eating action. 1 eyes on naan at chest; 2 lower naan toward curry; 3 dip edge into curry; 4 lift curry-coated edge to mouth; 5 take a bite, visible bite notch; 6 lower bitten naan, cheeks puff eyes close delighted; 7 tiny tongue licks one lip corner; 8 relaxed happy eyes open, naan held beside plate. Platter left hoof, naan right hoof always.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original muted sage chef toque, curry bowl and naan platter, sage cape. Replace raised wooden ladle with a small torn naan piece for eating action. 1 eyes on naan at chest; 2 lower naan toward curry; 3 dip edge into curry; 4 lift curry-coated edge to mouth; 5 take a bite, visible bite notch; 6 lower bitten naan, cheeks puff eyes close delighted; 7 tiny tongue licks one lip corner; 8 relaxed happy eyes open, naan held beside plate. Platter left hoof, naan right hoof always."
+    },
+    {
+      "key": "western",
+      "title": "西式 · 捲意粉開餐",
+      "description": "用叉捲起意粉、送入口，咀嚼後滿足眨眼。",
+      "action": "Keep original cream tall chef toque with blue band, pasta plate and bread roll, ruffled blue-trim apron. 1 fork near pasta, eyes on plate; 2 lower fork into spaghetti; 3 wrist turns fork wrapping a small spiral of pasta; 4 lift neat forkful; 5 take forkful into mouth, short noodle disappears; 6 lower empty fork, cheeks puff, eyes half close; 7 swallow and wink joyfully; 8 both eyes open, fork returns toward plate. Plate level in left hoof, fork right, no extra limbs.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original cream tall chef toque with blue band, pasta plate and bread roll, ruffled blue-trim apron. 1 fork near pasta, eyes on plate; 2 lower fork into spaghetti; 3 wrist turns fork wrapping a small spiral of pasta; 4 lift neat forkful; 5 take forkful into mouth, short noodle disappears; 6 lower empty fork, cheeks puff, eyes half close; 7 swallow and wink joyfully; 8 both eyes open, fork returns toward plate. Plate level in left hoof, fork right, no extra limbs."
+    },
+    {
+      "key": "grill",
+      "title": "燒烤 · 夾起香噴噴串燒",
+      "description": "燒烤夾開合，翻一翻蔬菜串燒，聞到香味後笑眯眯。",
+      "action": "Keep original hatless pig, sage cape, steak-and-vegetable-skewer wooden platter, metal tongs. 1 tongs open above platter; 2 lower tongs toward vegetable skewer; 3 close tips gripping skewer handle; 4 lift skewer slightly, wrist rotates it half turn; 5 set skewer down neatly, a little steam curls; 6 lean snout toward aroma, eyes closed pleased; 7 lift tongs in proud small salute and wink; 8 return tongs open rest. Do not put tongs into mouth. Left carries platter, right operates tongs.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original hatless pig, sage cape, steak-and-vegetable-skewer wooden platter, metal tongs. 1 tongs open above platter; 2 lower tongs toward vegetable skewer; 3 close tips gripping skewer handle; 4 lift skewer slightly, wrist rotates it half turn; 5 set skewer down neatly, a little steam curls; 6 lean snout toward aroma, eyes closed pleased; 7 lift tongs in proud small salute and wink; 8 return tongs open rest. Do not put tongs into mouth. Left carries platter, right operates tongs."
+    },
+    {
+      "key": "vegetarian",
+      "title": "素食 · 咬紅蘿蔔",
+      "description": "拿起紅蘿蔔咬一口，面珠鼓起，再開心眯眼。",
+      "action": "Keep original sage leaf-decorated chef cap, vegetable/mushroom bowl, sage cape. Replace wooden spoon with a small carrot taken from bowl. 1 look at carrot with bright eyes; 2 lift carrot toward mouth; 3 open mouth and take small bite at tip; 4 lower carrot showing tiny bite notch, one cheek puff; 5 chew both cheeks softly puff, eyes half-close; 6 pleased closed eyes and pink blush; 7 swallow and small lip lick; 8 reopen smiling eyes carrot at chest, bowl level. Left hoof bowl, right carrot, no animal ingredients.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original sage leaf-decorated chef cap, vegetable/mushroom bowl, sage cape. Replace wooden spoon with a small carrot taken from bowl. 1 look at carrot with bright eyes; 2 lift carrot toward mouth; 3 open mouth and take small bite at tip; 4 lower carrot showing tiny bite notch, one cheek puff; 5 chew both cheeks softly puff, eyes half-close; 6 pleased closed eyes and pink blush; 7 swallow and small lip lick; 8 reopen smiling eyes carrot at chest, bowl level. Left hoof bowl, right carrot, no animal ingredients."
+    },
+    {
+      "key": "seafood",
+      "title": "海鮮 · 嚐蝦肉眨眼",
+      "description": "叉起一小口熟蝦肉，吹一吹、食入口，再滿足地眨眼。",
+      "action": "Keep original mist-blue chef cap, fish-and-prawn platter and two-prong serving fork, sage cape. 1 eyes on platter; 2 lower fork to small peeled cooked prawn piece on plate; 3 lift small bite on fork; 4 purse lips blowing gently near bite; 5 eat bite with open then closing mouth; 6 lower empty fork, puff cheeks and happy eyes; 7 swallow and wink with broad smile; 8 open eyes fork returns to rest. Remaining whole cooked fish and prawns stay on platter; no bones in mouth, no raw animal or grotesque details.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original mist-blue chef cap, fish-and-prawn platter and two-prong serving fork, sage cape. 1 eyes on platter; 2 lower fork to small peeled cooked prawn piece on plate; 3 lift small bite on fork; 4 purse lips blowing gently near bite; 5 eat bite with open then closing mouth; 6 lower empty fork, puff cheeks and happy eyes; 7 swallow and wink with broad smile; 8 open eyes fork returns to rest. Remaining whole cooked fish and prawns stay on platter; no bones in mouth, no raw animal or grotesque details."
+    },
+    {
+      "key": "hotpot",
+      "title": "火鍋 · 撈料吹一吹",
+      "description": "漏勺撈起蘑菇，吹涼才品嚐，最後開心笑。",
+      "action": "Keep original cream chef toque with dusty-rose band, brass two-handled vegetable hotpot with central chimney, perforated ladle, sage cape. 1 look at simmering pot, ladle above; 2 dip ladle; 3 scoop one small mushroom and lift; 4 bring ladle closer and purse lips blowing gently, steam bends away; 5 eat mushroom off ladle carefully; 6 lower empty ladle, cheeks puff and eyes half closed; 7 content closed-eye grin, ears lift softly; 8 open eyes ladle back above pot. Pot supported by left hoof, right ladle, no extra limbs or stove.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original cream chef toque with dusty-rose band, brass two-handled vegetable hotpot with central chimney, perforated ladle, sage cape. 1 look at simmering pot, ladle above; 2 dip ladle; 3 scoop one small mushroom and lift; 4 bring ladle closer and purse lips blowing gently, steam bends away; 5 eat mushroom off ladle carefully; 6 lower empty ladle, cheeks puff and eyes half closed; 7 content closed-eye grin, ears lift softly; 8 open eyes ladle back above pot. Pot supported by left hoof, right ladle, no extra limbs or stove."
+    },
+    {
+      "key": "wrap",
+      "title": "薄餅及卷餅 · 大啖咬一口",
+      "description": "拿起卷餅咬一口，鼓起面珠、舔嘴，再開心展示美食。",
+      "action": "Keep original warm beige chef toque, sage cape, platter with vegetable taco and wrap. Replace wooden spoon with one small vegetable wrap picked from platter. 1 look at wrap at chest; 2 lift toward mouth, eyes sparkle; 3 take one eager neat bite; 4 lower wrap with clear bite notch, cheeks puff; 5 chew with pleased crescent eyes; 6 swallow and tongue tip licks one lip corner; 7 lift bitten wrap in proud small presentation gesture, happy open mouth; 8 relax wrap to chest, eyes open smile. Left hoof platter, right wrap, fillings stay tidy inside wrap.",
+      "prompt": "Use case: identity-preserve. Create ONE eight-frame hand-drawn animation sprite atlas from the supplied original pig illustration. Match that exact pig's face, very big brown eyes, pink snout, chubby body, brown hooves, curled tail, clothing, hat/headband, cape colours, cream roulette apron, props and soft paper-watercolour Morandi style. Do not redesign the mascot. 4 columns x 2 rows of EIGHT EQUAL square cells, row-major reading order, landscape 2048x1024 ratio 2:1. Invisible grid, NO text, borders, scenery or shadow. True transparent PNG alpha 0 outside pig, opaque pig interiors: never a white/translucent backdrop. Full pig in EVERY cell at identical scale and centre, feet on same baseline, 32px margins around all food/ears/hands. Only TWO arms and TWO legs, utensils naturally gripped. Animate articulated mouth, cheeks, pupils, arms, ears and cape, not rotating the entire picture. Coherent sequential 8-frame action with readable facial expressions, cute, appetising, clean, no mess. Hats/cape/colours must stay identical across frames. All food/steam must stay inside its own cell. Follow these 8 frame directions:\nKeep original warm beige chef toque, sage cape, platter with vegetable taco and wrap. Replace wooden spoon with one small vegetable wrap picked from platter. 1 look at wrap at chest; 2 lift toward mouth, eyes sparkle; 3 take one eager neat bite; 4 lower wrap with clear bite notch, cheeks puff; 5 chew with pleased crescent eyes; 6 swallow and tongue tip licks one lip corner; 7 lift bitten wrap in proud small presentation gesture, happy open mouth; 8 relax wrap to chest, eyes open smile. Left hoof platter, right wrap, fillings stay tidy inside wrap."
+    }
+  ],
+  "generationResults": [
+    {
+      "key": "ramen",
+      "generatedFilename": "exec-b1affee6-61e7-4547-827a-4cf22ae6c79a.png",
+      "cleanupPrompt": "Use case: background-extraction. Change ONLY the background of this eight-frame pig animation atlas to perfectly clean fully transparent alpha=0. Remove the white/grey haze and stray background pixels everywhere outside the actual character/food/utensils. Preserve exact image dimensions, 4 columns x 2 rows grid registration, all eight original poses, hat/headband, facial expressions, food, soft watercolour character texture, opaque interior colours, all lines and edges. Do not redraw, recompose, resize, move or crop anything. NO checkerboard or visible background; no transparency over the pig interior. Keep legitimate tiny steam/blowing-air lines belonging to the action. Output a transparent PNG.",
+      "finalFilename": "exec-1ed8e268-1678-45ac-a0ef-150050a80b46.png"
+    },
+    {
+      "key": "korean",
+      "generatedFilename": "exec-c3d8fabb-dd49-4fe2-a188-3a30bf150853.png"
+    },
+    {
+      "key": "southeast",
+      "generatedFilename": "exec-9684653f-c723-4a36-81f7-d3cf03bb6088.png"
+    },
+    {
+      "key": "curry",
+      "generatedFilename": "exec-f5dc8160-327d-4709-8cf0-5b7d41ba99ad.png"
+    },
+    {
+      "key": "western",
+      "generatedFilename": "exec-a02f6273-4281-484f-9c12-0b80e3cdb40c.png"
+    },
+    {
+      "key": "grill",
+      "generatedFilename": "exec-2cc8bd68-496f-4454-8a1d-9eff5f211568.png"
+    },
+    {
+      "key": "vegetarian",
+      "generatedFilename": "exec-e729fece-6802-42e3-a4a7-f7d86dd7c120.png"
+    },
+    {
+      "key": "seafood",
+      "generatedFilename": "exec-2471959c-a96f-43e4-b915-f6698fff0ac2.png"
+    },
+    {
+      "key": "hotpot",
+      "generatedFilename": "exec-eade3a5c-6050-4103-a867-d83937aa2cbd.png"
+    },
+    {
+      "key": "wrap",
+      "generatedFilename": "exec-5e76e6ae-fcc7-4660-8d10-64922aba5f85.png",
+      "cleanupPrompt": "Use case: background-extraction. Change ONLY the background of this eight-frame pig animation atlas to perfectly clean fully transparent alpha=0. Remove the white/grey haze and stray background pixels everywhere outside the actual character/food/utensils. Preserve exact image dimensions, 4 columns x 2 rows grid registration, all eight original poses, hat/headband, facial expressions, food, soft watercolour character texture, opaque interior colours, all lines and edges. Do not redraw, recompose, resize, move or crop anything. NO checkerboard or visible background; no transparency over the pig interior. Keep legitimate tiny steam/blowing-air lines belonging to the action. Output a transparent PNG.",
+      "finalFilename": "exec-46248d87-ffff-49a1-8377-6cebe1897e65.png"
+    }
+  ],
+  "checks": [
+    "All 13 original cuisine themes have an eight-frame atlas",
+    "All 48 catalogue cuisine IDs covered exactly once",
+    "All 16 PNG atlases RGBA, true transparent pixels and 4:2 grid ratio",
+    "Browser loaded all 13 theme atlases and 3 bonus atlases",
+    "All 13 theme choices switch to the matching original reference",
+    "All 48 cuisine choices show the correct selected cuisine without failures",
+    "Pause, step, 0.5x speed, restart and light/dark background verified",
+    "Screenshot saved showing original versus animated ramen mascot"
+  ],
+  "nativeIntegration": {
+    "date": "2026-11-04",
+    "version": "0.3.0",
+    "resourcePattern": "app/src/main/res/drawable-nodpi/mascot_motion_*.png",
+    "renderer": "core/designsystem/AnimatedPigMascot.kt",
+    "timeline": "domain/mascot/MascotTimeline.kt"
+  }
+}
