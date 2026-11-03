@@ -35,7 +35,7 @@ def generate(date):
     (assets/'motion-clips.json').write_text(json.dumps(clips,ensure_ascii=False,indent=2),encoding='utf-8')
     def page(title,content):
         return f'''<!doctype html>
-<html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="食咩好？Android 餐廳抽選 App：篩選、地區選擇、資料來源與更新指南。"><title>{escape(title)}｜食咩好？</title><link rel="stylesheet" href="style.css"></head>
+<html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="食咩好？Android 餐廳抽選 App：篩選、地區選擇、資料來源與更新指南。"><title>{escape(title)}｜食咩好？</title><link rel="stylesheet" href="style.css?v=0.3.1"></head>
 <body><a class="skip" href="#main">跳至內容</a><header><a class="brand" href="index.html">食咩好？<small>WHAT TO EAT</small></a><nav aria-label="主選單"><a href="index.html#guide">使用方法</a><a href="index.html#filters">篩選條件</a><a href="mascot.html">豬仔角色</a><a href="data.html">資料與維護</a><a href="index.html#faq">常見問題</a></nav></header><main id="main">{content}</main>
 <footer><div><strong>食咩好？</strong><p>少一點猶豫，多一個選擇。</p></div><p>開發版文件 · {escape(date)}<br><a href="{REPO}">GitHub 原始碼 ↗</a></p></footer></body></html>\n'''
     metrics=f'''<div class="metrics" aria-label="目前內置資料統計"><div><strong>{len(rows):,}</strong><span>已匯入餐廳</span></div><div><strong>{len(eligible):,}</strong><span>可抽選餐廳</span></div><div><strong>{len(cuisines)}</strong><span>可抽選菜式</span></div><div><strong>{len(areas)}</strong><span>細地點選項</span></div></div>'''
