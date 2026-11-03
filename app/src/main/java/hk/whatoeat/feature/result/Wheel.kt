@@ -1,5 +1,4 @@
 package hk.whatoeat.feature.result
-import android.provider.Settings
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -7,6 +6,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.nativeCanvas
 import kotlin.math.*
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.graphics.graphicsLayer
+import hk.whatoeat.core.designsystem.PigMascot
+import hk.whatoeat.core.designsystem.reducedMascotMotion
+import hk.whatoeat.domain.mascot.MascotMotion
+import hk.whatoeat.domain.mascot.MascotTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -20,14 +26,16 @@ import androidx.compose.ui.unit.dp
 import hk.whatoeat.core.model.DrawSession
 import hk.whatoeat.domain.draw.WheelGeometry
 @Composable fun CuisineWheel(s: DrawSession,reveal: ()->Unit) {
- val rotation=remember(s.drawId) {Animatable(0f)};val context=LocalContext.current
+ val rotation=remember(s.drawId) {Animatable(0f)}
+ val reduced=reducedMascotMotion()
+ val target=remember(s.drawId) {WheelGeometry.target(s.snapshot.cuisines.size,s.cuisineIndex).toFloat()}
  LaunchedEffect(s.drawId) {
- val reduced=Settings.Global.getFloat(context.contentResolver,Settings.Global.ANIMATOR_DURATION_SCALE,1f)==0f
- rotation.animateTo(WheelGeometry.target(s.snapshot.cuisines.size,s.cuisineIndex).toFloat(),tween(if(reduced) 1 else 3200,easing=FastOutSlowInEasing));reveal()
+ rotation.animateTo(target,tween(if(reduced) 1 else 3200,easing=FastOutSlowInEasing));reveal()
  }
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  Text("抽選菜式",style=MaterialTheme.typography.headlineLarge);Text("▼ 指針",Modifier.align(Alignment.CenterHorizontally))
- Canvas(Modifier.fillMaxWidth().height(260.dp)) {
+ Box(Modifier.fillMaxWidth().height(260.dp)) {
+ Canvas(Modifier.matchParentSize()) {
  val count=s.snapshot.cuisines.size;val d=size.minDimension;val top=Offset((size.width-d)/2,0f)
  repeat(count) {i ->
  drawArc(MorandiPalette.wheel[i%MorandiPalette.wheel.size],rotation.value+i*360f/count,360f/count,true,top,androidx.compose.ui.geometry.Size(d,d))
@@ -36,6 +44,12 @@ import hk.whatoeat.domain.draw.WheelGeometry
  val paint=android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {color=MorandiPalette.wheelInk.toArgb();textSize=14.dp.toPx();textAlign=android.graphics.Paint.Align.CENTER}
  drawContext.canvas.nativeCanvas.drawText((i+1).toString(),(size.width/2+cos(angle)*d*.35).toFloat(),(d/2+sin(angle)*d*.35).toFloat()-(paint.ascent()+paint.descent())/2,paint)
  }
+ }
+ }
+ Box(Modifier.size(120.dp).align(Alignment.Center).background(MaterialTheme.colorScheme.surface,CircleShape)) {
+ PigMascot(MascotTheme.Base,"豬仔陪你轉輪盤",Modifier.fillMaxSize().padding(3.dp).graphicsLayer {
+ rotationZ=MascotMotion.wheelSway(rotation.value/target,reduced)
+ })
  }
  }
  Text("菜式順序（從右側起順時針）："+s.snapshot.cuisines.mapIndexed {i,c -> "${i+1}. ${c.cuisine.label}"}.joinToString("、"))

@@ -1,0 +1,76 @@
+{
+  "Chinese": [
+    "chinese",
+    "cantonese",
+    "shanghai",
+    "beijing",
+    "sichuan",
+    "hunan",
+    "hakka",
+    "fujian",
+    "zhejiang",
+    "taiwanese",
+    "dim_sum",
+    "noodles",
+    "congee",
+    "cha_chaan_teng"
+  ],
+  "Ramen": [
+    "ramen",
+    "japanese",
+    "izakaya"
+  ],
+  "Sushi": [
+    "sushi"
+  ],
+  "Korean": [
+    "korean"
+  ],
+  "Southeast": [
+    "thai",
+    "vietnamese",
+    "singaporean",
+    "malaysian"
+  ],
+  "Curry": [
+    "indian",
+    "nepalese",
+    "pakistani",
+    "bangladeshi"
+  ],
+  "Western": [
+    "western",
+    "french",
+    "italian",
+    "spanish",
+    "american",
+    "british",
+    "german",
+    "polish",
+    "australian"
+  ],
+  "Grill": [
+    "steak",
+    "barbecue",
+    "japanese_grill",
+    "argentinian"
+  ],
+  "Vegetarian": [
+    "vegetarian"
+  ],
+  "Seafood": [
+    "seafood"
+  ],
+  "Hotpot": [
+    "hot_pot"
+  ],
+  "Dessert": [
+    "dessert"
+  ],
+  "Wrap": [
+    "turkish",
+    "mediterranean",
+    "mexican",
+    "latin_american"
+  ]
+}

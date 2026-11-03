@@ -1,5 +1,7 @@
 # 食咩好？ — 內置資料版本
 
+已加入莫蘭迪豬仔角色：首頁拿鑊原造型、輪盤中央擺動，以及按抽中菜式切換的結果造型。13 組主題對應現有 48 種菜式；不認識的菜式使用原造型，多菜式餐廳按本輪抽中的菜式配對。詳見 [角色素材及提示詞](art/mascot/README.md) 及 [本輪驗證](MASCOT-VERIFICATION.md)。
+
 目前 App 改為讀取 `app/src/main/assets/restaurants.json`，兩種 flavor 均不使用 Supabase；毋須註冊，沒有評論／評分提交入口。已匯入 2026-11-03 整理的 2,665 間餐廳；2,376 間可抽選，48 種菜式，277 間未分類及 15 間明確停業不進入抽選（兩者有重疊）。並非全港完整資料；重新建置及安裝後才會更新手機。詳見 [匯入報告](docs/catalog-import-report.md)。沿用原生 Compose、Room 收藏／歷史、距離與菜式篩選及公平抽選。
 
 - [App 說明網站](docs/index.html)（GitHub 網頁可由 Pages 選 main /docs 提供）

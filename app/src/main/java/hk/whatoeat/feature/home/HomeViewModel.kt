@@ -35,7 +35,9 @@ data class HomeState(
                 val filters=withContext(io) {prefs.read()}
                 val saved=withContext(io) {store.read()}
                 withContext(io) {auth.restore()}
-                mutable.update {it.copy(filters=filters,session=saved?.session,snapshot=saved?.request?.snapshot,recovery=saved!=null && saved.session==null,restored=saved!=null)}
+                // Completed results can be restored, but their in-memory candidate cache
+                // does not survive a process restart. A new draw must query fresh candidates.
+                mutable.update {it.copy(filters=filters,session=saved?.session,snapshot=saved?.request?.snapshot?.takeIf {saved.session==null},recovery=saved!=null && saved.session==null,restored=saved!=null)}
                 saved?.session?.let {pick ->
                     val revealed=pick.copy(revealed=true)
                     withContext(io) {store.save(SavedDraw(saved.request,revealed))}

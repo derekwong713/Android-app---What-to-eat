@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import hk.whatoeat.core.model.*
 import hk.whatoeat.core.designsystem.label
+import hk.whatoeat.core.designsystem.ResultMascot
+import hk.whatoeat.domain.mascot.CuisineMascot
 import hk.whatoeat.feature.home.*
 @Composable fun RestaurantContent(d: Detail,s: HomeState,vm: HomeViewModel,openRestaurant: (Restaurant)->Unit) {
  val r=d.restaurant
@@ -23,14 +25,18 @@ import hk.whatoeat.feature.home.*
 @Composable fun ResultScreen(s: HomeState,vm: HomeViewModel,openRestaurant: (Restaurant)->Unit,reroll: Boolean) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  if(reroll) s.session?.let {pick ->
- Text("抽中菜式："+pick.snapshot.cuisines.first {it.cuisine.id==pick.cuisineId}.cuisine.label)
+ val cuisineName=pick.snapshot.cuisines.firstOrNull {it.cuisine.id==pick.cuisineId}?.cuisine?.label ?: pick.cuisineId
+ ResultMascot(CuisineMascot.forResult(pick),cuisineName,pick.drawId)
  if(pick.snapshot.cuisines.size==1) Text("只有一種符合條件的菜式。")
  if(pick.restaurantCount==1) Text("此菜式只有一間符合條件的餐廳，重抽餐廳仍會是同一間。")
  Button(onClick={vm.draw(DrawMode.SameCuisine)},enabled=!s.locked) {Text("重抽餐廳")}
  OutlinedButton(onClick={vm.draw(DrawMode.NewCuisine)},enabled=!s.locked) {Text("重抽菜式")}
  }
  if(s.detailLoading) CircularProgressIndicator()
- s.detail?.let {RestaurantContent(it,s,vm,openRestaurant)}
+ s.detail?.let {
+ if(!reroll) it.restaurant.cuisines.firstOrNull()?.let {c -> ResultMascot(CuisineMascot.forCuisine(c.id),c.label,"detail:${it.restaurant.id}:${c.id}",isDraw=false)}
+ RestaurantContent(it,s,vm,openRestaurant)
+ }
  if(!s.detailLoading) TextButton(onClick=vm::retryDetail) {Text("重新讀取餐廳資料")}
  }
 }

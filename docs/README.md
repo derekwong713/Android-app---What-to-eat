@@ -4,9 +4,11 @@ Buildless Traditional Chinese website, designed for mobile/desktop and light/dar
 
 - `index.html`: guest flow, four filters, automatic unlimited distance, localities, settings and FAQs.
 - `data.html`: catalogue metrics, the nine restored places, complete district/locality listing, repeatable import commands, verification limits and source attribution.
+- `mascot.html`: homepage/wheel/result appearances, three costume examples, all 13 theme groups, reduced motion and offline behavior.
+- `assets/`: four original transparent mascot PNGs copied from App resources by the generator; no image generation or credentials needed to regenerate the site.
 - `catalog-import-report.md`: detailed source report; the website links to GitHub's Markdown renderer.
 
-Regenerate both HTML pages after a catalogue or locality change:
+Regenerate all three HTML pages after a catalogue, locality or mascot change:
 
     python tools/generate_docs.py --date 2026-11-03
 

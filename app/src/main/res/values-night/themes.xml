@@ -1,1 +1,11 @@
-<resources><style name="Theme.WhatToEat" parent="android:style/Theme.Material.NoActionBar"><item name="android:fontFamily">sans</item><item name="android:windowLightStatusBar">false</item><item name="android:windowLightNavigationBar">false</item><item name="android:statusBarColor">#1F2420</item><item name="android:navigationBarColor">#1F2420</item><item name="android:windowBackground">#1F2420</item><item name="android:colorAccent">#B5C7B5</item><item name="android:windowActionModeOverlay">true</item></style></resources>
+<resources>
+ <style name="Theme.WhatToEat.Base" parent="android:style/Theme.Material.NoActionBar">
+  <item name="android:fontFamily">sans</item>
+  <item name="android:windowLightStatusBar">false</item>
+  <item name="android:statusBarColor">#1F2420</item>
+  <item name="android:navigationBarColor">#1F2420</item>
+  <item name="android:windowBackground">#1F2420</item>
+  <item name="android:colorAccent">#B5C7B5</item>
+  <item name="android:windowActionModeOverlay">true</item>
+ </style>
+</resources>

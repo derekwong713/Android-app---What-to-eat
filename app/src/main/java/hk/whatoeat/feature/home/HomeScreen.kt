@@ -7,10 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import hk.whatoeat.core.designsystem.filterSummary
+import hk.whatoeat.core.designsystem.MascotWelcome
 import hk.whatoeat.core.model.DrawMode
 @Composable fun HomeScreen(s: HomeState,vm: HomeViewModel,filters: ()->Unit,location: ()->Unit) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp)) {
  Text("今日食咩好？",style=MaterialTheme.typography.headlineLarge)
+ MascotWelcome()
  Text("先等機率抽菜式，再等機率抽餐廳。評分及廣告不影響抽選。")
  Text("目標範圍為香港；使用內置餐廳資料，來源及日期見詳情，尚未完整收錄。")
  Text(filterSummary(s.filters));Text("距離為直線距離，不代表步行距離。")
