@@ -51,8 +51,7 @@ object RegionOptions {
         "tai_po" to "大埔區",
         "sha_tin" to "沙田區",
         "sai_kung" to "西貢區",
-        "islands" to "離島區",
-        "unknown" to "地區未知"
+        "islands" to "離島區"
     )
     val allLabels get()=labels+LocalityOptions.labels
     fun matches(selected: Set<String>,r: Restaurant)=selected.isEmpty() || r.region in selected || (r.locality.isNotBlank() && r.locality in selected)

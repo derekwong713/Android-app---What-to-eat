@@ -26,6 +26,7 @@ class LocalityFilterUiTest {
  hideKeyboard={focus.clearFocus(force=true);keyboard?.hide()}
  EatTheme {FilterSheet(Filters(radius=500,minRating=4.0),emptyList(),{}, {saved=it})}
  }
+ compose.onNodeWithText("地區及地點").performScrollTo().performClick()
  compose.onNodeWithText("搜尋地區／地點，例如旺角、東涌").performScrollTo().performTextInput("太子")
  compose.runOnIdle {hideKeyboard()}
  compose.onNode(hasText("太子") and isToggleable()).performScrollTo().performClick()
@@ -50,6 +51,7 @@ class LocalityFilterUiTest {
  hideKeyboard={focus.clearFocus(force=true);keyboard?.hide()}
  EatTheme {FilterSheet(Filters(radius=500),emptyList(),{}, {saved=it})}
  }
+ compose.onNodeWithText("地區及地點").performScrollTo().performClick()
  compose.onNodeWithText("搜尋地區／地點，例如旺角、東涌").performScrollTo().performTextInput("銅鑼灣")
  compose.runOnIdle {hideKeyboard()}
  val places=compose.onAllNodes(hasText("銅鑼灣",substring=true) and isToggleable())

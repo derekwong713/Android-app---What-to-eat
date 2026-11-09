@@ -14,12 +14,11 @@ class CandidateFilterTest {
  val filters=Filters(500,setOf("a"),4.0,setOf("yau_tsim_mong"))
  assertEquals(listOf("1","far"),filter.apply(rows,filters,null,100).eligible.map {it.id})
  }
- @Test fun unknownRatingsAndRegionsOnlyPassWhenUnrestrictedOrExplicit() {
+ @Test fun missingRatingOrRegionCanStillPassWhenUnrestricted() {
  val unknown=row()
  assertEquals(1,filter.apply(listOf(unknown),Filters(),null,100).eligible.size)
  assertTrue(filter.apply(listOf(unknown),Filters(minRating=3.0),null,100).eligible.isEmpty())
  assertTrue(filter.apply(listOf(unknown),Filters(regions=setOf("yau_tsim_mong")),null,100).eligible.isEmpty())
- assertEquals(1,filter.apply(listOf(unknown),Filters(regions=setOf("unknown")),null,100).eligible.size)
  }
  @Test fun rerollsOnlyUseRatingAndRegionFilteredCandidates() {
  val filters=Filters(minRating=4.0,regions=setOf("yau_tsim_mong"))
@@ -65,7 +64,8 @@ class CandidateFilterTest {
  @Test fun oldBroadRegionPreferencesExpandIntoDistricts() {
  assertEquals(5,RegionOptions.migrate(setOf("kowloon")).size)
  assertTrue("yau_tsim_mong" in RegionOptions.migrate(setOf("kowloon")))
- assertEquals(setOf("unknown","sha_tin"),RegionOptions.migrate(setOf("unknown","sha_tin","invalid")))
+ assertEquals(setOf("sha_tin"),RegionOptions.migrate(setOf("unknown","sha_tin","invalid")))
+ assertTrue(RegionOptions.migrate(setOf("unknown")).isEmpty())
  assertEquals(18,RegionOptions.migrate(setOf("hk_island","kowloon","new_territories")).size)
  }
  @Test fun unlimitedDoesNotNeedFakeLocation() {assertEquals(1,filter.apply(listOf(row(point=null)),Filters(),null,100).eligible.size)}

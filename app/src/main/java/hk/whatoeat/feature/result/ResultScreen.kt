@@ -14,7 +14,8 @@ import hk.whatoeat.feature.home.*
 @Composable fun RestaurantContent(d: Detail,s: HomeState,vm: HomeViewModel,openRestaurant: (Restaurant)->Unit) {
  val r=d.restaurant
  Text(r.name,style=MaterialTheme.typography.headlineMedium);Text(r.address.ifBlank {"地址未知"})
- Text("地區：${listOfNotNull(RegionOptions.labels[r.region],LocalityOptions.labels[r.locality]).distinct().joinToString(" · ")}")
+ val areas = listOfNotNull(RegionOptions.labels[r.region], LocalityOptions.labels[r.locality]).distinct()
+ if (areas.isNotEmpty()) Text("地區：${areas.joinToString(" · ")}")
  Text(r.cuisines.joinToString("、") {it.label}.ifBlank {"未分類"});Text("營業時間：${r.openingHours?.takeIf {it.isNotBlank()} ?: "未知"}");Text(r.status.label())
  Text(r.averageRating?.let {"用戶評分：${"%.1f".format(it)}／5（${r.ratingCount} 個評分）"} ?: "暫無評分")
  Text("來源：${r.source} · 更新：${r.updatedAt} · 版本 ${r.version}",style=MaterialTheme.typography.bodySmall)

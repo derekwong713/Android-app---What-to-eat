@@ -14,6 +14,37 @@ import org.junit.Test
 
 class LocationFilterUiTest {
  @get:Rule val ui=createComposeRule()
+ @Test fun collapsedSectionsPreserveDraftSelections() {
+  var saved: Filters? = null
+  ui.setContent { EatTheme { FilterSheet(Filters(), listOf(Cuisine("sushi", "壽司")), {}, { saved = it }) } }
+
+  val districts = ui.onNodeWithText("地區及地點")
+  val cuisines = ui.onNodeWithText("菜式")
+  val district = ui.onNode(hasText("油尖旺區") and isToggleable())
+  val cuisine = ui.onNode(hasText("壽司") and isToggleable())
+  district.assertDoesNotExist()
+  cuisine.assertDoesNotExist()
+
+  districts.performScrollTo().performClick()
+  ui.onNodeWithText("地區未知", substring = true).assertDoesNotExist()
+  district.performScrollTo().performClick().assertIsOn()
+  districts.performScrollTo().performClick()
+  district.assertDoesNotExist()
+
+  cuisines.performScrollTo().performClick()
+  cuisine.performScrollTo().performClick().assertIsOn()
+  cuisines.performScrollTo().performClick()
+  cuisine.assertDoesNotExist()
+  cuisines.performScrollTo().performClick()
+  cuisine.assertIsOn()
+
+  ui.onNodeWithText("套用篩選").performScrollTo().performClick()
+  ui.runOnIdle {
+   assertEquals(setOf("yau_tsim_mong"), saved?.regions)
+   assertEquals(setOf("sushi"), saved?.cuisines)
+  }
+ }
+
  @Test fun requestingPositionClearsAllDistrictsAndPlacesEvenWithoutReturnedFix() {
   var saved: Filters?=null;var requests=0
   ui.setContent {EatTheme {FilterSheet(Filters(cuisines=setOf("sushi"),minRating=4.0,regions=setOf("yau_tsim_mong","area_prince_edward")),listOf(Cuisine("sushi","壽司")),{}, {saved=it},requestLocation={requests++})}}
@@ -28,6 +59,7 @@ class LocationFilterUiTest {
   val status=mutableStateOf("已取得目前位置")
   ui.setContent {EatTheme {FilterSheet(Filters(radius=500,cuisines=setOf("sushi"),minRating=4.0),listOf(Cuisine("sushi","壽司")),{}, {saved=it},
    locationStatus=status.value,cancelLocation={cancellations++;status.value="尚未取得目前位置"})}}
+  ui.onNodeWithText("地區及地點").performScrollTo().performClick()
   ui.onNode(hasText("油尖旺區") and isToggleable()).performScrollTo().performClick()
   ui.onNodeWithText("已選地區，未使用目前位置").assertExists()
   ui.onNode(hasText("油尖旺區") and isToggleable()).performScrollTo().performClick()
@@ -46,6 +78,7 @@ class LocationFilterUiTest {
    hideKeyboard={focus.clearFocus(force=true);keyboard?.hide()}
    EatTheme {FilterSheet(Filters(radius=1000),emptyList(),{}, {saved=it},locationStatus="已取得目前位置",cancelLocation={cancellations++})}
   }
+  ui.onNodeWithText("地區及地點").performScrollTo().performClick()
   ui.onNodeWithText("搜尋地區／地點，例如旺角、東涌").performScrollTo().performTextInput("太子")
   ui.runOnIdle {hideKeyboard()}
   ui.onNode(hasText("太子") and isToggleable()).performScrollTo().performClick()
