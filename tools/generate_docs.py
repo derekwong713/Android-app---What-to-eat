@@ -36,7 +36,7 @@ def generate(date):
     def page(title,content):
         return f'''<!doctype html>
 <html lang="zh-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="食咩好？Android 餐廳抽選 App：篩選、地區選擇、資料來源與更新指南。"><title>{escape(title)}｜食咩好？</title><link rel="stylesheet" href="style.css?v=0.3.1"></head>
-<body><a class="skip" href="#main">跳至內容</a><header><a class="brand" href="index.html">食咩好？<small>WHAT TO EAT</small></a><nav aria-label="主選單"><a href="index.html#guide">使用方法</a><a href="index.html#filters">篩選條件</a><a href="mascot.html">豬仔角色</a><a href="data.html">資料與維護</a><a href="index.html#faq">常見問題</a></nav></header><main id="main">{content}</main>
+<body><a class="skip" href="#main">跳至內容</a><header><a class="brand" href="index.html">食咩好？<small>WHAT TO EAT</small></a><nav aria-label="主選單"><a href="index.html#guide">使用方法</a><a href="index.html#filters">篩選條件</a><a href="mascot.html">豬仔角色</a><a href="data.html">資料與維護</a><a href="index.html#faq">常見問題</a><a href="privacy.html">私隱政策</a></nav></header><main id="main">{content}</main>
 <footer><div><strong>食咩好？</strong><p>少一點猶豫，多一個選擇。</p></div><p>開發版文件 · {escape(date)}<br><a href="{REPO}">GitHub 原始碼 ↗</a></p></footer></body></html>\n'''
     metrics=f'''<div class="metrics" aria-label="目前內置資料統計"><div><strong>{len(rows):,}</strong><span>已匯入餐廳</span></div><div><strong>{len(eligible):,}</strong><span>可抽選餐廳</span></div><div><strong>{len(cuisines)}</strong><span>可抽選菜式</span></div><div><strong>{len(areas)}</strong><span>細地點選項</span></div></div>'''
     index='''<section class="hero"><div><p class="eyebrow">原生 ANDROID · 香港繁體中文</p><h1>今日食咩？<br><span>交畀輪盤決定。</span></h1><p class="lead">揀地點、揀菜式，設定心水評分。先抽菜式，再抽餐廳，毋須註冊。</p><a class="button" href="#download">下載 Android APK <span aria-hidden="true">↓</span></a></div><aside class="illustration"><img class="hero-mascot" src="assets/mascot-base.png" width="1254" height="1254" alt="大眼豬仔披着灰綠披肩，拿着鑊和鑊鏟"><p>豬仔陪你揀今餐</p><small>App 內置角色 · <a href="mascot.html">認識菜式造型 ↗</a></small></aside></section>'''+metrics+'''
@@ -67,10 +67,28 @@ python -m unittest discover -s tools -p test_district_boundaries.py -v</code></p
 <section><p class="eyebrow">造型示例</p><h2>抽到壽司、火鍋，還是甜品？</h2><div class="mascot-gallery"><figure><img src="assets/mascot-sushi.png" width="1254" height="1254" loading="lazy" decoding="async" alt="壽司主題豬仔拿着壽司盤及筷子"><figcaption><strong>壽司造型</strong><span>壽司盤與筷子，準備開動。</span></figcaption></figure><figure><img src="assets/mascot-hotpot.png" width="1254" height="1254" loading="lazy" decoding="async" alt="火鍋主題豬仔拿着火鍋及漏勺"><figcaption><strong>火鍋造型</strong><span>捧着熱鍋，拿好漏勺。</span></figcaption></figure><figure><img src="assets/mascot-dessert.png" width="1254" height="1254" loading="lazy" decoding="async" alt="甜品主題豬仔披着藕粉披肩，拿蛋糕及打蛋器"><figcaption><strong>甜品造型</strong><span>藕粉披肩，蛋糕與打蛋器。</span></figcaption></figure></div><p class="muted">角色插圖示例，並非餐廳食物照片，也不代表個別餐廳一定供應圖中食物。</p></section>
 <section><p class="eyebrow">{len(themes)} 組主題 / {sum(map(len,themes.values()))} 種菜式</p><h2>相關菜式，共用主題。</h2><p>App 內置 13 組菜式動畫（104 格主題動作），對應 48 種菜式；同組菜式共用造型動畫。另有迎賓、拋鑊及流口水三款，共 16 張透明圖集，並保留原本靜態圖。以下為原圖示例及完整菜式對照。</p><div class="table-wrap"><table><caption>現有菜式與角色主題對照</caption><thead><tr><th scope="col">造型主題</th><th scope="col">對應菜式</th></tr></thead><tbody>{theme_rows}</tbody></table></div><div class="callout"><strong>跟隨抽中菜式，不猜餐廳風格。</strong><p>多菜式餐廳使用本輪實際抽中的菜式配圖，並非取餐廳第一個分類。新菜式未有對照時，顯示拿鑊原造型；角色不會改變任何篩選或抽選機率。</p></div></section>
 <section><p class="eyebrow">無障礙與離線使用</p><h2>動作可以停，造型仍然在。</h2><p>App 在背景時暫停角色播放；停用 Android 系統動畫後，顯示原本靜態造型，抽選仍會顯示相同結果。圖片隨 App 打包，顯示角色毋須額外網絡、帳戶或金鑰，亦支援日夜模式。</p><p>本輪同時修正已完成抽選在重新啟動後仍沿用失效候選快取的問題：保留上次結果供查看，下一輪重新查詢符合現有條件的候選。</p><div class="links"><a href="{REPO}/blob/main/art/mascot/motion/README.md">角色素材與生成提示詞 ↗</a><a href="{REPO}/blob/main/MOTION-INTEGRATION.md">建置及畫面測試紀錄 ↗</a><a href="index.html#guide">返回使用方法 ↗</a></div></section>'''
+    privacy = f"""<section class="hero compact"><div><h1>私隱政策</h1>
+<p class="lead">Derek Wong 發佈的 What to eat（食咩好？）Android App</p>
+<p>生效日期：2026 年 11 月 16 日</p></div></section>
+<section><h2>定位及餐廳抽選</h2>
+<p>App 使用內置餐廳清單，毋須註冊帳戶。只有當你要求取得目前位置並授予 Android 定位權限時，App 才會透過 Google Play 服務取得位置，在裝置上計算你與餐廳的直線距離。App 不會把用作距離篩選的座標上傳至開發者的伺服器，也不會保存位置紀錄。你可在 Android 設定撤回定位權限，並以不限距離或地區篩選繼續使用。</p></section>
+<section><h2>本機資料及保留期限</h2>
+<p>篩選設定、收藏、抽選歷史及待處理抽選會儲存在裝置，供下次使用。這些資料會保留至你在 App「設定」選擇清除本機資料，或透過 Android 清除 App 儲存空間或解除安裝。App 停用了 Android 備份。</p></section>
+<section><h2>廣告及同意選項</h2>
+<p>使用廣告的版本透過 Google AdMob 顯示廣告，並使用 Google User Messaging Platform 管理適用的同意選項。Google Mobile Ads SDK 可處理並與 Google 分享 IP 位址、裝置或帳戶識別碼、廣告或 App 互動及效能診斷資料，用於廣告、成效分析及防止欺詐。IP 位址可用於推算大概位置。SDK 傳送這些資料時使用加密連線。Google 按其私隱政策管理所接收資料的保留及刪除。</p>
+<p>如適用，可在 App「設定」開啟「廣告同意及私隱選項」。你也可在 Android 設定管理廣告 ID。</p>
+<p><a href="https://policies.google.com/privacy?hl=zh-HK">Google 私隱政策</a> · <a href="https://developers.google.com/admob/android/privacy/play-data-disclosure">Google Mobile Ads SDK 資料披露</a></p></section>
+<section><h2>外部連結及說明網站</h2>
+<p>當你選擇在 Google Maps 查看餐廳資料，App 會開啟該餐廳的連結。Google Maps 對資料的處理受 Google 私隱政策約束。本網站由 GitHub Pages 託管，GitHub 可按其私隱聲明處理網站訪問資料。</p>
+<p><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub 私隱聲明</a></p></section>
+<section><h2>聯絡開發者</h2>
+<p>如有私隱疑問或資料要求，可透過 GitHub 聯絡開發者 Derek Wong。GitHub Issues 為公開渠道，請勿在留言中張貼個人資料。</p>
+<p><a href="{REPO}/issues">聯絡 Derek Wong</a></p></section>"""
+    (ROOT/'docs/privacy.html').write_text(page('私隱政策', privacy), encoding='utf-8')
     (ROOT/'docs/mascot.html').write_text(page('豬仔角色與菜式造型',mascot.replace('<section class="mascot-intro">',demo+'<section class="mascot-intro">')),encoding='utf-8')
     (ROOT/'docs/index.html').write_text(page('App 使用說明',index),encoding='utf-8')
     (ROOT/'docs/data.html').write_text(page('資料與維護指南',data),encoding='utf-8')
-    print(f'Generated 3 documentation pages: {len(rows)} restaurants / {len(eligible)} drawable / {len(cuisines)} cuisines / {len(areas)} localities / {len(themes)} mascot themes')
+    print(f'Generated 4 documentation pages: {len(rows)} restaurants / {len(eligible)} drawable / {len(cuisines)} cuisines / {len(areas)} localities / {len(themes)} mascot themes')
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--date',required=True)
     generate(parser.parse_args().date)
